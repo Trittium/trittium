@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Jiyo
+Comment=Jiyo P2P Cryptocurrency
+Comment[fr]=Jiyo, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Jiyo, eşten eşe kriptografik sanal para birimi
+Exec=jiyo-qt %u
+Terminal=false
+Type=Application
+Icon=jiyo128
+MimeType=x-scheme-handler/jiyo;
+Categories=Office;Finance;

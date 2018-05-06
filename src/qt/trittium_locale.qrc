@@ -1,0 +1,30 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/trittium_bg.qm</file>
+        <file alias="ca">locale/trittium_ca.qm</file>
+        <file alias="cs">locale/trittium_cs.qm</file>
+        <file alias="da">locale/trittium_da.qm</file>
+        <file alias="de">locale/trittium_de.qm</file>
+        <file alias="en">locale/trittium_en.qm</file>
+        <file alias="en_US">locale/trittium_en_US.qm</file>
+        <file alias="es">locale/trittium_es.qm</file>
+        <file alias="fi">locale/trittium_fi.qm</file>
+        <file alias="fr_FR">locale/trittium_fr_FR.qm</file>
+        <file alias="hr">locale/trittium_hr.qm</file>
+        <file alias="it">locale/trittium_it.qm</file>
+        <file alias="ja">locale/trittium_ja.qm</file>
+        <file alias="ko_KR">locale/trittium_ko_KR.qm</file>
+        <file alias="nl">locale/trittium_nl.qm</file>
+        <file alias="pl">locale/trittium_pl.qm</file>
+        <file alias="pt">locale/trittium_pt.qm</file>
+        <file alias="pt_BR">locale/trittium_pt_BR.qm</file>
+        <file alias="ro_RO">locale/trittium_ro_RO.qm</file>
+        <file alias="ru">locale/trittium_ru.qm</file>
+        <file alias="sk">locale/trittium_sk.qm</file>
+        <file alias="sv">locale/trittium_sv.qm</file>
+        <file alias="tr">locale/trittium_tr.qm</file>
+        <file alias="uk">locale/trittium_uk.qm</file>
+        <file alias="zh_CN">locale/trittium_zh_CN.qm</file>
+        <file alias="zh_TW">locale/trittium_zh_TW.qm</file>
+    </qresource>
+</RCC>

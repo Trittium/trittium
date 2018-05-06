@@ -1,0 +1,26 @@
+[Unit]
+Description=Jiyo's distributed currency daemon
+After=network.target
+
+[Service]
+User=jiyo
+Group=jiyo
+
+Type=forking
+PIDFile=/var/lib/jiyod/jiyod.pid
+
+ExecStart=/usr/bin/jiyod -daemon -pid=/var/lib/jiyod/jiyod.pid \
+          -conf=/etc/jiyo/jiyo.conf -datadir=/var/lib/jiyod
+
+ExecStop=-/usr/bin/jiyo-cli -conf=/etc/jiyo/jiyo.conf \
+         -datadir=/var/lib/jiyod stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

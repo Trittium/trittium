@@ -401,6 +401,16 @@ Value getblocktemplate(const Array& params, bool fHelp)
 
     std::string strMode = "template";
     Value lpval = Value::null;
+    
+    CBlockIndex* const pindexPrevCheck = chainActive.Tip();
+            
+    //fix to return simple error while switched to PoS
+    if (pindexPrevCheck->nHeight+1 > Params().LAST_POW_BLOCK()) {
+		
+		throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+	}
+    
+    
     if (params.size() > 0) {
         const Object& oparam = params[0].get_obj();
         const Value& modeval = find_value(oparam, "mode");
@@ -433,6 +443,13 @@ Value getblocktemplate(const Array& params, bool fHelp)
             }
 
             CBlockIndex* const pindexPrev = chainActive.Tip();
+            
+            //TEST!!! fix
+            if (pindexPrev->nHeight+1 > Params().LAST_POW_BLOCK()) {
+				printf("TEST!!! no more PoW blocks\n");
+				throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+			}
+            
             // TestBlockValidity only supports blocks built on the current Tip
             if (block.hashPrevBlock != pindexPrev->GetBlockHash())
                 return "inconclusive-not-best-prevblk";

@@ -165,6 +165,13 @@ Value setgenerate(const Array& params, bool fHelp)
     if (pwalletMain == NULL)
         throw JSONRPCError(RPC_METHOD_NOT_FOUND, "Method not found (disabled)");
 
+    CBlockIndex* const pindexPrevCheck = chainActive.Tip();
+            
+    //fix to return simple error while switched to PoS
+    if (pindexPrevCheck->nHeight+1 > Params().LAST_POW_BLOCK()) {
+		throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+    }
+    
     bool fGenerate = true;
     if (params.size() > 0)
         fGenerate = params[0].get_bool();
@@ -405,10 +412,13 @@ Value getblocktemplate(const Array& params, bool fHelp)
     CBlockIndex* const pindexPrevCheck = chainActive.Tip();
             
     //fix to return simple error while switched to PoS
+    bool fProofOfStake;
     if (pindexPrevCheck->nHeight+1 > Params().LAST_POW_BLOCK()) {
 		
-		throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
-	}
+		//throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+		fProofOfStake = true;
+	} else
+	    fProofOfStake = false;
     
     
     if (params.size() > 0) {
@@ -445,10 +455,10 @@ Value getblocktemplate(const Array& params, bool fHelp)
             CBlockIndex* const pindexPrev = chainActive.Tip();
             
             //TEST!!! fix
-            if (pindexPrev->nHeight+1 > Params().LAST_POW_BLOCK()) {
-				printf("TEST!!! no more PoW blocks\n");
-				throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
-			}
+            //if (pindexPrev->nHeight+1 > Params().LAST_POW_BLOCK()) {
+			//	printf("TEST!!! no more PoW blocks\n");
+			//	throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks");
+			//}
             
             // TestBlockValidity only supports blocks built on the current Tip
             if (block.hashPrevBlock != pindexPrev->GetBlockHash())
@@ -545,9 +555,11 @@ Value getblocktemplate(const Array& params, bool fHelp)
 			return Value::null;
 		
         CScript scriptDummy = CScript() << ToByteVector(pubkey) << OP_CHECKSIG;
-        pblocktemplate = CreateNewBlock(scriptDummy, pwalletMain, false);
-        if (!pblocktemplate)
+        pblocktemplate = CreateNewBlock(scriptDummy, pwalletMain, fProofOfStake);
+        if (!pblocktemplate) {
+			LogPrintf("DEBUG getblocktemplate: cannot create a new block");
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
+		}
 
         // Need to update only after we know CreateNewBlock succeeded
         pindexPrev = pindexPrevNew;

@@ -12,6 +12,7 @@
  * network protocol versioning
  */
 
+static const int NEW_PROTOCOL_VERSION = 71003; //new version with dev fee and new PoS maturity time
 static const int PROTOCOL_VERSION = 71002; //release
 
 //! initial proto version, to be increased after version/verack negotiation

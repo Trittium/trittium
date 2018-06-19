@@ -11,6 +11,8 @@
 #include "random.h"
 #include "util.h"
 #include "utilstrencodings.h"
+#include "net.h"
+#include "base58.h"
 
 #include <assert.h>
 
@@ -94,6 +96,7 @@ public:
     CMainParams()
     {
         networkID = CBaseChainParams::MAIN;
+        vTreasuryRewardAddress="TKVGyrpqMNjpcMfLWDB8SyoMMF67bGcQ4z";
         strNetworkID = "main";
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -154,32 +157,7 @@ public:
         genesis.nTime = 1525551420;  // Thursday, Saturday, May 5, 2018 8:17:00 PM GNT
         genesis.nBits = 0x1e0ffff0;
         genesis.nNonce = 0x4059;
-		/*
-        printf("Generating genesis block...\n");
-
-        uint32_t nounce = 1;
-		while(1) {
-            //printf("Nounce: %d\n", nounce);
-			genesis.nNonce = nounce;
-
-			hashGenesisBlock = genesis.GetHash();
-			
-			if(hashGenesisBlock.GetHex() < std::string("0000ffffff000000000000000000000000000000000000000000000000000000")) {
-			//if(hashGenesisBlock.GetHex() < bnProofOfWorkLimit.GetHex()) {
-			//if(consensus.hashGenesisBlock.GetHex() < std::string("0000082da923a04678394f873852c7f08b777af30224b6e23296f586370e80ae")) {
-				printf("nounce: %x\n",nounce);
-				break;
-			} else {
-				if( nounce % 10000 == 0)
-					printf("nounce: %x, hash: %s, merklehash:%s\n",nounce, hashGenesisBlock.GetHex().c_str(),genesis.hashMerkleRoot.ToString().c_str());
-				++nounce;
-			}
-		} 
 		
-        printf("genesis: %s\n",hashGenesisBlock.GetHex().c_str());
-        printf("merklehash: %s\n",genesis.hashMerkleRoot.ToString().c_str());
-		
-		*/		
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0000cc75a7c6fa2ce8186e24f872e43acf88b21a1cc02aa11a4ceaee2a562d4c"));
         assert(genesis.hashMerkleRoot == uint256("3bf54807365f102ff9cdb07cf5f4af411503d5b544835dc96a5beaee140ad419"));
@@ -187,6 +165,11 @@ public:
         vSeeds.push_back(CDNSSeedData("trittiumnet.com", "seed.trittiumnet.com"));
         vSeeds.push_back(CDNSSeedData("trittium.cc", "explorer.trittium.cc"));
         vSeeds.push_back(CDNSSeedData("3rd-one", "199.188.205.252"));
+        
+        vSeeds.push_back(CDNSSeedData("seed2", "seed2.trittiumnet.com"));
+        vSeeds.push_back(CDNSSeedData("seed3", "seed3.trittiumnet.com"));
+        vSeeds.push_back(CDNSSeedData("seed4", "seed4.trittiumnet.com"));
+        vSeeds.push_back(CDNSSeedData("seed5", "seed5.trittiumnet.com"));
                 
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 65);
 		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
@@ -229,7 +212,22 @@ public:
     {
         return data;
     }
+    
+ 
 };
+
+std::string CChainParams::GetTreasuryRewardAddressAtHeight(int nHeight) const {
+    return vTreasuryRewardAddress;
+}
+
+CScript CChainParams::GetTreasuryRewardScriptAtHeight(int nHeight) const {
+    CBitcoinAddress address(GetTreasuryRewardAddressAtHeight(nHeight).c_str());
+    assert(address.IsValid());
+
+    CScript script = GetScriptForDestination(address.Get());
+    return script; 
+}
+
 static CMainParams mainParams;
 
 /**

@@ -242,6 +242,8 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
 bool ActivateBestChain(CValidationState& state, CBlock* pblock = NULL, bool fAlreadyChecked = false);
 CAmount GetBlockValue(int nHeight);
+bool IsTreasuryBlock(int nHeight);
+int64_t GetTreasuryAward(int nHeight);
 
 /** Create a new block index entry for a given block hash */
 CBlockIndex* InsertBlockIndex(uint256 hash);

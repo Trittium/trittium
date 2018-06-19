@@ -535,7 +535,7 @@ Value getstakingstatus(const Array& params, bool fHelp)
     obj.push_back(Pair("haveconnections", !vNodes.empty()));
     if (pwalletMain) {
         obj.push_back(Pair("walletunlocked", !pwalletMain->IsLocked()));
-        obj.push_back(Pair("mintablecoins", pwalletMain->MintableCoins()));
+        obj.push_back(Pair("mintablecoins", pwalletMain->MintableCoins(chainActive.Tip()->nHeight)));
         obj.push_back(Pair("enoughcoins", nReserveBalance <= pwalletMain->GetBalance()));
     }
     obj.push_back(Pair("mnsync", masternodeSync.IsSynced()));

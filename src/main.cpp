@@ -80,8 +80,35 @@ bool fVerifyingBlocks = false;
 unsigned int nCoinCacheSize = 5000;
 bool fAlerts = DEFAULT_ALERTS;
 
-unsigned int nStakeMinAge = 6 * 60 * 60; //6 hours
+//unsigned int nStakeMinAge = 6 * 60 * 60; //6 hours
+
+static unsigned int nStakeMinAgeV1 = 6 * 60 * 60; // 6 hours
+static unsigned int nStakeMinAgeV2 = 12 * 60 * 60; // 12 hours after block 69,000
+const int targetReadjustment_forkBlockHeight = 69000; //retargeting since 69,000 block
+
 int64_t nReserveBalance = 0;
+
+bool IsProtocolMaturityV2(int nHeight)
+{
+    return(nHeight >= targetReadjustment_forkBlockHeight);
+}
+
+unsigned int GetStakeMinAge(int nHeight)
+{
+    if(IsProtocolMaturityV2(nHeight))
+        return nStakeMinAgeV2;
+    else
+        return nStakeMinAgeV1;
+}
+
+int GetMinPeerProtoVersion(int nHeight)
+{
+	if(nHeight!=0)
+		return(IsProtocolMaturityV2(nHeight)? NEW_PROTOCOL_VERSION : PROTOCOL_VERSION);
+	else
+	    return NEW_PROTOCOL_VERSION; //if we build blockchain from the scratch, ask for a new version first
+}
+
 
 /** Fees smaller than this (in duffs) are considered zero fee (for relaying and mining)
  * We are ~100 times smaller then bitcoin now (2015-06-23), set minRelayTxFee only 10 times higher
@@ -928,57 +955,6 @@ int GetIXConfirmations(uint256 nTXHash)
     }
 
     return 0;
-}
-
-// ppcoin: total coin age spent in transaction, in the unit of coin-days.
-// Only those coins meeting minimum age requirement counts. As those
-// transactions not in main chain are not currently indexed so we
-// might not find out about their coin age. Older transactions are
-// guaranteed to be in main chain by sync-checkpoint. This rule is
-// introduced to help nodes establish a consistent view of the coin
-// age (trust score) of competing branches.
-bool GetCoinAge(const CTransaction& tx, const unsigned int nTxTime, uint64_t& nCoinAge)
-{
-    uint256 bnCentSecond = 0; // coin age in the unit of cent-seconds
-    nCoinAge = 0;
-
-    CBlockIndex* pindex = NULL;
-    BOOST_FOREACH (const CTxIn& txin, tx.vin) {
-        // First try finding the previous transaction in database
-        CTransaction txPrev;
-        uint256 hashBlockPrev;
-        if (!GetTransaction(txin.prevout.hash, txPrev, hashBlockPrev, true)) {
-            LogPrintf("GetCoinAge: failed to find vin transaction \n");
-            continue; // previous transaction not in main chain
-        }
-
-        BlockMap::iterator it = mapBlockIndex.find(hashBlockPrev);
-        if (it != mapBlockIndex.end())
-            pindex = it->second;
-        else {
-            LogPrintf("GetCoinAge() failed to find block index \n");
-            continue;
-        }
-
-        // Read block header
-        CBlockHeader prevblock = pindex->GetBlockHeader();
-
-        if (prevblock.nTime + nStakeMinAge > nTxTime)
-            continue; // only count coins meeting min age requirement
-
-        if (nTxTime < prevblock.nTime) {
-            LogPrintf("GetCoinAge: Timestamp Violation: txtime less than txPrev.nTime");
-            return false; // Transaction timestamp violation
-        }
-
-        int64_t nValueIn = txPrev.vout[txin.prevout.n].nValue;
-        bnCentSecond += uint256(nValueIn) * (nTxTime - prevblock.nTime);
-    }
-
-    uint256 bnCoinDay = bnCentSecond / COIN / (24 * 60 * 60);
-    LogPrintf("coin age bnCoinDay=%s\n", bnCoinDay.ToString().c_str());
-    nCoinAge = bnCoinDay.GetCompact();
-    return true;
 }
 
 bool MoneyRange(CAmount nValueOut)
@@ -2125,34 +2101,41 @@ int64_t GetBlockValue(int nHeight)
         if (nHeight < 200 && nHeight > 0)
             return 10000 * COIN;
     }
-
-    if (nHeight == 0) {
-        nSubsidy = 250 * COIN;  //genesis
-    } else if(nHeight == 1 ){   
-        nSubsidy = 1450000 * COIN;  //1,450,000
-    } else if(nHeight > 1 && nHeight <= 800) { //PoW phase
-		nSubsidy = 30 * COIN;
-	} else if(nHeight > 800 && nHeight <= 1800) { //PoS phase
-		nSubsidy = 10 * COIN; // "instamine"
-    } else if(nHeight > 1800 && nHeight <= 3200) {
-		nSubsidy = 650 * COIN;
-    } else if(nHeight > 3200 && nHeight <= 6000) { 
-		nSubsidy = 850 * COIN;
-    } else if(nHeight > 6000 && nHeight <= 12000) { 
-		nSubsidy = 1050 * COIN;
-    } else if(nHeight > 12000 && nHeight <= 20000) { 
-		nSubsidy = 1250 * COIN;
-    } else if(nHeight > 20000 && nHeight <= 100000) { 
-		nSubsidy = 450 * COIN;
-    } else if(nHeight > 100000 && nHeight <= 1000000) { 
-		nSubsidy = 350 * COIN;
-    } else if(nHeight > 1000000 && nHeight <= 1500000) { 
-		nSubsidy = 250 * COIN;
-    } else if(nHeight > 1500000 && nHeight <= 2000000) { 
-		nSubsidy = 150 * COIN;
-    } else {
-        nSubsidy = 50 * COIN;
+    
+    if(IsTreasuryBlock(nHeight)) {
+        LogPrintf("GetBlockValue(): this is a treasury block\n");
+		nSubsidy = GetTreasuryAward(nHeight);
+        
+	} else {
+	    if (nHeight == 0) {
+	        nSubsidy = 250 * COIN;  //genesis
+	    } else if(nHeight == 1 ){   
+	        nSubsidy = 1450000 * COIN;  //1,450,000
+	    } else if(nHeight > 1 && nHeight <= 800) { //PoW phase
+			nSubsidy = 30 * COIN;
+		} else if(nHeight > 800 && nHeight <= 1800) { //PoS phase
+			nSubsidy = 10 * COIN; // "instamine"
+	    } else if(nHeight > 1800 && nHeight <= 3200) {
+			nSubsidy = 650 * COIN;
+	    } else if(nHeight > 3200 && nHeight <= 6000) { 
+			nSubsidy = 850 * COIN;
+	    } else if(nHeight > 6000 && nHeight <= 12000) { 
+			nSubsidy = 1050 * COIN;
+	    } else if(nHeight > 12000 && nHeight <= 20000) { 
+			nSubsidy = 1250 * COIN;
+	    } else if(nHeight > 20000 && nHeight <= 100000) { 
+			nSubsidy = 450 * COIN;
+	    } else if(nHeight > 100000 && nHeight <= 1000000) { 
+			nSubsidy = 350 * COIN;
+	    } else if(nHeight > 1000000 && nHeight <= 1500000) { 
+			nSubsidy = 250 * COIN;
+	    } else if(nHeight > 1500000 && nHeight <= 2000000) { 
+			nSubsidy = 150 * COIN;
+	    } else {
+	        nSubsidy = 50 * COIN;
+	    }
     }
+    
     return nSubsidy;
 }
 
@@ -2175,6 +2158,32 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 			
 	
     return ret;
+}
+
+//Treasury blocks start from 70,000 and then each 10,000th block
+int nStartTreasuryBlock = 70000;
+int nTreasuryBlockStep = 1000;
+
+
+bool IsTreasuryBlock(int nHeight)
+{
+	if(nHeight < nStartTreasuryBlock)
+		return false;
+	else if( (nHeight-nStartTreasuryBlock) % nTreasuryBlockStep == 0)
+		return true;
+	else
+		return false;
+}
+
+int64_t GetTreasuryAward(int nHeight)
+{
+	if(IsTreasuryBlock(nHeight)) {
+		if(nHeight == nStartTreasuryBlock)
+			return 200010 * COIN; //200,000 for the first treasury block, 10 - reward to PoS
+		else
+			return 15010 * COIN; //15,000 for each next block
+	} else
+		return 0;
 }
 
 bool IsInitialBlockDownload()
@@ -2966,14 +2975,20 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     //PoW phase redistributed fees to miner. PoS stage destroys fees.
     CAmount nExpectedMint = GetBlockValue(pindex->pprev->nHeight);
-    if (block.IsProofOfWork())
-        nExpectedMint += nFees;
+    CAmount nExpectedMintNext = GetBlockValue(pindex->pprev->nHeight+1);
+    CAmount nExpectedMint2 = nExpectedMint+nExpectedMintNext;
+    
+    if (block.IsProofOfWork()) {
+        nExpectedMint2 += nFees;
+	}
 
-    if (!IsBlockValueValid(block, nExpectedMint, pindex->nMint)) {
-        return state.DoS(100,
-            error("ConnectBlock() : reward pays too much (actual=%s vs limit=%s)",
-                FormatMoney(pindex->nMint), FormatMoney(nExpectedMint)),
-            REJECT_INVALID, "bad-cb-amount");
+    if (!IsBlockValueValid(block, nExpectedMint2, pindex->nMint)) {
+		
+		
+	        return state.DoS(100,
+	            error("ConnectBlock() : reward pays too much (actual=%s vs limit=%s)",
+	                FormatMoney(pindex->nMint), FormatMoney(nExpectedMint2)),
+	            REJECT_INVALID, "bad-cb-amount");
     }
 
     // zerocoin accumulator: if a new accumulator checkpoint was generated, check that it is the correct value
@@ -5404,6 +5419,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         LogPrintf("dropmessagestest DROPPING RECV MESSAGE\n");
         return true;
     }
+    
+    int nCurHeight = GetHeight();
+    
 
     if (strCommand == "version") {
         // Each connection can only send one version message
@@ -5428,7 +5446,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand))
+        if (pfrom->DisconnectOldProtocol(GetMinPeerProtoVersion(nCurHeight), strCommand))
             return false;
 
         if (pfrom->nVersion == 10300)
@@ -5988,7 +6006,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     }
                 }
                 //disconnect this node if its old protocol version
-                pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
+                pfrom->DisconnectOldProtocol(GetMinPeerProtoVersion(pindexBestHeader->nHeight), strCommand);
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }

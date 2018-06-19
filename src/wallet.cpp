@@ -22,6 +22,7 @@
 #include "timedata.h"
 #include "util.h"
 #include "utilmoneystr.h"
+#include "main.h"
 
 #include "denomination_functions.h"
 #include "libzerocoin/Denominations.h"
@@ -1745,7 +1746,7 @@ bool less_then_denom(const COutput& out1, const COutput& out2)
     return (!found1 && found2);
 }
 
-bool CWallet::SelectStakeCoins(std::set<std::pair<const CWalletTx*, unsigned int> >& setCoins, CAmount nTargetAmount) const
+bool CWallet::SelectStakeCoins(std::set<std::pair<const CWalletTx*, unsigned int> >& setCoins, CAmount nTargetAmount, int nHeight) const
 {
     vector<COutput> vCoins;
     AvailableCoins(vCoins, true, NULL, false, STAKABLE_COINS);
@@ -1765,7 +1766,7 @@ bool CWallet::SelectStakeCoins(std::set<std::pair<const CWalletTx*, unsigned int
         }
 
         //check for min age
-        if (GetAdjustedTime() - nTxTime < nStakeMinAge)
+        if (GetAdjustedTime() - nTxTime < GetStakeMinAge(nHeight))
             continue;
 
         //check that it is matured
@@ -1779,7 +1780,7 @@ bool CWallet::SelectStakeCoins(std::set<std::pair<const CWalletTx*, unsigned int
     return true;
 }
 
-bool CWallet::MintableCoins()
+bool CWallet::MintableCoins(int nHeight)
 {
     CAmount nBalance = GetBalance();
     if (mapArgs.count("-reservebalance") && !ParseMoney(mapArgs["-reservebalance"], nReserveBalance))
@@ -1798,7 +1799,7 @@ bool CWallet::MintableCoins()
             nTxTime = mapBlockIndex.at(out.tx->hashBlock)->GetBlockTime();
         }
 
-        if (GetAdjustedTime() - nTxTime > nStakeMinAge)
+        if (GetAdjustedTime() - nTxTime > GetStakeMinAge(nHeight))
             return true;
     }
 
@@ -2516,7 +2517,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWa
 }
 
 // ppcoin: create coin stake transaction
-bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CMutableTransaction& txNew, unsigned int& nTxNewTime)
+bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, CMutableTransaction& txNew, unsigned int& nTxNewTime, int nPrevHeight)
 {
     // The following split & combine thresholds are important to security
     // Should not be adjusted if you don't understand the consequences
@@ -2545,7 +2546,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
     if (GetTime() - nLastStakeSetUpdate > nStakeSetUpdateTime) {
         setStakeCoins.clear();
-        if (!SelectStakeCoins(setStakeCoins, nBalance - nReserveBalance))
+        if (!SelectStakeCoins(setStakeCoins, nBalance - nReserveBalance, nPrevHeight))
             return false;
 
         nLastStakeSetUpdate = GetTime();

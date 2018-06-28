@@ -103,10 +103,7 @@ unsigned int GetStakeMinAge(int nHeight)
 
 int GetMinPeerProtoVersion(int nHeight)
 {
-	if(nHeight!=0)
-		return(IsProtocolMaturityV2(nHeight)? NEW_PROTOCOL_VERSION : PROTOCOL_VERSION);
-	else
-	    return NEW_PROTOCOL_VERSION; //if we build blockchain from the scratch, ask for a new version first
+	return PROTOCOL_VERSION; //2.1.1 - always return new protocol version, forget about older blockchain.
 }
 
 
@@ -2288,8 +2285,7 @@ void Misbehaving(NodeId pnode, int howmuch)
     int banscore = GetArg("-banscore", 100);
     if (state->nMisbehavior >= banscore && state->nMisbehavior - howmuch < banscore) {
         LogPrintf("Misbehaving: %s (%d -> %d) BAN THRESHOLD EXCEEDED\n", state->name, state->nMisbehavior - howmuch, state->nMisbehavior);
-        //state->fShouldBan = true;
-        //DEBUG!!! disable banning
+        state->fShouldBan = true;
     } else
         LogPrintf("Misbehaving: %s (%d -> %d)\n", state->name, state->nMisbehavior - howmuch, state->nMisbehavior);
 }

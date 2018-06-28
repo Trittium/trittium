@@ -45,8 +45,8 @@ const std::string CLIENT_NAME("Trittium Core");
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives.
 #define GIT_ARCHIVE
 #ifdef GIT_ARCHIVE
-#define GIT_COMMIT_ID "20180619"
-#define GIT_COMMIT_DATE "Sat, 5 May 2018 16:15:00 -0400"
+#define GIT_COMMIT_ID "20180626"
+#define GIT_COMMIT_DATE "Sat, 26 June 2018 16:15:00 -0400"
 #endif
 
 #define BUILD_DESC_WITH_SUFFIX(maj, min, rev, build, suffix) \

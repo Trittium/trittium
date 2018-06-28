@@ -1130,6 +1130,13 @@ void ThreadDNSAddressSeed()
                     CAddress addr = CAddress(CService(ip, Params().GetDefaultPort()));
                     addr.nTime = GetTime() - 3 * nOneDay - GetRand(4 * nOneDay); // use a random age between 3 and 7 days old
                     vAdd.push_back(addr);
+                    
+                    //DEBUG!!!
+                    //add whitelist
+                    CSubNet subnet(ip.ToString()+"/32");
+                    LogPrintf("ThreadDNSAddressSeed: add whitelist %s\n", ip.ToString());
+                    CNode::AddWhitelistedRange(subnet);
+                    
                     found++;
                 }
             }

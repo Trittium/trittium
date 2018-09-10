@@ -86,6 +86,8 @@ static unsigned int nStakeMinAgeV1 = 6 * 60 * 60; // 6 hours
 static unsigned int nStakeMinAgeV2 = 12 * 60 * 60; // 12 hours after block 69,000
 const int targetReadjustment_forkBlockHeight = 69000; //retargeting since 69,000 block
 
+const int targetFork1 = 200790; //fork since block 200,790
+
 int64_t nReserveBalance = 0;
 
 bool IsProtocolMaturityV2(int nHeight)
@@ -95,7 +97,7 @@ bool IsProtocolMaturityV2(int nHeight)
 
 unsigned int GetStakeMinAge(int nHeight)
 {
-    if(IsProtocolMaturityV2(nHeight))
+    if(IsProtocolMaturityV2(nHeight)) 
         return nStakeMinAgeV2;
     else
         return nStakeMinAgeV1;
@@ -103,7 +105,10 @@ unsigned int GetStakeMinAge(int nHeight)
 
 int GetMinPeerProtoVersion(int nHeight)
 {
-	return PROTOCOL_VERSION; //2.1.1 - always return new protocol version, forget about older blockchain.
+	if(nHeight >= targetFork1)
+		return PROTOCOL_VERSION; //2.2.0
+	else
+		return PROTOCOL_VERSION_BEFORE_FORK; //2.1.1 
 }
 
 
@@ -2122,15 +2127,24 @@ int64_t GetBlockValue(int nHeight)
 			nSubsidy = 1250 * COIN;
 	    } else if(nHeight > 20000 && nHeight <= 100000) { 
 			nSubsidy = 450 * COIN;
-	    } else if(nHeight > 100000 && nHeight <= 1000000) { 
+	    } else if(nHeight > 100000 && nHeight <= targetFork1) { 
 			nSubsidy = 350 * COIN;
-	    } else if(nHeight > 1000000 && nHeight <= 1500000) { 
-			nSubsidy = 250 * COIN;
-	    } else if(nHeight > 1500000 && nHeight <= 2000000) { 
-			nSubsidy = 150 * COIN;
-	    } else {
-	        nSubsidy = 50 * COIN;
-	    }
+	    } else if(nHeight > targetFork1 && nHeight <= 330390) {
+			nSubsidy = 80 * COIN;
+		} else if(nHeight > 330390 && nHeight <= 459990) {
+			nSubsidy = 40 * COIN;
+		} else if(nHeight > 459990 && nHeight <= 985590) {
+			nSubsidy = 20 * COIN;
+		} else if(nHeight > 985590 && nHeight <= 1511190) {
+			nSubsidy = 10 * COIN;
+		} else if(nHeight > 1511190 && nHeight <= 2036790) {
+			nSubsidy = 5 * COIN;
+		} else if(nHeight > 2036790 && nHeight <= 2562390) {
+			nSubsidy = 2.5 * COIN;
+		} else if(nHeight > 2562390) {
+			int nMul = (nHeight - 2562390)/525600;
+			nSubsidy = 0.6125 * COIN / pow(2,nMul);  //halving each year
+		}
     }
     
     return nSubsidy;
@@ -2161,7 +2175,6 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 int nStartTreasuryBlock = 70000;
 int nTreasuryBlockStep = 1000;
 
-
 bool IsTreasuryBlock(int nHeight)
 {
 	if(nHeight < nStartTreasuryBlock)
@@ -2182,6 +2195,34 @@ int64_t GetTreasuryAward(int nHeight)
 	} else
 		return 0;
 }
+
+
+//TEST ONLY!!!
+/*
+bool IsTreasuryBlock(int nHeight)
+{
+	if(nHeight > targetFork1+20)
+		nTreasuryBlockStep = 10; //treasury each 10 blocks!
+	
+	if(nHeight < nStartTreasuryBlock)
+		return false;
+	else if( (nHeight-nStartTreasuryBlock) % nTreasuryBlockStep == 0)
+		return true;
+	else
+		return false;
+}
+
+int64_t GetTreasuryAward(int nHeight)
+{
+	if(IsTreasuryBlock(nHeight)) {
+		if(nHeight == nStartTreasuryBlock)
+			return 200010 * COIN; //200,000 for the first treasury block, 10 - reward to PoS
+		else
+			return 15010 * COIN; //15,000 for each next block
+	} else
+		return 0;
+}
+*/
 
 bool IsInitialBlockDownload()
 {
@@ -3933,7 +3974,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     } else {
         LogPrintf("CheckBlock() : skipping transaction locking checks\n");
     }
-
+    
     // masternode payments / budgets and zerocoin check
     CBlockIndex* pindexPrev = chainActive.Tip();
     int nHeight = 0;
@@ -6253,10 +6294,17 @@ int ActiveProtocol()
 
     // SPORK_15 is used for 70911. Nodes < 70911 don't see it and still get their protocol version via SPORK_14 and their
     // own ModifierUpgradeBlock()
-
+	/*
     if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
             return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+    * */
+    
+    if(chainActive.Tip()->nHeight >= targetFork1)
+		return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+	else
+		return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+		
 }
 
 // requires LOCK(cs_vRecvMsg)

@@ -622,7 +622,7 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
     mnodeman.Add(mn);
 
     // if it matches our Masternode privkey, then we've been remotely activated
-    if (pubKeyMasternode == activeMasternode.pubKeyMasternode && protocolVersion == PROTOCOL_VERSION) {
+    if (pubKeyMasternode == activeMasternode.pubKeyMasternode) {
         activeMasternode.EnableHotColdMasterNode(vin, addr);
     }
 

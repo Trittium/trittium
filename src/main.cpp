@@ -104,9 +104,14 @@ unsigned int GetStakeMinAge(int nHeight)
         return nStakeMinAgeV1;
 }
 
+#define EXPECTED_MINT_ENFORCEMENT_HEIGHT	400000
+
 int GetMinPeerProtoVersion(int nHeight)
 {
-	if(nHeight >= targetFork1)
+
+	if(nHeight >= EXPECTED_MINT_ENFORCEMENT_HEIGHT)
+		return PROTOCOL_VERSION_AFTER_FORK;
+	else if(nHeight >= targetFork1)
 		return PROTOCOL_VERSION; //2.2.0
 	else
 		return PROTOCOL_VERSION_BEFORE_FORK; //2.1.1 
@@ -2785,8 +2790,6 @@ static int64_t nTimeConnect = 0;
 static int64_t nTimeIndex = 0;
 static int64_t nTimeCallbacks = 0;
 static int64_t nTimeTotal = 0;
-
-#define EXPECTED_MINT_ENFORCEMENT_HEIGHT	400000
 
 bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pindex, CCoinsViewCache& view, bool fJustCheck, bool fAlreadyChecked)
 {
@@ -6407,10 +6410,15 @@ int ActiveProtocol()
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
     * */
     
+    return GetMinPeerProtoVersion(chainActive.Tip()->nHeight);
+    
+    /*
+    
     if(chainActive.Tip()->nHeight >= targetFork1)
 		return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
 	else
 		return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+		* */
 		
 }
 

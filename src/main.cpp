@@ -110,9 +110,7 @@ int GetMinPeerProtoVersion(int nHeight)
 {
 
 	if(nHeight >= EXPECTED_MINT_ENFORCEMENT_HEIGHT)
-		return PROTOCOL_VERSION_AFTER_FORK;
-	else if(nHeight >= targetFork1)
-		return PROTOCOL_VERSION; //2.2.0
+		return PROTOCOL_VERSION;
 	else
 		return PROTOCOL_VERSION_BEFORE_FORK; //2.1.1 
 }

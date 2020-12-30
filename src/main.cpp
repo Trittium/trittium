@@ -87,6 +87,7 @@ static unsigned int nStakeMinAgeV2 = 12 * 60 * 60; // 12 hours after block 69,00
 const int targetReadjustment_forkBlockHeight = 69000; //retargeting since 69,000 block
 
 const int targetFork1 = 200790; //fork since block 200,790
+const int targetFork2 = 1400000; //fork since block 1,400,001
 
 int64_t nReserveBalance = 0;
 
@@ -2135,16 +2136,25 @@ int64_t GetBlockValue(int nHeight)
 			nSubsidy = 40 * COIN;
 		} else if(nHeight > 459990 && nHeight <= 985590) {
 			nSubsidy = 20 * COIN;
-		} else if(nHeight > 985590 && nHeight <= 1511190) {
+		} else if(nHeight > 985590 && nHeight <= targetFork2) { // targetFork2 = 1400001
 			nSubsidy = 10 * COIN;
-		} else if(nHeight > 1511190 && nHeight <= 2036790) {
-			nSubsidy = 5 * COIN;
-		} else if(nHeight > 2036790 && nHeight <= 2562390) {
-			nSubsidy = 2.5 * COIN;
-		} else if(nHeight > 2562390) {
-			int nMul = (nHeight - 2562390)/525600;
-			nSubsidy = 0.6125 * COIN / pow(2,nMul);  //halving each year
-		}
+        } else if(nHeight > targetFork2 && nHeight <= 1500000) {
+			nSubsidy = 1000 * COIN;
+        } else if(nHeight > 1500000 && nHeight <= 1600000) {
+			nSubsidy = 900 * COIN;
+        } else if(nHeight > 1600000 && nHeight <= 1700000) {
+			nSubsidy = 800 * COIN;
+        } else if(nHeight > 1700000 && nHeight <= 1800000) {
+			nSubsidy = 700 * COIN;
+        } else if(nHeight > 1800000 && nHeight <= 1900000) {
+			nSubsidy = 600 * COIN;
+        } else if(nHeight > 1900000 && nHeight <= 2000000) {
+			nSubsidy = 500 * COIN;
+        } else if(nHeight > 2000000 && nHeight <= 2100000) {
+			nSubsidy = 450 * COIN;
+        } else if(nHeight > 2100000) {
+			nSubsidy = 400 * COIN;
+        } 
     }
     
     return nSubsidy;
@@ -2161,13 +2171,13 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
 	
 	// 80% for Masternodes
 	if (nHeight <= 800) {
-	      ret = blockValue  / 100 * 0;
-	} else if (nHeight > 1) {
-		  ret = blockValue  / 100 * 80; //80%
-		
-	}
+	    ret = blockValue  / 100 * 0;
+	} else if (nHeight > 1 && nHeight <= targetFork2) {
+		ret = blockValue  / 100 * 80; //80%
+	} else if (nHeight > targetFork2) {
+        ret = 90 * blockValue / 100; //90%
+    }
 			
-	
     return ret;
 }
 
@@ -2177,7 +2187,7 @@ int nTreasuryBlockStep = 1000;
 
 bool IsTreasuryBlock(int nHeight)
 {
-	if(nHeight < nStartTreasuryBlock)
+	if(nHeight < nStartTreasuryBlock || nHeight > targetFork2)
 		return false;
 	else if( (nHeight-nStartTreasuryBlock) % nTreasuryBlockStep == 0)
 		return true;
@@ -6284,27 +6294,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-
-    // SPORK_14 was used for 70910. Leave it 'ON' so they don't see > 70910 nodes. They won't react to SPORK_15
-    // messages because it's not in their code
-
-/*    if (IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
-            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
-*/
-
-    // SPORK_15 is used for 70911. Nodes < 70911 don't see it and still get their protocol version via SPORK_14 and their
-    // own ModifierUpgradeBlock()
-	/*
-    if (IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2))
-            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
-    return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
-    * */
-    
-    if(chainActive.Tip()->nHeight >= targetFork1)
+    if (IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
 		return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
 	else
-		return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
-		
+		return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;	
 }
 
 // requires LOCK(cs_vRecvMsg)

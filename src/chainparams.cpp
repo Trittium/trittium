@@ -162,14 +162,14 @@ public:
         assert(hashGenesisBlock == uint256("0000cc75a7c6fa2ce8186e24f872e43acf88b21a1cc02aa11a4ceaee2a562d4c"));
         assert(genesis.hashMerkleRoot == uint256("3bf54807365f102ff9cdb07cf5f4af411503d5b544835dc96a5beaee140ad419"));
 
-        vSeeds.push_back(CDNSSeedData("trittiumnet.com", "seed.trittiumnet.com"));
-        vSeeds.push_back(CDNSSeedData("trittium.cc", "explorer.trittium.cc"));
-        vSeeds.push_back(CDNSSeedData("3rd-one", "199.188.205.252"));
-        
-        vSeeds.push_back(CDNSSeedData("seed2", "seed2.trittiumnet.com"));
-        vSeeds.push_back(CDNSSeedData("seed3", "seed3.trittiumnet.com"));
-        vSeeds.push_back(CDNSSeedData("seed4", "seed4.trittiumnet.com"));
-        vSeeds.push_back(CDNSSeedData("seed5", "seed5.trittiumnet.com"));
+        vSeeds.push_back(CDNSSeedData("seed1.trittium.net", "seed1.trittium.net"));
+        vSeeds.push_back(CDNSSeedData("seed2.trittium.net", "seed2.trittium.net"));
+        vSeeds.push_back(CDNSSeedData("seed3.trittium.net", "seed3.trittium.net"));
+        vSeeds.push_back(CDNSSeedData("seed4.trittium.net", "seed4.trittium.net"));
+        vSeeds.push_back(CDNSSeedData("seed5.trittium.net", "seed5.trittium.net"));
+        vSeeds.push_back(CDNSSeedData("seed6.trittium.net", "seed6.trittium.net"));
+        vSeeds.push_back(CDNSSeedData("seed7.trittium.net", "seed7.trittium.net"));
+        vSeeds.push_back(CDNSSeedData("seed8.trittium.net", "seed8.trittium.net"));
                 
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 65);
 		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
@@ -178,7 +178,6 @@ public:
 		base58Prefixes[EXT_SECRET_KEY] = list_of(0x02)(0x21)(0x31)(0x2B).convert_to_container<std::vector<unsigned char> >();
         // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0xbc).convert_to_container<std::vector<unsigned char> >();
-        
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
@@ -193,7 +192,8 @@ public:
         fHeadersFirstSyncingActive = false;
 
         nPoolMaxTransactions = 3;
-        strSporkKey = "0464b1f34052a9fa87d18516fd97bfd70ed78a3424d59e9b9ffa9ea7fa35b50d376ec01b0923a2c7a8edfbfd2787247aadea861d4c6d8fb5814b708ddfb153aafc";
+        //strSporkKey = "0464b1f34052a9fa87d18516fd97bfd70ed78a3424d59e9b9ffa9ea7fa35b50d376ec01b0923a2c7a8edfbfd2787247aadea861d4c6d8fb5814b708ddfb153aafc";
+        strSporkKey = "029e54031b41982ac1c22b780c1101cf4b0efb71f7beb435e46fc0b406ff545ef6";
         strObfuscationPoolDummyAddress = "Jeax8jHDQ1s2kHVjysEoTQncVdUrNBuXtp";
         nStartMasternodePayments = 1403728576; //Wed, 25 Jun 2014 20:36:16 GMT
 
@@ -213,8 +213,6 @@ public:
     {
         return data;
     }
-    
- 
 };
 
 std::string CChainParams::GetTreasuryRewardAddressAtHeight(int nHeight) const {

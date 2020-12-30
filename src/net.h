@@ -673,7 +673,7 @@ public:
 };
 
 unsigned int GetStakeMinAge(int nHeight);
-int GetMinPeerProtoVersion(int nHeight);
+//int GetMinPeerProtoVersion(int nHeight);
 bool IsProtocolMaturityV2(int nHeight);
 
 #endif // BITCOIN_NET_H

@@ -104,13 +104,13 @@ unsigned int GetStakeMinAge(int nHeight)
         return nStakeMinAgeV1;
 }
 
-int GetMinPeerProtoVersion(int nHeight)
-{
-	if(nHeight >= targetFork1)
-		return PROTOCOL_VERSION; //2.2.0
-	else
-		return PROTOCOL_VERSION_BEFORE_FORK; //2.1.1 
-}
+// int GetMinPeerProtoVersion(int nHeight)
+// {
+// 	if(nHeight >= targetFork1)
+// 		return PROTOCOL_VERSION; //2.2.0
+// 	else
+// 		return PROTOCOL_VERSION_BEFORE_FORK; //2.1.1 
+// }
 
 
 /** Fees smaller than this (in duffs) are considered zero fee (for relaying and mining)
@@ -5493,8 +5493,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->DisconnectOldProtocol(GetMinPeerProtoVersion(nCurHeight), strCommand))
+        if (pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand)) {
             return false;
+        }
 
         if (pfrom->nVersion == 10300)
             pfrom->nVersion = 300;
@@ -6053,7 +6054,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     }
                 }
                 //disconnect this node if its old protocol version
-                pfrom->DisconnectOldProtocol(GetMinPeerProtoVersion(pindexBestHeader->nHeight), strCommand);
+                pfrom->DisconnectOldProtocol(ActiveProtocol(), strCommand);
             } else {
                 LogPrint("net", "%s : Already processed block %s, skipping ProcessNewBlock()\n", __func__, block.GetHash().GetHex());
             }

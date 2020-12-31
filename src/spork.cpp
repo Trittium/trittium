@@ -181,14 +181,22 @@ bool CSporkManager::CheckSignature(CSporkMessage& spork)
 {
     //note: need to investigate why this is failing
     std::string strMessage = boost::lexical_cast<std::string>(spork.nSporkID) + boost::lexical_cast<std::string>(spork.nValue) + boost::lexical_cast<std::string>(spork.nTimeSigned);
+    std::string errorMessage = "";
 
-    //string strSporkKey = "04fc640bba80713c0666acda4d3ffce670307a55f90b703995c830a1e9110b07244508724b7106395f8336c78d3691ae5ba05abe3840f3a7e18d6b95acdd0de71d";
+    if (GetAdjustedTime() < 1612051200) { // 2021-01-31T00:00:00+00:00
+    
+        CPubKey pubkey(ParseHex("04fc640bba80713c0666acda4d3ffce670307a55f90b703995c830a1e9110b07244508724b7106395f8336c78d3691ae5ba05abe3840f3a7e18d6b95acdd0de71d"));
+        if (obfuScationSigner.VerifyMessage(pubkey, spork.vchSig, strMessage, errorMessage)) {
+            return true;
+        }
+
+        CPubKey pubkey2(ParseHex(Params().SporkKeyOld()));
+        if (obfuScationSigner.VerifyMessage(pubkey2, spork.vchSig, strMessage, errorMessage)) {
+            return true;
+        }
+    }
 
     CPubKey pubkeynew(ParseHex(Params().SporkKey()));
-    //CPubKey pubkeynew(ParseHex(strSporkKey));
-
-    //cout << "CheckSignature: " << pubkeynew.GetHex() << "\n";
-    std::string errorMessage = "";
     if (obfuScationSigner.VerifyMessage(pubkeynew, spork.vchSig, strMessage, errorMessage)) {
         return true;
     }

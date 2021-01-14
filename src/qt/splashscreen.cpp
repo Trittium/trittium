@@ -27,7 +27,7 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle* networkStyle) 
     // set reference point, paddings
     int paddingLeft = 14;
     int paddingTop = 470;
-    int titleVersionVSpace = 17;
+    int titleVersionVSpace = 17; // 17
     int titleCopyrightVSpace = 32;
 
     float fontFactor = 1.0;
@@ -61,17 +61,17 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle* networkStyle) 
     pixPaint.setFont(QFont(font, 28 * fontFactor));
     fm = pixPaint.fontMetrics();
     //titleTextWidth = fm.width(titleText);
-    pixPaint.drawText(paddingLeft, paddingTop, titleText);
+    pixPaint.drawText(paddingLeft, paddingTop - 10, titleText);
 
     pixPaint.setFont(QFont(font, 15 * fontFactor));
-    pixPaint.drawText(paddingLeft, paddingTop + titleVersionVSpace, versionText);
+    pixPaint.drawText(paddingLeft, paddingTop + titleVersionVSpace- 10, versionText);
 
     // draw copyright stuff
     pixPaint.setFont(QFont(font, 10 * fontFactor));
-    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace, copyrightTextBtc);
-    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 12, copyrightTextDash);
-    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 24, copyrightTextPIVX);
-    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 36, copyrightTextTrittium);
+    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace - 10, copyrightTextBtc);
+    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 12 - 10, copyrightTextDash);
+    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 24 - 10, copyrightTextPIVX);
+    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 36 - 10, copyrightTextTrittium);
 
     // draw additional text if special network
     if (!titleAddText.isEmpty()) {

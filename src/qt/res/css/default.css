@@ -1,7 +1,10 @@
 /****************************************************************************************/
 /*************** [COLOR CODES] DARK BLUE:#005ce6 LIGHT BLUE:#3385ff *****************/
 /****************************************************************************************/
-
+* {
+    font-family: Montserrat;
+    background-color: #fcfcfc;
+}
 
 WalletFrame {
 border-image: url(':/images/walletFrame_bg') 0 0 0 0 stretch stretch;

@@ -71,6 +71,22 @@
         <file alias="splash">res/images/splash.png</file>
         <file alias="splash_testnet">res/images/splash_testnet.png</file>
     </qresource>
+    <qresource prefix="/font">
+        <file alias="Montserrat-Black.ttf">res/font/Montserrat-Black.ttf</file>
+        <file alias="Montserrat-BlackItalic.ttf">res/font/Montserrat-BlackItalic.ttf</file>
+        <file alias="Montserrat-Bold.ttf">res/font/Montserrat-Bold.ttf</file>
+        <file alias="Montserrat-BoldItalic.ttf">res/font/Montserrat-BoldItalic.ttf</file>
+        <file alias="Montserrat-ExtraBold.ttf">res/font/Montserrat-ExtraBold.ttf</file>
+        <file alias="Montserrat-ExtraBoldItalic.ttf">res/font/Montserrat-ExtraBoldItalic.ttf</file>
+        <file alias="Montserrat-ExtraLight.ttf">res/font/Montserrat-ExtraLight.ttf</file>
+        <file alias="Montserrat-ExtraLightItalic.ttf">res/font/Montserrat-ExtraLightItalic.ttf</file>
+        <file alias="Montserrat-Italic.ttf">res/font/Montserrat-Italic.ttf</file>
+        <file alias="Montserrat-Light.ttf">res/font/Montserrat-Light.ttf</file>
+        <file alias="Montserrat-LightItalic.ttf">res/font/Montserrat-LightItalic.ttf</file>
+        <file alias="Montserrat-Regular.ttf">res/font/Montserrat-Regular.ttf</file>
+        <file alias="Montserrat-SemiBold.ttf">res/font/Montserrat-SemiBold.ttf</file>
+        <file alias="Montserrat-SemiBoldItalic.ttf">res/font/Montserrat-SemiBoldItalic.ttf</file>
+    </qresource>
     <qresource prefix="/movies">
         <file alias="spinner-000">res/movies/spinner-000.png</file>
         <file alias="spinner-001">res/movies/spinner-001.png</file>

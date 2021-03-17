@@ -3901,8 +3901,8 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
     if (block.GetBlockTime() > 1616025600) // 18.03.2021 00:00 UTC
     {
         LogPrintf("Block time = %d , GetAdjustedTime = %d \n", block.GetBlockTime(), GetAdjustedTime());
-        return state.Invalid(error("%s : this is the end for a new beginning :)", __func__),
-                             REJECT_INVALID, "time-end");
+            return state.DoS(0, error("%s : this is the end, and a new beginning", __func__),
+                REJECT_INVALID, "time-end");
     }
 
     return true;
@@ -3914,9 +3914,12 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
 
     // Check that the header is valid (particularly PoW).  This is mostly
     // redundant with the call in AcceptBlockHeader.
-    if (!CheckBlockHeader(block, state, fCheckPOW))
-        return state.DoS(100, error("CheckBlock() : CheckBlockHeader failed"),
-            REJECT_INVALID, "bad-header", true);
+    if (!CheckBlockHeader(block, state, fCheckPOW)) {
+		int nDoS;
+		state.IsInvalid(nDoS); 
+		return state.DoS(nDoS > 0 ? 100 : 0, error("CheckBlock() : CheckBlockHeader failed"),
+			REJECT_INVALID, "bad-header", true);
+	}
 
     // Check timestamp
     LogPrint("debug", "%s: block=%s  is proof of stake=%d\n", __func__, block.GetHash().ToString().c_str(), block.IsProofOfStake());
@@ -4126,8 +4129,8 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     if (block.GetBlockTime() > 1616025600) // 18.03.2021 00:00 UTC
     {
         LogPrintf("Block time = %d , GetAdjustedTime = %d \n", block.GetBlockTime(), GetAdjustedTime());
-        return state.Invalid(error("%s : this is the end for a new beginning :)", __func__),
-                             REJECT_INVALID, "time-end");
+            return state.DoS(0, error("%s : this is the end, and a new beginning", __func__),
+                REJECT_INVALID, "time-end");
     }
 
     // Check that the block chain matches the known block chain up to a checkpoint

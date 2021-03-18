@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+<class>Splash</class>
+	<widget class="QWidget"
+      		name="Splash">
+		<property name="geometry">
+			<rect>
+				<x>0</x>
+				<y>0</y>
+				<width>768</width>
+				<height>431</height>
+			</rect>
+		</property>
+		<property name="minimumSize">
+			<size>
+				<width>768</width>
+				<height>431</height>
+			</size>
+		</property>
+		<property name="maximumSize">
+			<size>
+				<width>16777215</width>
+				<height>700</height>
+			</size>
+		</property>
+		<property name="windowTitle">
+			<string>Form</string>
+		</property>
+		<layout class="QVBoxLayout"
+      			name="verticalLayout_2">
+			<property name="spacing">
+				<number>0</number>
+			</property>
+			<property name="leftMargin">
+				<number>0</number>
+			</property>
+			<property name="topMargin">
+				<number>0</number>
+			</property>
+			<property name="rightMargin">
+				<number>0</number>
+			</property>
+			<property name="bottomMargin">
+				<number>0</number>
+			</property>
+			<item>
+				<widget class="QFrame"
+      					name="frame">
+					<property name="minimumSize">
+						<size>
+							<width>750</width>
+							<height>520</height>
+						</size>
+					</property>
+					<property name="styleSheet">
+						<string notr="true"/>
+					</property>
+					<property name="frameShape">
+						<enum>QFrame::NoFrame</enum>
+					</property>
+					<property name="frameShadow">
+						<enum>QFrame::Plain</enum>
+					</property>
+					<layout class="QVBoxLayout"
+      						name="verticalLayout">
+						<property name="spacing">
+							<number>0</number>
+						</property>
+						<property name="leftMargin">
+							<number>0</number>
+						</property>
+						<property name="topMargin">
+							<number>0</number>
+						</property>
+						<property name="rightMargin">
+							<number>0</number>
+						</property>
+						<property name="bottomMargin">
+							<number>0</number>
+						</property>
+						<property name="alignment">
+							<set>Qt::AlignTop|Qt::AlignHCenter</set>
+						</property>
+						<item>
+							<widget class="QPushButton"
+      								name="imgLogo">
+								<property name="minimumSize">
+									<size>
+										<width>395</width>
+										<height>348</height>
+									</size>
+								</property>
+								<property name="focusPolicy">
+									<enum>Qt::NoFocus</enum>
+								</property>
+								<property name="text">
+									<string/>
+								</property>
+								<property name="iconSize">
+									<size>
+										<width>395</width>
+										<height>348</height>
+									</size>
+								</property>
+							</widget>
+						</item>
+						<item>
+							<widget class="QWidget"
+      								name="horizontalWidget"
+      								native="true">
+								<property name="minimumSize">
+									<size>
+										<width>395</width>
+										<height>12</height>
+									</size>
+								</property>
+								<property name="maximumSize">
+									<size>
+										<width>395</width>
+										<height>12</height>
+									</size>
+								</property>
+								<widget class="QLabel"
+      									name="lblMessage">
+									<property name="geometry">
+										<rect>
+											<x>0</x>
+											<y>0</y>
+											<width>395</width>
+											<height>12</height>
+										</rect>
+									</property>
+									<property name="sizePolicy">
+										<sizepolicy hsizetype="Maximum"
+          											vsizetype="Maximum">
+											<horstretch>0</horstretch>
+											<verstretch>0</verstretch>
+										</sizepolicy>
+									</property>
+									<property name="minimumSize">
+										<size>
+											<width>0</width>
+											<height>0</height>
+										</size>
+									</property>
+									<property name="maximumSize">
+										<size>
+											<width>395</width>
+											<height>22</height>
+										</size>
+									</property>
+									<property name="styleSheet">
+										<string notr="true">
+											height: 11px;
+											width: 91px;
+											color: #828282;
+											font-family: Nunito;
+											font-size: 9px;
+											letter-spacing: 1.04px;
+											line-height: 12px;
+										</string>
+									</property>
+									<property name="text">
+										<string>Loading...</string>
+									</property>
+									<property name="alignment">
+										<set>Qt::AlignTop|Qt::AlignLeft</set>
+									</property>
+								</widget>
+							</widget>
+						</item>
+						<item>
+							<widget class="QWidget"
+      								name="layoutProgress"
+      								native="true">
+								<property name="minimumSize">
+									<size>
+										<width>395</width>
+										<height>4</height>
+									</size>
+								</property>
+								<property name="maximumSize">
+									<size>
+										<width>395</width>
+										<height>4</height>
+									</size>
+								</property>
+								<layout class="QHBoxLayout"
+      									name="horizontalLayout">
+									<property name="spacing">
+										<number>0</number>
+									</property>
+									<property name="leftMargin">
+										<number>0</number>
+									</property>
+									<property name="topMargin">
+										<number>2</number>
+									</property>
+									<property name="rightMargin">
+										<number>0</number>
+									</property>
+									<property name="bottomMargin">
+										<number>0</number>
+									</property>
+									<item>
+										<widget class="QProgressBar"
+      											name="progressBar">
+											<property name="value">
+												<number>24</number>
+											</property>
+										</widget>
+									</item>
+								</layout>
+							</widget>
+						</item>
+						<item>
+							<spacer name="horizontalSpacer_1">
+								<property name="orientation">
+									<enum>Qt::Vertical</enum>
+								</property>
+								<property name="sizeType">
+									<enum>QSizePolicy::Fixed</enum>
+								</property>
+								<property name="sizeHint"
+        									stdset="0">
+									<size>
+										<width>40</width>
+										<height>20</height>
+									</size>
+								</property>
+							</spacer>
+						</item>
+						<item>
+							<widget class="QLabel"
+      								name="lblVersion">
+								<property name="geometry">
+									<rect>
+										<x>0</x>
+										<y>0</y>
+										<width>200</width>
+										<height>16</height>
+									</rect>
+								</property>
+								<property name="sizePolicy">
+									<sizepolicy hsizetype="Maximum"
+          										vsizetype="Maximum">
+										<horstretch>0</horstretch>
+										<verstretch>0</verstretch>
+									</sizepolicy>
+								</property>
+								<property name="minimumSize">
+									<size>
+										<width>0</width>
+										<height>0</height>
+									</size>
+								</property>
+								<property name="maximumSize">
+									<size>
+										<width>200</width>
+										<height>16</height>
+									</size>
+								</property>
+								<property name="styleSheet">
+									<string notr="true">
+										height: 16px;
+										width: 85px;
+										color: #FFFFFF;
+										font-family: Nunito;
+										font-size: 12px;
+										letter-spacing: 0.2px;
+										line-height: 16px;
+										text-align: center;
+									</string>
+								</property>
+								<property name="text">
+									<string>VERSION 2.0.0.0</string>
+								</property>
+								<property name="alignment">
+									<set>Qt::AlignTop|Qt::AlignLeft</set>
+								</property>
+							</widget>
+						</item>
+					</layout>
+				</widget>
+			</item>
+		</layout>
+	</widget>
+	<resources/>
+	<connections/>
+</ui>

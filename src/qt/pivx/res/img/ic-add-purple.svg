@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg10"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="ic-add-purple.svg"
+   x="0px"
+   y="0px"
+   viewBox="0 0 30 22"
+   style="enable-background:new 0 0 30 22;"
+   xml:space="preserve"><metadata
+   id="metadata13"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs11" />
+<style
+   type="text/css"
+   id="style2">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#2EA1FF;}
+	.st1{fill:none;}
+</style>
+<sodipodi:namedview
+   bordercolor="#666666"
+   borderopacity="1"
+   gridtolerance="10"
+   guidetolerance="10"
+   id="namedview12"
+   inkscape:current-layer="ic-add-purple"
+   inkscape:cx="15"
+   inkscape:cy="11"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-height="2066"
+   inkscape:window-width="3840"
+   inkscape:zoom="12.090909"
+   objecttolerance="10"
+   pagecolor="#ffffff"
+   showgrid="false"
+   inkscape:document-rotation="0"
+   inkscape:window-x="3829"
+   inkscape:window-y="-11"
+   inkscape:window-maximized="1">
+	</sodipodi:namedview>
+<desc
+   id="desc4">Created with Sketch.</desc>
+<g
+   id="Add-purple">
+	<g
+   id="ic-add-purple"
+   transform="translate(5.000000, 3.000000)">
+		<polygon
+   id="Path_18951"
+   class="st0"
+   points="9.2,7 9.2,2 7.1,2 7.1,7 2,7 2,9 7.1,9 7.1,14 9.2,14 9.2,9 14.3,9 14.3,7   "
+   style="fill:#0099f9;fill-opacity:1" />
+		<polygon
+   id="Rectangle_4603"
+   class="st1"
+   points="0,0 16,0 16,16 0,16   " />
+	</g>
+</g>
+</svg>

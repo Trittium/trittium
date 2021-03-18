@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg10"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
+   sodipodi:docname="ic-update.svg"
+   x="0px"
+   y="0px"
+   viewBox="0 0 24 24"
+   style="enable-background:new 0 0 24 24;"
+   xml:space="preserve"><metadata
+   id="metadata13"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs11" />
+<style
+   type="text/css"
+   id="style2">
+	.st0{fill:none;}
+	.st1{fill:#2EA1FF;}
+</style>
+<sodipodi:namedview
+   bordercolor="#666666"
+   borderopacity="1"
+   gridtolerance="10"
+   guidetolerance="10"
+   id="namedview12"
+   inkscape:current-layer="ic-update"
+   inkscape:cx="12"
+   inkscape:cy="12"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-height="2126"
+   inkscape:window-width="3840"
+   inkscape:zoom="11.083333"
+   objecttolerance="10"
+   pagecolor="#ffffff"
+   showgrid="false"
+   inkscape:document-rotation="0"
+   inkscape:window-x="-11"
+   inkscape:window-y="-11"
+   inkscape:window-maximized="1">
+	</sodipodi:namedview>
+<desc
+   id="desc4">Created with Sketch.</desc>
+<g
+   id="Artboard">
+	<g
+   id="ic-update"
+   transform="translate(2.000000, 2.000000)">
+		<polygon
+   id="Rectangle_4642"
+   class="st0"
+   points="0,0 20,0 20,20 0,20   " />
+		<path
+   id="Path_18962"
+   inkscape:connector-curvature="0"
+   class="st1"
+   d="M13.2,8.5h5.1v-5h-2v1.2c-2.5-2.8-6.6-3.5-9.9-1.8    s-5.1,5.4-4.2,9s4.2,6.1,8,6.1c2.2,0,4.3-0.8,5.8-2.3l-1.4-1.4c-1.8,1.8-4.6,2.3-6.9,1.2s-3.8-3.5-3.6-6s2-4.6,4.5-5.3    s5.1,0.2,6.6,2.3h-1.9v2H13.2z"
+   style="fill:#0099f9;fill-opacity:1" />
+	</g>
+</g>
+</svg>

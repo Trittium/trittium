@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="30"
+   height="30"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="ic-pending.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview14"
+     showgrid="false"
+     inkscape:zoom="8.8666667"
+     inkscape:cx="15"
+     inkscape:cy="15"
+     inkscape:current-layer="Group_8850" />
+  <defs
+     id="defs4">
+    <style
+       type="text/css"
+       id="style2">
+            .cls-1{opacity:.7}.cls-2{fill:#7c7687}.cls-3{fill:none}
+        </style>
+  </defs>
+  <g
+     id="ic_pending"
+     class="cls-1">
+    <g
+       id="Group_8850"
+       data-name="Group 8850"
+       style="fill:#6666ff;fill-opacity:1">
+      <path
+         id="Path_18903"
+         d="M10 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8zm0-14a6 6 0 1 0 6 6 6.006 6.006 0 0 0-6-6z"
+         class="cls-2"
+         data-name="Path 18903"
+         style="fill:#ed1c24;fill-opacity:1" />
+    </g>
+    <g
+       id="Group_8851"
+       data-name="Group 8851"
+       style="fill:#ed1c24;fill-opacity:1">
+      <path
+         id="Path_18904"
+         d="M14 12H9V6h2v4h3z"
+         class="cls-2"
+         data-name="Path 18904"
+         style="fill:#ed1c24;fill-opacity:1" />
+    </g>
+    <path
+       id="Rectangle_4429"
+       d="M0 0h20v20H0z"
+       class="cls-3"
+       data-name="Rectangle 4429" />
+  </g>
+</svg>

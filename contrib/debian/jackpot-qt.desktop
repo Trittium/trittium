@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Trittium 
+Comment=Trittium P2P Cryptocurrency
+Comment[fr]=Trittium, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Trittium, eşten eşe kriptografik sanal para birimi
+Exec=trittium-qt %u
+Terminal=false
+Type=Application
+Icon=pivx128
+MimeType=x-scheme-handler/trittium;
+Categories=Office;Finance;
+StartupWMClass=trittium-qt

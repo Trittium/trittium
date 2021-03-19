@@ -69,35 +69,35 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits
  */
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-    (0, uint256("0x000003b073dae25978a8dab4a2d52dce79cbada6c5b8c21b09646af9a44cfc93"))
-    (104, uint256("0x000000b0eadc3ae63a01910e68ad6114b5f56a11343cc935bb868aa97f007f0e")); 
+    (0, uint256("0x00000e41db923032d1be957ad4be59aa287c9727ca7602dd403cf7312d259968"))
+    (102, uint256("0x000000b17e437d42405be6135c85f92ce6031c88fdc77642bf2419935da160d8")); 
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1616099742, // * UNIX timestamp of last checkpoint block
-    177,        // * total number of transactions between genesis and last checkpoint
+    1616121266, // * UNIX timestamp of last checkpoint block
+    175,        // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the UpdateTip debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
 
 static Checkpoints::MapCheckpoints mapCheckpointsTestnet =
     boost::assign::map_list_of
-    (0, uint256("0x000001757bc439623709f3f8f95d7975db3b73af16b7157e2c782f4ef6822725"));
+    (0, uint256("0x000034fe1805f04a440c06c1b96b1234b45d9fdba0fcb055d5caf4d83689428c"));
 
 static const Checkpoints::CCheckpointData dataTestnet = {
     &mapCheckpointsTestnet,
-    1615346670,
+    1616082640,
     0,
     250};
 
 static Checkpoints::MapCheckpoints mapCheckpointsRegtest =
     boost::assign::map_list_of
-	(0, uint256("0x00000a51ec08652323848a7587356052bbb044bd788c51ba545f7188896883b1")
+	(0, uint256("0x003279ba296f0376d7a8417354e0ef9bd00fa29f92ac5d9cdf97c160673474af")
 );
 
 static const Checkpoints::CCheckpointData dataRegtest = {
     &mapCheckpointsRegtest,
-    1615347255,
+    1616082641,
     0,
     100};
 
@@ -155,9 +155,9 @@ public:
 
         // /////////////////////////////////////////////////////////////////
 
-        genesis = CreateGenesisBlock(1616082639, 56119, 0x1e0ffff0, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1616082639, 933427, 0x1e0ffff0, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x000003b073dae25978a8dab4a2d52dce79cbada6c5b8c21b09646af9a44cfc93"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000e41db923032d1be957ad4be59aa287c9727ca7602dd403cf7312d259968"));
         assert(genesis.hashMerkleRoot == uint256S("0xbeb39df5e5c3029bb4a6d66357a41d06c275ea69a96c9081a3e6f8d2f8efe918"));
 
         consensus.fPowAllowMinDifficultyBlocks = false;
@@ -298,14 +298,14 @@ public:
         // arith_uint256 test;
         // bool fNegative;
         // bool fOverflow;
-        // test.SetCompact(0x1e0ffff0, &fNegative, &fOverflow);
+        // test.SetCompact(0x1efffff0, &fNegative, &fOverflow);
         // std::cout << "Test threshold: " << test.GetHex() << "\n\n";
 
         // int genesisNonce = 0;
         // uint256 TempHashHolding = uint256S("0x0000000000000000000000000000000000000000000000000000000000000000");
         // uint256 BestBlockHash = uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         // for (int i=0;i<40000000;i++) {
-        //     genesis = CreateGenesisBlock(nGenesisTime, i, 0x1e0ffff0, 1, 0 * COIN);
+        //     genesis = CreateGenesisBlock(nGenesisTime, i, 0x1efffff0, 1, 0 * COIN);
         //     //genesis.hashPrevBlock = TempHashHolding;
         //     consensus.hashGenesisBlock = genesis.GetHash();
 
@@ -336,9 +336,9 @@ public:
 
         // /////////////////////////////////////////////////////////////////
 
-        genesis = CreateGenesisBlock(1616082640, 3235403, 0x1e0ffff0, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1616082640, 178720, 0x1efffff0, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x0000019cc3b05fed09b3757db6fa9e408e75a93387ac99c95758ae38b25cebbb"));
+        assert(consensus.hashGenesisBlock == uint256S("0x000034fe1805f04a440c06c1b96b1234b45d9fdba0fcb055d5caf4d83689428c"));
         assert(genesis.hashMerkleRoot == uint256S("0xbeb39df5e5c3029bb4a6d66357a41d06c275ea69a96c9081a3e6f8d2f8efe918"));
 
         consensus.fPowAllowMinDifficultyBlocks = true;
@@ -514,9 +514,9 @@ public:
 
         // /////////////////////////////////////////////////////////////////
 
-        genesis = CreateGenesisBlock(1616082641, 498, 0x1fffffff, 1, 0 * COIN);
+        genesis = CreateGenesisBlock(1616082641, 333, 0x1fffffff, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x004952a7bf209dae25d54c0721872a43ad660e78687a03c6f56ed18dd00cca79"));
+        assert(consensus.hashGenesisBlock == uint256S("0x003279ba296f0376d7a8417354e0ef9bd00fa29f92ac5d9cdf97c160673474af"));
         assert(genesis.hashMerkleRoot == uint256S("0xbeb39df5e5c3029bb4a6d66357a41d06c275ea69a96c9081a3e6f8d2f8efe918"));
 
         consensus.fPowAllowMinDifficultyBlocks = true;

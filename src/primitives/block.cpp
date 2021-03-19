@@ -25,9 +25,10 @@ uint256 CBlockHeader::GetHash() const
         WriteLE32(&data[68], nTime);
         WriteLE32(&data[72], nBits);
         WriteLE32(&data[76], nNonce);
-        return XEVAN(data, data + 80);
+
+        return HashX11KVS(data, data + 80);
 #else // Can take shortcut for little endian
-        return XEVAN(BEGIN(nVersion), END(nNonce));
+        return HashX11KVS(BEGIN(nVersion), END(nNonce));
 #endif
     }
 	

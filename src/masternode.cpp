@@ -316,7 +316,6 @@ bool CMasternode::IsInputAssociatedWithPubkey() const
     return false;
 }
 
-// TODO: Adjust the collateral schedule once the old chain snapshot block is decided.
 CAmount CMasternode::GetMasternodeNodeCollateral(int nHeight) 
 {
 	// Old blockchain snapshot is taken at 18.03.2021 00:00 UTC at Block 1493071 - Collateral is 100000 * COIN
@@ -337,7 +336,6 @@ CAmount CMasternode::GetMasternodeNodeCollateral(int nHeight)
     return 200000 * COIN; // Old blockchain block above 1900000
 }
 
-// TODO: Adjust the reward schedule once the old chain snapshot block is decided.
 CAmount CMasternode::GetBlockValue(int nHeight)
 {
     CAmount maxMoneyOut= Params().GetConsensus().nMaxMoneyOut;

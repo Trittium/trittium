@@ -29,6 +29,7 @@ Trittium wallet repository
  mso-width-alt:3702;width:81pt'>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6317252 width=150 style='height:15.75pt;width:104pt'>Block</td>
+ <td class=xl6317252 width=107 style='width:81pt'>App. Date</td>
   <td class=xl6317252 width=107 style='width:81pt'>Collateral</td>
   <td class=xl6317252 width=107 style='width:81pt'>Block Reward</td>
   <td class=xl6317252 width=107 style='width:81pt'>MN Reward %</td>
@@ -47,6 +48,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>2-1000</td>
+  <td class=xl6517252>19-03-2021</td>
   <td class=xl6517252>100.000</td>
   <td class=xl6517252>1000</td>
   <td class=xl6617252>-</td>
@@ -56,6 +58,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>1001-2880</td>
+  <td class=xl6517252>20-03-2021</td>
   <td class=xl6517252>100.000</td>
   <td class=xl6517252>1000</td>
   <td class=xl6617252>-</td>
@@ -65,6 +68,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>2881-6928</td>
+ <td class=xl6517252>21-03-2021</td>
   <td class=xl6517252>100.000</td>
   <td class=xl6517252>1000</td>
   <td class=xl6617252>90</td>
@@ -74,6 +78,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>6929-106928</td>
+ <td class=xl6517252>24-03-2021</td>
   <td class=xl6517252>120.000</td>
   <td class=xl6517252>900</td>
   <td class=xl6617252>90</td>
@@ -83,6 +88,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>106929-206928</td>
+ <td class=xl6517252>01-06-2021</td>
   <td class=xl6517252>140.000</td>
   <td class=xl6517252>800</td>
   <td class=xl6617252>90</td>
@@ -92,6 +98,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>206929-306928</td>
+ <td class=xl6517252>09-08-2021</td>
   <td class=xl6517252>160.000</td>
   <td class=xl6517252>700</td>
   <td class=xl6617252>90</td>
@@ -101,6 +108,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>306929-406928</td>
+ <td class=xl6517252>17-10-2021</td>
   <td class=xl6517252>180.000</td>
   <td class=xl6517252>600</td>
   <td class=xl6617252>90</td>
@@ -110,6 +118,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>406929-506928</td>
+ <td class=xl6517252>25-12-2021</td>
   <td class=xl6517252>200.000</td>
   <td class=xl6517252>500</td>
   <td class=xl6617252>90</td>
@@ -119,6 +128,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>506929-606928</td>
+ <td class=xl6517252>04-03-2022</td>
   <td class=xl6517252>200.000</td>
   <td class=xl6517252>450</td>
   <td class=xl6617252>90</td>
@@ -128,6 +138,7 @@ Trittium wallet repository
  </tr>
  <tr height=21 style='mso-height-source:userset;height:15.75pt'>
   <td height=21 class=xl6417252 style='height:15.75pt'>606929-...</td>
+ <td class=xl6517252>12-05-2022</td>
   <td class=xl6517252>200.000</td>
   <td class=xl6517252>400</td>
   <td class=xl6617252>90</td>

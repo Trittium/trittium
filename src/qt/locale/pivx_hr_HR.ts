@@ -3441,8 +3441,8 @@ Došlo je do greške prilikom spremanja popisa adresa u %1. Molimo pokušajte po
         <translation>2) Zašto se moji TRTT ne mogu potrošiti?</translation>
     </message>
     <message>
-        <source>https://trittium.cc/</source>
-        <translation>https://trittium.cc/</translation>
+        <source>https://trittium.net/</source>
+        <translation>https://trittium.net/</translation>
     </message>
     <message>
         <source>1</source>

@@ -3,7 +3,7 @@ Trittium Core
 
 Setup
 ---------------------
-[Trittium Core](https://trittium.cc/) is the original Trittium client and it builds the backbone of the network. However, it downloads and stores the entire history of Trittium transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
+[Trittium Core](https://trittium.net/) is the original Trittium client and it builds the backbone of the network. However, it downloads and stores the entire history of Trittium transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once.
 
 Running
 ---------------------
@@ -55,7 +55,7 @@ The Trittium repo's [root README](/README.md) contains relevant information on t
 - [Dnsseed Policy](dnsseed-policy.md)
 
 ### Resources
-* Discuss on the [Trittium Homepage](https://trittium.cc/).
+* Discuss on the [Trittium Homepage](https://trittium.net/).
 * Join the [Trittium Discord](https://discordapp.com/invite/MkdqhHDqsr).
 
 ### Miscellaneous

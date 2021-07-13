@@ -3512,8 +3512,8 @@ Ha habido un error al tratar de guardar la libreta de direcciones en %1. Por fav
         <translation>2) ¿Por qué mis TRTT no se pueden gastar?</translation>
     </message>
     <message>
-        <source>https://trittium.cc/</source>
-        <translation>https://trittium.cc/</translation>
+        <source>https://trittium.net/</source>
+        <translation>https://trittium.net/</translation>
     </message>
     <message>
         <source>1</source>

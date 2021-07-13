@@ -28,7 +28,7 @@ Build-Depends: debhelper,
  libzmq3-dev,
  dh-systemd
 Standards-Version: 3.9.2
-Homepage: https://trittium.cc
+Homepage: https://trittium.net
 Vcs-Git: git://github.com/Trittium/trittium.git
 Vcs-Browser: https://github.com/Trittium/trittium
 

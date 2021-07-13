@@ -3515,8 +3515,8 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>2) Waarom is mijn TRTT niet besteedbaar?</translation>
     </message>
     <message>
-        <source>https://trittium.cc/</source>
-        <translation>https://trittium.cc/</translation>
+        <source>https://trittium.net/</source>
+        <translation>https://trittium.net/</translation>
     </message>
     <message>
         <source>1</source>

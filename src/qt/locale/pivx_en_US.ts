@@ -3519,8 +3519,8 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>2) Why are my TRTT unspendable?</translation>
     </message>
     <message>
-        <source>https://trittium.cc/</source>
-        <translation>https://trittium.cc/</translation>
+        <source>https://trittium.net/</source>
+        <translation>https://trittium.net/</translation>
     </message>
     <message>
         <source>1</source>

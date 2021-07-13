@@ -342,7 +342,7 @@
                   <enum>Qt::NoFocus</enum>
                  </property>
                  <property name="text">
-                  <string>https://trittium.cc/</string>
+                  <string>https://trittium.net/</string>
                  </property>
                 </widget>
                </item>

@@ -3511,8 +3511,8 @@ Es gab ein Problem bei dem Versuch die Adressen unter %1 zu speichern. Bitte ver
         <translation>2) Wieso kann ich meine TRTT nicht ausgeben?</translation>
     </message>
     <message>
-        <source>https://trittium.cc/</source>
-        <translation>https://trittium.cc/</translation>
+        <source>https://trittium.net/</source>
+        <translation>https://trittium.net/</translation>
     </message>
     <message>
         <source>1</source>

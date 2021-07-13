@@ -3509,8 +3509,8 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation>2) Почему мои TRTT невозможно потратить?</translation>
     </message>
     <message>
-        <source>https://trittium.cc/</source>
-        <translation>https://trittium.cc/</translation>
+        <source>https://trittium.net/</source>
+        <translation>https://trittium.net/</translation>
     </message>
     <message>
         <source>1</source>

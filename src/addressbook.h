@@ -15,13 +15,7 @@ namespace AddressBook {
         extern const std::string UNKNOWN;
         extern const std::string RECEIVE;
         extern const std::string SEND;
-        extern const std::string DELEGABLE;
-        extern const std::string DELEGATOR;
-        extern const std::string COLD_STAKING;
-        extern const std::string COLD_STAKING_SEND;
     }
-
-    bool IsColdStakingPurpose(const std::string& purpose);
 
 /** Address book data */
     class CAddressBookData {
@@ -37,7 +31,6 @@ namespace AddressBook {
         typedef std::map<std::string, std::string> StringMap;
         StringMap destdata;
 
-        bool isSendColdStakingPurpose() const;
         bool isSendPurpose() const;
         bool isReceivePurpose() const;
     };

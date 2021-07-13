@@ -363,7 +363,7 @@ void TransactionTableModel::updateTransaction(const QString& hash, int status, b
     priv->updateWallet(updated, status, showTransaction, rec);
 
     if (!rec.isNull())
-        Q_EMIT txArrived(hash, rec.isCoinStake(), rec.isAnyColdStakingType());
+        Q_EMIT txArrived(hash, rec.isCoinStake());
 }
 
 void TransactionTableModel::updateConfirmations()
@@ -472,17 +472,6 @@ QString TransactionTableModel::formatTxType(const TransactionRecord* wtx) const
         return tr("%1 Stake").arg(CURRENCY_UNIT.c_str());
     case TransactionRecord::StakeZPIV:
         return tr("z%1 Stake").arg(CURRENCY_UNIT.c_str());
-    case TransactionRecord::StakeDelegated:
-        return tr("%1 Cold Stake").arg(CURRENCY_UNIT.c_str());
-    case TransactionRecord::StakeHot:
-        return tr("%1 Stake on behalf of").arg(CURRENCY_UNIT.c_str());
-    case TransactionRecord::P2CSDelegationSent:
-    case TransactionRecord::P2CSDelegationSentOwner:
-    case TransactionRecord::P2CSDelegation:
-        return tr("Stake delegation");
-    case TransactionRecord::P2CSUnlockOwner:
-    case TransactionRecord::P2CSUnlockStaker:
-        return tr("Stake delegation spent by");
     case TransactionRecord::Generated:
         return tr("Mined");
     case TransactionRecord::ZerocoinMint:
@@ -547,13 +536,6 @@ QString TransactionTableModel::formatTxToAddress(const TransactionRecord* wtx, b
     case TransactionRecord::ZerocoinSpend_Change_zPiv:
     case TransactionRecord::StakeZPIV:
         return tr("Anonymous");
-    case TransactionRecord::P2CSDelegation:
-    case TransactionRecord::P2CSDelegationSent:
-    case TransactionRecord::P2CSDelegationSentOwner:
-    case TransactionRecord::P2CSUnlockOwner:
-    case TransactionRecord::P2CSUnlockStaker:
-    case TransactionRecord::StakeDelegated:
-    case TransactionRecord::StakeHot:
     case TransactionRecord::SendToSelf: {
         QString label = walletModel->getAddressTableModel()->labelForAddress(QString::fromStdString(wtx->address));
         return label.isEmpty() ? "" : label;

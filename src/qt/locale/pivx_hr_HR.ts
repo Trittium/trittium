@@ -432,33 +432,6 @@ za staking</translation>
     </message>
 </context>
 <context>
-    <name>CSRow</name>
-    <message>
-        <source>Form</source>
-        <translation>Obrazac</translation>
-    </message>
-    <message>
-        <source>Savings</source>
-        <translation>Ušteđjevina</translation>
-    </message>
-    <message>
-        <source>0,00 TRTT</source>
-        <translation>0,00 TRTT</translation>
-    </message>
-    <message>
-        <source>address</source>
-        <translation>adresa</translation>
-    </message>
-    <message>
-        <source>Not Staking</source>
-        <translation>Staking neaktivan</translation>
-    </message>
-    <message>
-        <source>Own delegation</source>
-        <translation>Vlastita delegacija</translation>
-    </message>
-</context>
-<context>
     <name>ClientModel</name>
     <message>
         <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
@@ -664,10 +637,6 @@ za staking</translation>
         <translation>da</translation>
     </message>
     <message>
-        <source>delegated to %1 for cold staking</source>
-        <translation>delegirano %1 za cold staking</translation>
-    </message>
-    <message>
         <source>Select All</source>
         <translation>Označi sve</translation>
     </message>
@@ -710,227 +679,6 @@ za staking</translation>
     <message>
         <source>(change)</source>
         <translation>(promjena)</translation>
-    </message>
-</context>
-<context>
-    <name>ColdStakingWidget</name>
-    <message>
-        <source>Form</source>
-        <translation>Obrazac</translation>
-    </message>
-    <message>
-        <source>Owner address (optional, if empty a new address will be created)</source>
-        <translation>Adresa vlasnika (neobavezno, ako ostavite prazno nova adresa će biti napravljena)</translation>
-    </message>
-    <message>
-        <source>Total Staking:</source>
-        <translation>Ukupan staking:</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>Cold Staking</translation>
-    </message>
-    <message>
-        <source>Staker</source>
-        <translation>Staker</translation>
-    </message>
-    <message>
-        <source>Delegation</source>
-        <translation>Delegacija</translation>
-    </message>
-    <message>
-        <source>Delegate</source>
-        <translation>Delegiraj</translation>
-    </message>
-    <message>
-        <source>Clear All</source>
-        <translation>Očisti sve</translation>
-    </message>
-    <message>
-        <source>Delegated balance history</source>
-        <translation>Povijest delegiranih iznosa</translation>
-    </message>
-    <message>
-        <source>No delegations yet</source>
-        <translation>Nema još delegacija</translation>
-    </message>
-    <message>
-        <source>Total Staking: %1</source>
-        <translation>Ukupan staking: %1</translation>
-    </message>
-    <message>
-        <source>Error loading delegations: %1</source>
-        <translation>Greška pri učitavanju delegacija: %1</translation>
-    </message>
-    <message>
-        <source>You can delegate your TRTTs, letting a hot node (24/7 online node)
-stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>Možete delegirati svoje TRTT-ove, dopuštajući hot node-u (24/7 online node) da stake-a za Vas, dok su Vaši ključevi offline na sigurnom.</translation>
-    </message>
-    <message>
-        <source>Enter owner address</source>
-        <translation>Unesi adresu vlasnika</translation>
-    </message>
-    <message>
-        <source>Accept TRTT delegation / Delegate TRTT</source>
-        <translation>Prihvati TRTT delegaciju / Delegiraj TRTT</translation>
-    </message>
-    <message>
-        <source>Cold Staking address</source>
-        <translation>Cold Staking adresa</translation>
-    </message>
-    <message>
-        <source>No receive addresses available, you can go to the receive screen and create some there!</source>
-        <translation>Nema dostupnih adresa, možete otići na zaslon primanja i tamo ih stvoriti!</translation>
-    </message>
-    <message>
-        <source>No contacts available, you can go to the contacts screen and add some there!</source>
-        <translation>Nema dostupnih kontakata, možete otići na zaslon s kontaktima i tamo ih dodati!</translation>
-    </message>
-    <message>
-        <source>Cannot send delegation, wallet locked</source>
-        <translation>Ne mogu poslati delegaciju, novčanik je zaključan</translation>
-    </message>
-    <message>
-        <source>Cold staking is networkely disabled</source>
-        <translation>Cold staking je mrežno onemogućen</translation>
-    </message>
-    <message>
-        <source>Coin Control</source>
-        <translation>Upravljanje novčićima</translation>
-    </message>
-    <message>
-        <source>Create Cold Staking Address</source>
-        <translation>Stvori Cold Staking adresu</translation>
-    </message>
-    <message>
-        <source>My Cold Staking Addresses</source>
-        <translation>Moje Cold Staking adrese</translation>
-    </message>
-    <message>
-        <source>Invalid entry</source>
-        <translation>Neispravan unos</translation>
-    </message>
-    <message>
-        <source>Invalid entry, minimum delegable amount is </source>
-        <translation>Neispravan unos, minimalni delegirajući iznos je</translation>
-    </message>
-    <message>
-        <source>Owner address invalid</source>
-        <translation>Neispravna adresa vlasnika</translation>
-    </message>
-    <message>
-        <source>ALERT!</source>
-        <translation>PAŽNJA!</translation>
-    </message>
-    <message>
-        <source>Delegating to an external owner address!
-
-The delegated coins will NOT be spendable by this wallet.
-Spending these coins will need to be done from the wallet or
-device containing the owner address.
-
-Do you wish to proceed?</source>
-        <translation>Preusmjeravanje na vanjsku adresu vlasnik!
-
-Delegirani novčići NEĆE se moći potrošiti s ovim novčanikom.
-Potrošnja ovih novčića morat će se obaviti iz novčanika ili uredjaja koji sadržava adresu vlasnika.
-
-Želite li nastaviti?</translation>
-    </message>
-    <message>
-        <source>Staking address corresponds to this wallet, change it to an external node</source>
-        <translation>Adresa za staking odgovara ovom novčaniku, promijenite je na vanjsku adresu</translation>
-    </message>
-    <message>
-        <source>Cannot create transaction.</source>
-        <translation>Neuspjelo stvaranje transakcije.</translation>
-    </message>
-    <message>
-        <source>Coins delegated</source>
-        <translation>Novčići delegirani</translation>
-    </message>
-    <message>
-        <source>You don't have any %1 to select.</source>
-        <translation>Nemate ni jedan %1 za odabrati.</translation>
-    </message>
-    <message>
-        <source>Cannot perform operation, wallet locked</source>
-        <translation>Ne može se izvršiti operacija, novčanik je zaključan</translation>
-    </message>
-    <message>
-        <source>URI copied to clipboard</source>
-        <translation>URI kopiran u medjuspremnik</translation>
-    </message>
-    <message>
-        <source>Address copied to clipboard</source>
-        <translation>Adresa kopirana u medjuspremnik</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopiraj</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Uredi</translation>
-    </message>
-    <message>
-        <source>Stake</source>
-        <translation>Stakeaj</translation>
-    </message>
-    <message>
-        <source>Blacklist</source>
-        <translation>Crna lista</translation>
-    </message>
-    <message>
-        <source>Edit Label</source>
-        <translation>Uredi naziv</translation>
-    </message>
-    <message>
-        <source>Copy owner
-address</source>
-        <translation>Kopiraj adresu
-vlasnika</translation>
-    </message>
-    <message>
-        <source>Address copied</source>
-        <translation>Adresa kopirana</translation>
-    </message>
-    <message>
-        <source>Edit Cold Address Label</source>
-        <translation>Uredi naziv Cold adrese</translation>
-    </message>
-    <message>
-        <source>Whitelist failed, please check the logs</source>
-        <translation>Dodavanje na popis dozvoljenih neuspjelo, molimo provjerite zapisnik</translation>
-    </message>
-    <message>
-        <source> staking!</source>
-        <translation>staking!</translation>
-    </message>
-    <message>
-        <source>Blacklist failed, please check the logs</source>
-        <translation>Dodavanje na popis zabranjenih neuspjelo, molimo provjerite zapisnik</translation>
-    </message>
-    <message>
-        <source> blacklisted from staking</source>
-        <translation>na crnoj listi za staking</translation>
-    </message>
-    <message>
-        <source>Owner address copied</source>
-        <translation>Adresa vlasnika kopirana</translation>
-    </message>
-    <message>
-        <source>Edit Owner Address Label</source>
-        <translation>Uredi oznaku adrese vlasnika</translation>
-    </message>
-    <message>
-        <source>Address label saved</source>
-        <translation>Naziv adrese spremljen</translation>
-    </message>
-    <message>
-        <source>Error storing address label</source>
-        <translation>Greška pri spremanju oznake adrese</translation>
     </message>
 </context>
 <context>
@@ -1673,12 +1421,6 @@ NODES</source>
 NODEOVI</translation>
     </message>
     <message>
-        <source>COLD
-STAKING</source>
-        <translation>COLD
-STAKING</translation>
-    </message>
-    <message>
         <source>SETTINGS
 </source>
         <translation>POSTAVKE
@@ -2296,18 +2038,6 @@ Adresa: %4
         <translation>Primanje</translation>
     </message>
     <message>
-        <source>Delegator</source>
-        <translation>Delegator</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>Cold Staking</translation>
-    </message>
-    <message>
-        <source>Cold Staking Contact</source>
-        <translation>Cold Staking kontakt</translation>
-    </message>
-    <message>
         <source>Hidden</source>
         <translation>Skriveno</translation>
     </message>
@@ -2368,20 +2098,8 @@ Adresa: %4
         <translation>Sebi</translation>
     </message>
     <message>
-        <source>Cold stakes</source>
-        <translation>Cold stake-ovi</translation>
-    </message>
-    <message>
         <source>Hot stakes</source>
         <translation>Hot stake-ovi</translation>
-    </message>
-    <message>
-        <source>Delegated</source>
-        <translation>Delegirano</translation>
-    </message>
-    <message>
-        <source>Delegations</source>
-        <translation>Delegacije</translation>
     </message>
     <message>
         <source>by Label</source>
@@ -3055,14 +2773,6 @@ Adresa: %4
         <translation>GENERIRAJ</translation>
     </message>
     <message>
-        <source>Creates an address to receive coin delegations and be able to stake them.</source>
-        <translation>Stvara adresu za primanje delegacija novčića i mogućnost njihovog stake-anja.</translation>
-    </message>
-    <message>
-        <source>New Cold Staking Address</source>
-        <translation>Nova Cold Staking adresa</translation>
-    </message>
-    <message>
         <source>Amount (optional)</source>
         <translation>Iznos (neobavezno)</translation>
     </message>
@@ -3215,10 +2925,6 @@ Do you want to continue?</source>
         <translation>Neispravan unos, prethodni unosi moraju biti ispravni prije dodavanja novog</translation>
     </message>
     <message>
-        <source>Possibly spend coins delegated for cold-staking (currently available: %1</source>
-        <translation>Moguća potrošnja novčića delegiranih za cold-staking (trenutno dostupno: %1</translation>
-    </message>
-    <message>
         <source>Invalid entry</source>
         <translation>Neispravan unos</translation>
     </message>
@@ -3233,14 +2939,6 @@ Do you want to continue?</source>
     <message>
         <source>Cannot create transaction.</source>
         <translation>Neuspjelo stvaranje transakcije.</translation>
-    </message>
-    <message>
-        <source>WARNING:
-Transaction spends a cold-stake delegation, voiding it.
-These coins will no longer be cold-staked.</source>
-        <translation>UPOZORENJE:
-Transakcija troši cold-stake delegaciju, uklanjajući ju.
-Ovi novčići više neće biti cold-stakeani.</translation>
     </message>
     <message>
         <source>Transaction sent</source>
@@ -3858,7 +3556,6 @@ da biste vidjeli i mogli potrošiti sredstva na mreži.
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;Instant transactions (SwiftX)&lt;/li&gt;
                            &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
                            &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
@@ -3900,7 +3597,6 @@ Te usluge uključuju:
 &lt;/p&gt;&lt;p align="justify"&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Trenutne transakcije (SwiftX)&lt;/li&gt;
 &lt;li&gt;Decentralizirano upravljanje (glasanje o zahtjevima)&lt;/li&gt;
 &lt;li&gt;Decentralizirani sustav proračuna (riznica)&lt;/li&gt;
 &lt;li&gt;Validacija transakcija unutar svakog bloka&lt;/li&gt;
@@ -4985,16 +4681,8 @@ se nova sigurnosna kopija.
         <translation>z%1 Stake</translation>
     </message>
     <message>
-        <source>%1 Cold Stake</source>
-        <translation>%1 Cold Stake</translation>
-    </message>
-    <message>
         <source>%1 Stake on behalf of</source>
         <translation>%1 Stake u korist</translation>
-    </message>
-    <message>
-        <source>Stake delegation</source>
-        <translation>Stake delegacija</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5007,10 +4695,6 @@ se nova sigurnosna kopija.
     <message>
         <source>Payment to yourself</source>
         <translation>Plaćanje sebi</translation>
-    </message>
-    <message>
-        <source>Stake delegation spent by</source>
-        <translation>Stake delegacija potrošena od strane</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -5296,10 +4980,6 @@ Trittium Wallet</source>
         <translation>Distribuirano pod MIT softverskom licencom, pogledajte priloženu datoteku COPYING ili &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</translation>
     </message>
     <message>
-        <source>Enable cold staking functionality (0-1, default: %u). Disabled if staking=0</source>
-        <translation>Omogući cold staking funkcionalnost (0-1, zadano: %u). Onemogućeno ako je staking=0</translation>
-    </message>
-    <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
         <translation>Omogućite funkcionalnost administracije s odgovarajućim privatnim ključem.</translation>
     </message>
@@ -5565,14 +5245,6 @@ Trittium Wallet</source>
         <translation>Završeno učitavanje</translation>
     </message>
     <message>
-        <source>Enable publish hash transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>Omogući objavu hasha transakcije (zaključano putem usluge SwiftX) u &lt;address&gt;</translation>
-    </message>
-    <message>
-        <source>Enable publish raw transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>Omogući objavljivanje neobrađjene transakcije (zaključano putem usluge SwiftX) u &lt;address&gt;</translation>
-    </message>
-    <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
         <translation>Omogućite klijentu da djeluje kao masternode (0-1, zadano: %u)</translation>
     </message>
@@ -5713,20 +5385,12 @@ Trittium Wallet</source>
         <translation>Odabrana vrijednost novčića je manja od količine za plačanje</translation>
     </message>
     <message>
-        <source>SwiftX options:</source>
-        <translation>SwiftX opcije:</translation>
-    </message>
-    <message>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation>Ovo je priprema za testiranje prije puštanja - upotrebljavajte na vlastiti rizik - nemojte ga koristiti za staking ili trgovinske aplikacije!</translation>
     </message>
     <message>
-        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Onemogući sve specifične funkcije TRTT (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, zadano: %u)</translation>
-    </message>
-    <message>
-        <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>Omogućite SwiftX, prikažite potvrde za zaključane transakcije (bool, zadano: %s)</translation>
+        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
+        <translation>Onemogući sve specifične funkcije TRTT (Masternodes, Zerocoin, Budgeting) (0-1, zadano: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -5747,10 +5411,6 @@ Trittium Wallet</source>
     <message>
         <source>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</source>
         <translation>Navedite put prilagođenog sigurnosnog kopiranja da biste dodali kopiju sigurnosne kopije lisnice. Ako je postavljeno kao dir, svaka sigurnosna kopija generira vremensku datoteku. Ako je postavljen kao datoteka, prepisat će na tu datoteku svaku kopiju.</translation>
-    </message>
-    <message>
-        <source>SwiftX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>SwiftX zahtijeva ulaze s najmanje 6 potvrda, možda ćete morati pričekati nekoliko minuta i pokušati ponovo.</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>
@@ -6396,10 +6056,6 @@ Trittium Wallet</source>
     <message>
         <source>Reset to default</source>
         <translation>Resetiraj na početno stanje</translation>
-    </message>
-    <message>
-        <source>Include delegated</source>
-        <translation>Uključi delegirane</translation>
     </message>
 </context>
 </TS>

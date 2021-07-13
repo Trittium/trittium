@@ -68,4 +68,27 @@ namespace KeyIO {
         return ret;
     }
 
+    CExtPubKey DecodeExtPubKey(const std::string &str) {
+        CExtPubKey key;
+        std::vector<unsigned char> data;
+        if (DecodeBase58Check(str, data)) {
+            const std::vector<unsigned char> &prefix = Params().Base58Prefix(CChainParams::EXT_PUBLIC_KEY);
+            if (data.size() == BIP32_EXTKEY_SIZE + prefix.size() &&
+                std::equal(prefix.begin(), prefix.end(), data.begin())) {
+                key.Decode(data.data() + prefix.size());
+            }
+        }
+        return key;
+    }
+
+    std::string EncodeExtPubKey(const CExtPubKey &key) {
+        std::vector<unsigned char> data = Params().Base58Prefix(CChainParams::EXT_PUBLIC_KEY);
+        size_t size = data.size();
+        data.resize(size + BIP32_EXTKEY_SIZE);
+        key.Encode(data.data() + size);
+        std::string ret = EncodeBase58Check(data);
+        memory_cleanse(data.data(), data.size());
+        return ret;
+    }
+    
 }// namespace

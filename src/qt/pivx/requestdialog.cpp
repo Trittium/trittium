@@ -70,16 +70,6 @@ void RequestDialog::setWalletModel(WalletModel *model)
     this->walletModel = model;
 }
 
-void RequestDialog::setPaymentRequest(bool isPaymentRequest)
-{
-    this->isPaymentRequest = isPaymentRequest;
-    if (!this->isPaymentRequest) {
-        ui->labelMessage->setText(tr("Creates an address to receive coin delegations and be able to stake them."));
-        ui->labelTitle->setText(tr("New Cold Staking Address"));
-        ui->labelSubtitleAmount->setText(tr("Amount (optional)"));
-    }
-}
-
 void RequestDialog::accept()
 {
     if (walletModel) {
@@ -92,14 +82,6 @@ void RequestDialog::accept()
                             0 :
                             GUIUtil::parseValue(ui->lineEditAmount->text(), displayUnit, &isValueValid)
                         );
-
-        if (!this->isPaymentRequest) {
-            // Add specific checks for cold staking address creation
-            if (labelStr.isEmpty()) {
-                inform(tr("Address label cannot be empty"));
-                return;
-            }
-        }
 
         if (value < 0 || !isValueValid) {
             inform(tr("Invalid amount"));
@@ -117,13 +99,9 @@ void RequestDialog::accept()
 
         Destination address;
         PairResult r(false);
-        if (this->isPaymentRequest) {
-            r = walletModel->getNewAddress(address, label);
-            title = tr("Request for ") + BitcoinUnits::format(displayUnit, value, false, BitcoinUnits::separatorAlways) + " " + QString(CURRENCY_UNIT.c_str());
-        } else {
-            r = walletModel->getNewStakingAddress(address, label);
-            title = tr("Cold Staking Address Generated");
-        }
+
+        r = walletModel->getNewAddress(address, label);
+        title = tr("Request for ") + BitcoinUnits::format(displayUnit, value, false, BitcoinUnits::separatorAlways) + " " + QString(CURRENCY_UNIT.c_str());
 
         if (!r.result) {
             // TODO: notify user about this error

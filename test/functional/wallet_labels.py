@@ -154,16 +154,6 @@ class WalletlabelsTest(PivxTestFramework):
             else:
                 assert_raises_rpc_error(-11, "No addresses with label", node.getaddressesbylabel, "")
 
-        # Check that setlabel can assign a label to a new unused staking address.
-        if not accounts_api:
-            for label in labels:
-                staking_address = node.getnewstakingaddress()
-                node.setlabel(staking_address, label.name)
-                label.add_address(staking_address)
-                label.purpose[staking_address] = "coldstaking"
-                label.verify(node)
-                assert_raises_rpc_error(-11, "No addresses with label", node.getaddressesbylabel, "")
-
         # Check that addmultisigaddress can assign labels.
         for label in labels:
             addresses = []

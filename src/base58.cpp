@@ -258,7 +258,7 @@ public:
     std::string operator()(const CNoDestination& no) const { return ""; }
 };
 
-CTxDestination DecodeDestination(const std::string& str, const CChainParams& params, bool& isStaking)
+CTxDestination DecodeDestination(const std::string& str, const CChainParams& params)
 {
     std::vector<unsigned char> data;
     uint160 hash;
@@ -269,13 +269,6 @@ CTxDestination DecodeDestination(const std::string& str, const CChainParams& par
         const std::vector<unsigned char>& pubkey_prefix = params.Base58Prefix(CChainParams::PUBKEY_ADDRESS);
         if (data.size() == hash.size() + pubkey_prefix.size() && std::equal(pubkey_prefix.begin(), pubkey_prefix.end(), data.begin())) {
             std::copy(data.begin() + pubkey_prefix.size(), data.end(), hash.begin());
-            return CKeyID(hash);
-        }
-        // Public-key-hash-coldstaking-addresses have version 63 (or 73 testnet).
-        const std::vector<unsigned char>& staking_prefix = params.Base58Prefix(CChainParams::STAKING_ADDRESS);
-        if (data.size() == hash.size() + staking_prefix.size() && std::equal(staking_prefix.begin(), staking_prefix.end(), data.begin())) {
-            isStaking = true;
-            std::copy(data.begin() + staking_prefix.size(), data.end(), hash.begin());
             return CKeyID(hash);
         }
         // Script-hash-addresses have version 13 (or 19 testnet).
@@ -320,9 +313,9 @@ std::string EncodeSecret(const CKey& key)
     return ret;
 }
 
-std::string EncodeDestination(const CTxDestination& dest, bool isStaking)
+std::string EncodeDestination(const CTxDestination& dest)
 {
-    return EncodeDestination(dest, isStaking ? CChainParams::STAKING_ADDRESS : CChainParams::PUBKEY_ADDRESS);
+    return EncodeDestination(dest, CChainParams::PUBKEY_ADDRESS);
 }
 
 std::string EncodeDestination(const CTxDestination& dest, const CChainParams::Base58Type addrType)
@@ -332,22 +325,15 @@ std::string EncodeDestination(const CTxDestination& dest, const CChainParams::Ba
 
 CTxDestination DecodeDestination(const std::string& str)
 {
-    bool isStaking;
-    return DecodeDestination(str, Params(), isStaking);
+    return DecodeDestination(str, Params());
 }
 
-CTxDestination DecodeDestination(const std::string& str, bool& isStaking)
+bool IsValidDestinationString(const std::string& str, const CChainParams& params)
 {
-    return DecodeDestination(str, Params(), isStaking);
+    return IsValidDestination(DecodeDestination(str, params));
 }
 
-bool IsValidDestinationString(const std::string& str, bool fStaking, const CChainParams& params)
+bool IsValidDestinationString(const std::string& str)
 {
-    bool isStaking = false;
-    return IsValidDestination(DecodeDestination(str, params, isStaking)) && (isStaking == fStaking);
-}
-
-bool IsValidDestinationString(const std::string& str, bool isStaking)
-{
-    return IsValidDestinationString(str, isStaking, Params());
+    return IsValidDestinationString(str, Params());
 }

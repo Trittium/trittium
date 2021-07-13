@@ -62,9 +62,6 @@ public:
 
     /** Current number of blocks (to know whether cached status is still valid) */
     int cur_num_blocks;
-
-    //** Know when to update transaction for ix locks **/
-    int cur_num_ix_locks;
 };
 
 /** UI model for a transaction. A core transaction can be represented by multiple UI transactions if it has
@@ -89,13 +86,6 @@ public:
         RecvFromZerocoinSpend,
         ZerocoinSpend_Change_zPiv,
         ZerocoinSpend_FromMe,
-        StakeDelegated, // Received cold stake (owner)
-        StakeHot, // Staked via a delegated P2CS.
-        P2CSDelegation, // Non-spendable P2CS, staker side.
-        P2CSDelegationSent, // Non-spendable P2CS delegated utxo. (coin-owner transferred ownership to external wallet)
-        P2CSDelegationSentOwner, // Spendable P2CS delegated utxo. (coin-owner)
-        P2CSUnlockOwner, // Coin-owner spent the delegated utxo
-        P2CSUnlockStaker // Staker watching the owner spent the delegated utxo
     };
 
     /** Number of confirmation recommended for accepting a transaction */
@@ -128,10 +118,6 @@ public:
                                     const CAmount& nCredit, const CAmount& nDebit, bool fZSpendFromMe,
                                     QList<TransactionRecord>& parts);
 
-    static bool decomposeP2CS(const CWallet* wallet, const CWalletTx& wtx,
-                                    const CAmount& nCredit, const CAmount& nDebit,
-                                    QList<TransactionRecord>& parts);
-
     static bool decomposeCreditTransaction(const CWallet* wallet, const CWalletTx& wtx,
                                     QList<TransactionRecord>& parts);
 
@@ -144,11 +130,8 @@ public:
                                                       QList<TransactionRecord>& parts);
 
     static std::string getValueOrReturnEmpty(const std::map<std::string, std::string>& mapValue, const std::string& key);
-    static bool ExtractAddress(const CScript& scriptPubKey, bool fColdStake, std::string& addressStr);
-    static void loadHotOrColdStakeOrContract(const CWallet* wallet, const CWalletTx& wtx,
-                                            TransactionRecord& record, bool isContract = false);
-    static void loadUnlockColdStake(const CWallet* wallet, const CWalletTx& wtx, TransactionRecord& record);
-
+    static bool ExtractAddress(const CScript& scriptPubKey, std::string& addressStr);
+    
     /** @name Immutable transaction attributes
       @{*/
     uint256 hash;
@@ -190,10 +173,6 @@ public:
     /** Return true if the tx is a coinstake
      */
     bool isCoinStake() const;
-
-    /** Return true if the tx is a any cold staking type tx.
-     */
-    bool isAnyColdStakingType() const;
 
     /** Return true if the tx hash is null and/or if the size is 0
      */

@@ -27,7 +27,6 @@ const char* GetTxnOutputType(txnouttype t)
     case TX_PUBKEYHASH: return "pubkeyhash";
     case TX_SCRIPTHASH: return "scripthash";
     case TX_MULTISIG: return "multisig";
-    case TX_COLDSTAKE: return "coldstake";
     case TX_NULL_DATA: return "nulldata";
     case TX_ZEROCOINMINT: return "zerocoinmint";
     }
@@ -51,16 +50,6 @@ static bool MatchPayToPubkeyHash(const CScript& script, valtype& pubkeyhash)
 {
     if (script.size() == 25 && script[0] == OP_DUP && script[1] == OP_HASH160 && script[2] == 20 && script[23] == OP_EQUALVERIFY && script[24] == OP_CHECKSIG) {
         pubkeyhash = valtype(script.begin () + 3, script.begin() + 23);
-        return true;
-    }
-    return false;
-}
-
-static bool MatchPayToColdStaking(const CScript& script, valtype& stakerPubKeyHash, valtype& ownerPubKeyHash)
-{
-    if (script.IsPayToColdStaking()) {
-        stakerPubKeyHash = valtype(script.begin () + 6, script.begin() + 26);
-        ownerPubKeyHash = valtype(script.begin () + 28, script.begin() + 48);
         return true;
     }
     return false;
@@ -139,14 +128,6 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, std::vector<std::v
         return true;
     }
 
-    std::vector<unsigned char> data1;
-    if (MatchPayToColdStaking(scriptPubKey, data, data1)) {
-        typeRet = TX_COLDSTAKE;
-        vSolutionsRet.push_back(std::move(data));
-        vSolutionsRet.push_back(std::move(data1));
-        return true;
-    }
-
     unsigned int required;
     std::vector<std::vector<unsigned char>> keys;
     if (MatchMultisig(scriptPubKey, required, keys)) {
@@ -174,8 +155,6 @@ int ScriptSigArgsExpected(txnouttype t, const std::vector<std::vector<unsigned c
         return 1;
     case TX_PUBKEYHASH:
         return 2;
-    case TX_COLDSTAKE:
-        return 3;
     case TX_MULTISIG:
         if (vSolutions.size() < 1 || vSolutions[0].size() < 1)
             return -1;
@@ -186,7 +165,7 @@ int ScriptSigArgsExpected(txnouttype t, const std::vector<std::vector<unsigned c
     return -1;
 }
 
-bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet, bool fColdStake)
+bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet)
 {
     std::vector<valtype> vSolutions;
     txnouttype whichType;
@@ -207,9 +186,6 @@ bool ExtractDestination(const CScript& scriptPubKey, CTxDestination& addressRet,
 
     } else if (whichType == TX_SCRIPTHASH) {
         addressRet = CScriptID(uint160(vSolutions[0]));
-        return true;
-    } else if (whichType == TX_COLDSTAKE) {
-        addressRet = CKeyID(uint160(vSolutions[!fColdStake]));
         return true;
     }
     // Multisig txns have more than one address...
@@ -243,15 +219,6 @@ bool ExtractDestinations(const CScript& scriptPubKey, txnouttype& typeRet, std::
 
         if (addressRet.empty())
             return false;
-
-    } else if (typeRet == TX_COLDSTAKE)
-    {
-        if (vSolutions.size() < 2)
-            return false;
-        nRequiredRet = 2;
-        addressRet.push_back(CKeyID(uint160(vSolutions[0])));
-        addressRet.push_back(CKeyID(uint160(vSolutions[1])));
-        return true;
 
     } else
     {
@@ -304,16 +271,6 @@ CScript GetScriptForDestination(const CTxDestination& dest)
 CScript GetScriptForRawPubKey(const CPubKey& pubKey)
 {
     return CScript() << std::vector<unsigned char>(pubKey.begin(), pubKey.end()) << OP_CHECKSIG;
-}
-
-CScript GetScriptForStakeDelegation(const CKeyID& stakingKey, const CKeyID& spendingKey)
-{
-    CScript script;
-    script << OP_DUP << OP_HASH160 << OP_ROT <<
-            OP_IF << OP_CHECKCOLDSTAKEVERIFY << ToByteVector(stakingKey) <<
-            OP_ELSE << ToByteVector(spendingKey) << OP_ENDIF <<
-            OP_EQUALVERIFY << OP_CHECKSIG;
-    return script;
 }
 
 CScript GetScriptForMultisig(int nRequired, const std::vector<CPubKey>& keys)

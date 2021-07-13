@@ -146,9 +146,6 @@ const char* GetOpName(opcodetype opcode)
     case OP_ZEROCOINSPEND          : return "OP_ZEROCOINSPEND";
     case OP_ZEROCOINPUBLICSPEND    : return "OP_ZEROCOINPUBLICSPEND";
 
-    // cold staking
-    case OP_CHECKCOLDSTAKEVERIFY   : return "OP_CHECKCOLDSTAKEVERIFY";
-
     case OP_INVALIDOPCODE          : return "OP_INVALIDOPCODE";
 
     default:
@@ -235,18 +232,6 @@ bool CScript::IsPayToScriptHash() const
             (*this)[0] == OP_HASH160 &&
             (*this)[1] == 0x14 &&
             (*this)[22] == OP_EQUAL);
-}
-
-bool CScript::IsPayToColdStaking() const
-{
-    // Extra-fast test for pay-to-cold-staking CScripts:
-    return (this->size() == 51 &&
-            (*this)[2] == OP_ROT &&
-            (*this)[4] == OP_CHECKCOLDSTAKEVERIFY &&
-            (*this)[5] == 0x14 &&
-            (*this)[27] == 0x14 &&
-            (*this)[49] == OP_EQUALVERIFY &&
-            (*this)[50] == OP_CHECKSIG);
 }
 
 bool CScript::StartsWithOpcode(const opcodetype opcode) const

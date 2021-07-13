@@ -67,9 +67,6 @@ bool TransactionFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex& 
     if (fOnlyStakesandMN && !isStakeTx(type) && !isMasternodeRewardTx(type))
         return false;
 
-    if (fOnlyColdStaking && !isColdStake(type))
-        return false;
-
     return true;
 }
 
@@ -135,12 +132,6 @@ void TransactionFilterProxy::setOnlyStakesandMN(bool fOnlyStakesandMN)
     invalidateFilter();
 }
 
-void TransactionFilterProxy::setOnlyColdStakes(bool fOnlyColdStakes)
-{
-    this->fOnlyColdStaking = fOnlyColdStakes;
-    invalidateFilter();
-}
-
 int TransactionFilterProxy::rowCount(const QModelIndex& parent) const
 {
     if (limitRows != -1) {
@@ -163,19 +154,9 @@ bool TransactionFilterProxy::isZcTx(int type) const {
 }
 
 bool TransactionFilterProxy::isStakeTx(int type) const {
-    return type == TransactionRecord::StakeMint || type == TransactionRecord::Generated || type == TransactionRecord::StakeDelegated;
+    return type == TransactionRecord::StakeMint || type == TransactionRecord::Generated;
 }
 
 bool TransactionFilterProxy::isMasternodeRewardTx(int type) const {
     return (type == TransactionRecord::MNReward);
 }
-
-bool TransactionFilterProxy::isColdStake(int type) const {
-    return type == TransactionRecord::P2CSDelegation || type == TransactionRecord::P2CSDelegationSent || type == TransactionRecord::P2CSDelegationSentOwner || type == TransactionRecord::StakeDelegated || type == TransactionRecord::StakeHot;
-}
-
-/*QVariant TransactionFilterProxy::dataFromSourcePos(int sourceRow, int role) const {
-    QModelIndex index = sourceModel()->index(sourceRow, 0, sourceParent);
-    return index.data(index, role);
-}
- */

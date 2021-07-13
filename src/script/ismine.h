@@ -20,12 +20,8 @@ enum isminetype {
     ISMINE_NO = 0,
     ISMINE_WATCH_ONLY = 1 << 0,
     ISMINE_SPENDABLE  = 1 << 1,
-    //! Indicates that we have the staking key of a P2CS
-    ISMINE_COLD = 1 << 2,
-    //! Indicates that we have the spending key of a P2CS
-    ISMINE_SPENDABLE_DELEGATED = 1 << 3,
-    ISMINE_SPENDABLE_ALL = ISMINE_SPENDABLE_DELEGATED | ISMINE_SPENDABLE,
-    ISMINE_ALL = ISMINE_WATCH_ONLY | ISMINE_SPENDABLE | ISMINE_COLD | ISMINE_SPENDABLE_DELEGATED,
+    ISMINE_SPENDABLE_ALL = ISMINE_SPENDABLE,
+    ISMINE_ALL = ISMINE_WATCH_ONLY | ISMINE_SPENDABLE,
     ISMINE_ENUM_ELEMENTS
 };
 /** used for bitflags of isminetype */

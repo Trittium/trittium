@@ -73,23 +73,6 @@ isminetype IsMine(const CKeyStore& keystore, const CScript& scriptPubKey)
         }
         break;
     }
-    case TX_COLDSTAKE: {
-        CKeyID stakeKeyID = CKeyID(uint160(vSolutions[0]));
-        bool stakeKeyIsMine = keystore.HaveKey(stakeKeyID);
-        CKeyID ownerKeyID = CKeyID(uint160(vSolutions[1]));
-        bool spendKeyIsMine = keystore.HaveKey(ownerKeyID);
-
-        if (spendKeyIsMine) {
-            // If the wallet has both keys, ISMINE_SPENDABLE_DELEGATED
-            // takes precedence over ISMINE_COLD
-            return ISMINE_SPENDABLE_DELEGATED;
-        } else if (stakeKeyIsMine) {
-            return ISMINE_COLD;
-        } else {
-            // todo: Include watch only..
-        }
-        break;
-    }
     case TX_MULTISIG: {
         // Only consider transactions "mine" if we own ALL the
         // keys involved. multi-signature transactions that are

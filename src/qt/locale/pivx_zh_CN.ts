@@ -408,33 +408,6 @@ for staking</source>
     </message>
 </context>
 <context>
-    <name>CSRow</name>
-    <message>
-        <source>Form</source>
-        <translation>来自</translation>
-    </message>
-    <message>
-        <source>Savings</source>
-        <translation>存款</translation>
-    </message>
-    <message>
-        <source>0,00 TRTT</source>
-        <translation>0,00 TRTT</translation>
-    </message>
-    <message>
-        <source>address</source>
-        <translation>地址</translation>
-    </message>
-    <message>
-        <source>Not Staking</source>
-        <translation>不可加薪</translation>
-    </message>
-    <message>
-        <source>Own delegation</source>
-        <translation>自己的代表团</translation>
-    </message>
-</context>
-<context>
     <name>ClientModel</name>
     <message>
         <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
@@ -640,10 +613,6 @@ for staking</source>
         <translation>是</translation>
     </message>
     <message>
-        <source>delegated to %1 for cold staking</source>
-        <translation>委托到%1进行冷加注</translation>
-    </message>
-    <message>
         <source>Select All</source>
         <translation>选择所有</translation>
     </message>
@@ -686,217 +655,6 @@ for staking</source>
     <message>
         <source>(change)</source>
         <translation>(更改)</translation>
-    </message>
-</context>
-<context>
-    <name>ColdStakingWidget</name>
-    <message>
-        <source>Form</source>
-        <translation>来自</translation>
-    </message>
-    <message>
-        <source>Owner address (optional, if empty a new address will be created)</source>
-        <translation>所有者地址(可选项，如果为空，将创建一个新地址)</translation>
-    </message>
-    <message>
-        <source>Total Staking:</source>
-        <translation>加注总额：</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>冷堆</translation>
-    </message>
-    <message>
-        <source>Staker</source>
-        <translation>利益相关者</translation>
-    </message>
-    <message>
-        <source>Delegation</source>
-        <translation>宪法</translation>
-    </message>
-    <message>
-        <source>Delegate</source>
-        <translation>分配</translation>
-    </message>
-    <message>
-        <source>Clear All</source>
-        <translation>清除全部</translation>
-    </message>
-    <message>
-        <source>Delegated balance history</source>
-        <translation>委托余额历史</translation>
-    </message>
-    <message>
-        <source>No delegations yet</source>
-        <translation>没有代表团</translation>
-    </message>
-    <message>
-        <source>Total Staking: %1</source>
-        <translation>总积累：%1</translation>
-    </message>
-    <message>
-        <source>Error loading delegations: %1</source>
-        <translation>加载委托时出错：%1</translation>
-    </message>
-    <message>
-        <source>You can delegate your TRTTs, letting a hot node (24/7 online node)
-stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>您可以委托您的TRTT并让一个热节点(24/7在线节点)
-代表你加注，而且保持密钥离线安全。</translation>
-    </message>
-    <message>
-        <source>Enter owner address</source>
-        <translation>输入所有者地址</translation>
-    </message>
-    <message>
-        <source>Accept TRTT delegation / Delegate TRTT</source>
-        <translation>接受TRTT委托／委托TRTT </translation>
-    </message>
-    <message>
-        <source>Cold Staking address</source>
-        <translation>冷加注地址</translation>
-    </message>
-    <message>
-        <source>No receive addresses available, you can go to the receive screen and create some there!</source>
-        <translation>没有可用接收地址，您可以到接收屏幕那里创建!</translation>
-    </message>
-    <message>
-        <source>No contacts available, you can go to the contacts screen and add some there!</source>
-        <translation>没有可用的联系人，您可以到联系人界面那里添加!</translation>
-    </message>
-    <message>
-        <source>Cannot send delegation, wallet locked</source>
-        <translation>无法发送委托，钱包被锁了</translation>
-    </message>
-    <message>
-        <source>Cold staking is networkely disabled</source>
-        <translation>禁用网络冷积累</translation>
-    </message>
-    <message>
-        <source>Coin Control</source>
-        <translation>币控制</translation>
-    </message>
-    <message>
-        <source>Invalid entry</source>
-        <translation>条目无效</translation>
-    </message>
-    <message>
-        <source>Invalid entry, minimum delegable amount is </source>
-        <translation>输入无效，最小委托数量为</translation>
-    </message>
-    <message>
-        <source>Owner address invalid</source>
-        <translation>所有者地址无效</translation>
-    </message>
-    <message>
-        <source>ALERT!</source>
-        <translation>警报！</translation>
-    </message>
-    <message>
-        <source>Delegating to an external owner address!
-
-The delegated coins will NOT be spendable by this wallet.
-Spending these coins will need to be done from the wallet or
-device containing the owner address.
-
-Do you wish to proceed?</source>
-        <translation>委托给外部所有者地址！
-
-授权的硬币将无法在此钱包中消费。
-花费这些硬币需要从钱包或
-包含所有者地址的设备。
-
-你想继续吗？</translation>
-    </message>
-    <message>
-        <source>Staking address corresponds to this wallet, change it to an external node</source>
-        <translation>放样地址对应于此钱包，将其更改为外部节点</translation>
-    </message>
-    <message>
-        <source>Cannot create transaction.</source>
-        <translation>无法创建交易</translation>
-    </message>
-    <message>
-        <source>Coins delegated</source>
-        <translation>委托硬币</translation>
-    </message>
-    <message>
-        <source>Cannot perform operation, wallet locked</source>
-        <translation>无法进行操作，钱包被锁了</translation>
-    </message>
-    <message>
-        <source>URI copied to clipboard</source>
-        <translation>URI已经复制到剪贴板</translation>
-    </message>
-    <message>
-        <source>Address copied to clipboard</source>
-        <translation>地址已经复制到剪贴板</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>复制</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>编辑</translation>
-    </message>
-    <message>
-        <source>Stake</source>
-        <translation>赌注</translation>
-    </message>
-    <message>
-        <source>Blacklist</source>
-        <translation>黑名单</translation>
-    </message>
-    <message>
-        <source>Edit Label</source>
-        <translation>编辑标签</translation>
-    </message>
-    <message>
-        <source>Copy owner
-address</source>
-        <translation>复制所有者
-地址</translation>
-    </message>
-    <message>
-        <source>Address copied</source>
-        <translation>地址已复制</translation>
-    </message>
-    <message>
-        <source>Edit Cold Address Label</source>
-        <translation>编辑冷地址标签</translation>
-    </message>
-    <message>
-        <source>Whitelist failed, please check the logs</source>
-        <translation>白名单失败，请检查日志</translation>
-    </message>
-    <message>
-        <source> staking!</source>
-        <translation>提高</translation>
-    </message>
-    <message>
-        <source>Blacklist failed, please check the logs</source>
-        <translation>黑名单失败，请检查日志</translation>
-    </message>
-    <message>
-        <source> blacklisted from staking</source>
-        <translation>放样被列入黑名单</translation>
-    </message>
-    <message>
-        <source>Owner address copied</source>
-        <translation>所有者地址已复制</translation>
-    </message>
-    <message>
-        <source>Edit Owner Address Label</source>
-        <translation>编辑所有者地址标签</translation>
-    </message>
-    <message>
-        <source>Address label saved</source>
-        <translation>地址标签已保存</translation>
-    </message>
-    <message>
-        <source>Error storing address label</source>
-        <translation>保存地址标签出错</translation>
     </message>
 </context>
 <context>
@@ -1488,7 +1246,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the trittium.conf file
+You will only have to paste the data in the Trittium.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1496,7 +1254,7 @@ this controller wallet (select the Masternode in the list and press "start").
 到剪贴板的远程服务器上。
 
 
-您只需将数据粘贴到trittium.conf文件中
+您只需将数据粘贴到Trittium.conf文件中
 ，然后使用主节点启动它
 这个控制器钱包(在列表中选择主节点并按“开始”)。
 </translation>
@@ -1636,8 +1394,8 @@ Are you sure?</source>
         <translation>解析的数据太大</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "trittium" prefix</source>
-        <translation>无效的URI，不是以“ trittium”前缀开头</translation>
+        <source>Invalid URI, not starting with "Trittium" prefix</source>
+        <translation>无效的URI，不是以“ Trittium”前缀开头</translation>
     </message>
 </context>
 <context>
@@ -2026,8 +1784,8 @@ Address: %4
         <translation>无效支付地址%1</translation>
     </message>
     <message>
-        <source>Cannot start trittium: click-to-pay handler</source>
-        <translation>无法启动trittium:点击支付处理程序</translation>
+        <source>Cannot start Trittium: click-to-pay handler</source>
+        <translation>无法启动Trittium:点击支付处理程序</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid TRTT address or malformed URI parameters.</source>
@@ -2196,18 +1954,6 @@ Address: %4
         <translation>正在接收</translation>
     </message>
     <message>
-        <source>Delegator</source>
-        <translation>委托人</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>冷堆</translation>
-    </message>
-    <message>
-        <source>Cold Staking Contact</source>
-        <translation>冷加注联系人</translation>
-    </message>
-    <message>
         <source>Hidden</source>
         <translation>隐藏</translation>
     </message>
@@ -2268,20 +2014,8 @@ Address: %4
         <translation>给您自己</translation>
     </message>
     <message>
-        <source>Cold stakes</source>
-        <translation>感冒</translation>
-    </message>
-    <message>
         <source>Hot stakes</source>
         <translation>热提</translation>
-    </message>
-    <message>
-        <source>Delegated</source>
-        <translation>委托</translation>
-    </message>
-    <message>
-        <source>Delegations</source>
-        <translation>宪法</translation>
     </message>
     <message>
         <source>by Label</source>
@@ -2887,14 +2621,6 @@ Address: %4
         <translation>生成</translation>
     </message>
     <message>
-        <source>Creates an address to receive coin delegations and be able to stake them.</source>
-        <translation>创建一个地址以接收代币授权并可以放样。</translation>
-    </message>
-    <message>
-        <source>New Cold Staking Address</source>
-        <translation>新冷堆地址</translation>
-    </message>
-    <message>
         <source>Amount (optional)</source>
         <translation>金额（可选项）</translation>
     </message>
@@ -3027,10 +2753,6 @@ Do you want to continue?</source>
         <translation>条目无效，在添加新条目之前，先前的条目必须有效</translation>
     </message>
     <message>
-        <source>Possibly spend coins delegated for cold-staking (currently available: %1</source>
-        <translation>可能花费委托用于冷加注到币（当前可用：%1</translation>
-    </message>
-    <message>
         <source>Invalid entry</source>
         <translation>条目无效</translation>
     </message>
@@ -3045,14 +2767,6 @@ Do you want to continue?</source>
     <message>
         <source>Cannot create transaction.</source>
         <translation>无法创建交易</translation>
-    </message>
-    <message>
-        <source>WARNING:
-Transaction spends a cold-stake delegation, voiding it.
-These coins will no longer be cold-staked.</source>
-        <translation>警告：
-交易花费了冷积累委派，使它无效。
-这些硬币将不再被冷积累。</translation>
     </message>
     <message>
         <source>Transaction sent</source>
@@ -3632,7 +3346,6 @@ TRTT使用了一个股权证明(PoS)一致系统算法，
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;Instant transactions (SwiftX)&lt;/li&gt;
                            &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
                            &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
@@ -3675,7 +3388,6 @@ TRTT使用了一个股权证明(PoS)一致系统算法，
 &lt;/p&gt;&lt;p align="justify"&gt;
 
 &lt;ul&gt;
-&lt;li&gt;即时交易(SwiftX)&lt;/li&gt;
 &lt;li&gt;去中心化治理(提案投票)&lt;/li&gt;
 &lt;li&gt;去中心化预算系统(国库)&lt;/li&gt;
 &lt;li&gt;验证每个区块交易&lt;/li&gt;
@@ -3821,8 +3533,8 @@ TRTT使用了一个股权证明(PoS)一致系统算法，
         <translation>无法打开备份文件夹</translation>
     </message>
     <message>
-        <source>Unable to open trittium.conf with default application</source>
-        <translation>无法使用默认应用程序打开trittium.conf</translation>
+        <source>Unable to open Trittium.conf with default application</source>
+        <translation>无法使用默认应用程序打开Trittium.conf</translation>
     </message>
     <message>
         <source>In:</source>
@@ -4680,10 +4392,6 @@ backup will be created.
         <translation>接收</translation>
     </message>
     <message>
-        <source>Stake delegation</source>
-        <translation>股权委托</translation>
-    </message>
-    <message>
         <source>Sent to</source>
         <translation>发送</translation>
     </message>
@@ -4694,10 +4402,6 @@ backup will be created.
     <message>
         <source>Payment to yourself</source>
         <translation>支付给您自己</translation>
-    </message>
-    <message>
-        <source>Stake delegation spent by</source>
-        <translation>加注花费委托</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -4977,10 +4681,6 @@ Trittium心钱包</translation>
         <translation>在MIT软件许可下发布，参见附带的文件复制或&lt;http://www.opensource.org/licenses/mit-license.php&gt;。</translation>
     </message>
     <message>
-        <source>Enable cold staking functionality (0-1, default: %u). Disabled if staking=0</source>
-        <translation>启用冷堆叠（0-1，默认值：%u）。 如果累计= 0，则禁用</translation>
-    </message>
-    <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
         <translation>使用适当的私钥启用spork管理功能。</translation>
     </message>
@@ -5245,14 +4945,6 @@ Trittium心钱包</translation>
         <translation>下载完成</translation>
     </message>
     <message>
-        <source>Enable publish hash transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>启用&lt;address&gt;发布哈希交易(通过SwiftX锁定)</translation>
-    </message>
-    <message>
-        <source>Enable publish raw transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>启用&lt;address&gt;发布原始交易(通过SwiftX锁定)</translation>
-    </message>
-    <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
         <translation>允许客户端充当主节点(0-1，默认值:%u)</translation>
     </message>
@@ -5393,20 +5085,12 @@ Trittium心钱包</translation>
         <translation>所选择币价值低于支付目标金额</translation>
     </message>
     <message>
-        <source>SwiftX options:</source>
-        <translation>SwiftX 选项：</translation>
-    </message>
-    <message>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation>这是一个预发行测试版本 - 您自己承担风险 - 不要用于商业应用！</translation>
     </message>
     <message>
-        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>禁用所有TRTT特定功能(主节点, 零币, SwiftX, budget)(0-1，默认值:%u)</translation>
-    </message>
-    <message>
-        <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>启用SwiftX，显示锁定交易的确认(bool，默认值:%s)</translation>
+        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
+        <translation>禁用所有TRTT特定功能(主节点, 零币, budget)(0-1，默认值:%u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -5427,10 +5111,6 @@ Trittium心钱包</translation>
     <message>
         <source>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</source>
         <translation>指定自定义备份路径去添加任何钱包备份的副本。如果将其设置为dir，则每个备份将生成一个时间戳文件。如果设置为文件，将重写到每次备份的该文件</translation>
-    </message>
-    <message>
-        <source>SwiftX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>SwiftX要求输入至少6个确认，您可能需要等待几分钟，然后重试。</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>
@@ -6042,10 +5722,6 @@ Trittium心钱包</translation>
     <message>
         <source>Reset to default</source>
         <translation>重置到默认值</translation>
-    </message>
-    <message>
-        <source>Include delegated</source>
-        <translation>包含委托</translation>
     </message>
 </context>
 </TS>

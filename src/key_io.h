@@ -24,6 +24,9 @@ namespace KeyIO {
 
     std::string EncodeExtKey(const CExtKey &extkey);
 
+    CExtPubKey DecodeExtPubKey(const std::string &str);
+
+    std::string EncodeExtPubKey(const CExtPubKey &extkey);
 }
 
 #endif //PIVX_KEY_IO_H

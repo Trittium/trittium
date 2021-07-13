@@ -861,7 +861,7 @@ class PivxTestFramework():
         # Find valid kernel hash - iterates stakeableUtxos, then block.nTime
         block.solve_stake(stakeableUtxos, int(prevModifier, 16))
 
-        # Check if this is a zPoS block or regular/cold stake - sign stake tx
+        # Check if this is a zPoS block or regular stake - sign stake tx
         block_sig_key = CECKey()
         isZPoS = is_zerocoin(block.prevoutStake)
         if isZPoS:
@@ -889,7 +889,7 @@ class PivxTestFramework():
                     # Use pk of the input. Ask sk from rpc_conn
                     rawtx = rpc_conn.getrawtransaction('{:064x}'.format(prevout.hash), True)
                     privKeyWIF = rpc_conn.dumpprivkey(rawtx["vout"][prevout.n]["scriptPubKey"]["addresses"][0])
-                # Use the provided privKeyWIF (cold staking).
+                # Use the provided privKeyWIF 
                 # export the corresponding private key to sign block
                 privKey, compressed = wif_to_privkey(privKeyWIF)
                 block_sig_key.set_compressed(compressed)

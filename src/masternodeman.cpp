@@ -15,7 +15,6 @@
 #include "netbase.h"
 #include "netmessagemaker.h"
 #include "spork.h"
-#include "swifttx.h"
 #include "util.h"
 
 #include <boost/thread/thread.hpp>
@@ -215,7 +214,9 @@ bool CMasternodeMan::Add(CMasternode& mn)
         return false;
 
     CMasternode* pmn = Find(mn.vin);
-    if (pmn == NULL) {
+    CMasternode* pmnByAddr = Find(mn.addr);
+    bool masternodeRankV2 = Params().GetConsensus().NetworkUpgradeActive(chainActive.Height(), Consensus::UPGRADE_MASTERNODE_RANK_V2);
+    if (pmn == NULL && (!masternodeRankV2 || pmnByAddr == NULL)) {
         LogPrint(BCLog::MASTERNODE, "CMasternodeMan: Adding new Masternode %s - count %i now\n", mn.vin.prevout.ToStringShort(), size() + 1);
         vMasternodes.push_back(mn);
         return true;
@@ -242,8 +243,7 @@ void CMasternodeMan::AskForMN(CNode* pnode, const CTxIn& vin)
 
 void CMasternodeMan::Check()
 {
-    LOCK(cs_main);
-    LOCK(cs);
+    LOCK2(cs_main, cs);
 
     for (CMasternode& mn : vMasternodes) {
         mn.Check();
@@ -480,13 +480,23 @@ CMasternode* CMasternodeMan::Find(const CPubKey& pubKeyMasternode)
     return NULL;
 }
 
+CMasternode* CMasternodeMan::Find(const CService &addr)
+{
+    LOCK(cs);
+
+    for (CMasternode& mn : vMasternodes) {
+        if (mn.addr.ToStringIP() == addr.ToStringIP())
+            return &mn;
+    }
+    return NULL;
+}
+
 //
 // Deterministically select the oldest/best masternode to pay on the network
 //
 CMasternode* CMasternodeMan::GetNextMasternodeInQueueForPayment(int nBlockHeight, bool fFilterSigTime, int& nCount)
 {
-    LOCK(cs_main);
-    LOCK(cs);
+    LOCK2(cs_main, cs);
 
     CMasternode* pBestMasternode = NULL;
     std::vector<std::pair<int64_t, CTxIn> > vecMasternodeLastPaid;
@@ -507,7 +517,7 @@ CMasternode* CMasternodeMan::GetNextMasternodeInQueueForPayment(int nBlockHeight
         if (masternodePayments.IsScheduled(mn, nBlockHeight)) continue;
 
         //it's too new, wait for a cycle
-        if (Params().GetConsensus().NetworkUpgradeActive(chainActive.Tip()->nHeight, Consensus::UPGRADE_V3_4)) {
+        if (Params().GetConsensus().NetworkUpgradeActive(chainActive.Tip()->nHeight, Consensus::UPGRADE_STAKE_MODIFIER_V2)) {
             if (fFilterSigTime && mn.sigTime + (nMnCount * 60) > GetAdjustedTime()) continue;
         } else {
             if (fFilterSigTime && mn.sigTime + (nMnCount * 2.6 * 60) > GetAdjustedTime()) continue;
@@ -573,15 +583,20 @@ CMasternode* CMasternodeMan::GetCurrentMasterNode(int mod, int64_t nBlockHeight,
     return winner;
 }
 
-int CMasternodeMan::GetMasternodeRank(const CTxIn& vin, int64_t nBlockHeight, int minProtocol, bool fOnlyActive)
+int CMasternodeMan::GetMasternodeRank(const CTxIn& vin, int64_t nBlockHeight, int minProtocol)
 {
     std::vector<std::pair<int64_t, CTxIn> > vecMasternodeScores;
     int64_t nMasternode_Min_Age = MN_WINNER_MINIMUM_AGE;
     int64_t nMasternode_Age = 0;
+    bool masternodeRankV2 = Params().GetConsensus().NetworkUpgradeActive(chainActive.Height(), Consensus::UPGRADE_MASTERNODE_RANK_V2);
+    int defaultValue = 
+        masternodeRankV2 ?
+        INT_MAX :
+        -1;
 
     //make sure we know about this block
     uint256 hash;
-    if (!GetBlockHash(hash, nBlockHeight)) return -1;
+    if (!GetBlockHash(hash, nBlockHeight)) return defaultValue;
 
     // scan for winner
     for (CMasternode& mn : vMasternodes) {
@@ -597,10 +612,10 @@ int CMasternodeMan::GetMasternodeRank(const CTxIn& vin, int64_t nBlockHeight, in
                 continue;                                                   // Skip masternodes younger than (default) 1 hour
             }
         }
-        if (fOnlyActive) {
-            mn.Check();
-            if (!mn.IsEnabled()) continue;
-        }
+        
+        mn.Check();
+        if (!mn.IsEnabled()) continue;
+
         uint256 n = mn.CalculateScore(1, nBlockHeight);
         int64_t n2 = n.GetCompact(false);
 
@@ -617,7 +632,7 @@ int CMasternodeMan::GetMasternodeRank(const CTxIn& vin, int64_t nBlockHeight, in
         }
     }
 
-    return -1;
+    return defaultValue;
 }
 
 std::vector<std::pair<int, CMasternode> > CMasternodeMan::GetMasternodeRanks(int64_t nBlockHeight, int minProtocol)
@@ -636,7 +651,7 @@ std::vector<std::pair<int, CMasternode> > CMasternodeMan::GetMasternodeRanks(int
         if (mn.protocolVersion < minProtocol) continue;
 
         if (!mn.IsEnabled()) {
-            vecMasternodeScores.push_back(std::make_pair(9999, mn));
+            vecMasternodeScores.push_back(std::make_pair(INT_MAX, mn));
             continue;
         }
 
@@ -752,7 +767,7 @@ void CMasternodeMan::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
                     if (GetTime() < t) {
                         LogPrintf("CMasternodeMan::ProcessMessage() : dseg - peer already asked me for the list\n");
                         LOCK(cs_main);
-                        Misbehaving(pfrom->GetId(), 34);
+                        if (CMasternode::GetMasternodePayment(chainActive.Height()) > 0) Misbehaving(pfrom->GetId(), 34);
                         return;
                     }
                 }
@@ -868,7 +883,6 @@ void ThreadCheckMasternodes()
                 if (c % 60 == 0) {
                     mnodeman.CheckAndRemove();
                     masternodePayments.CleanPaymentList();
-                    CleanTransactionLocksList();
                 }
             }
         }

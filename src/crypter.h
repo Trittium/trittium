@@ -135,25 +135,20 @@ bool DecryptSecret(const CKeyingMaterial& vMasterKey, const std::vector<unsigned
 class CCryptoKeyStore : public CBasicKeyStore
 {
 private:
-    //! if fUseCrypto is true, mapKeys and mapSaplingSpendingKeys must be empty
+    //! if fUseCrypto is true, mapKeys must be empty
     //! if fUseCrypto is false, vMasterKey must be empty
     bool fUseCrypto;
 
 protected:
     // TODO: In the future, move this variable to the wallet class directly following upstream's structure.
     CKeyingMaterial vMasterKey;
-    // Sapling
-    CryptedSaplingSpendingKeyMap mapCryptedSaplingSpendingKeys;
-
+    
     bool SetCrypted();
 
     //! will encrypt previously unencrypted keys
     bool EncryptKeys(CKeyingMaterial& vMasterKeyIn);
 
     CryptedKeyMap mapCryptedKeys;
-
-    // Unlock Sapling keys
-    bool UnlockSaplingKeys(const CKeyingMaterial& vMasterKeyIn, bool fDecryptionThoroughlyChecked);
 
 public:
     CCryptoKeyStore() : fUseCrypto(false) { }
@@ -203,14 +198,6 @@ public:
             mi++;
         }
     }
-
-    //! Sapling
-    virtual bool AddCryptedSaplingSpendingKey(
-            const libzcash::SaplingExtendedFullViewingKey &extfvk,
-            const std::vector<unsigned char> &vchCryptedSecret,
-            const libzcash::SaplingPaymentAddress &defaultAddr);
-    bool HaveSaplingSpendingKey(const libzcash::SaplingFullViewingKey &fvk) const;
-    bool GetSaplingSpendingKey(const libzcash::SaplingFullViewingKey &fvk, libzcash::SaplingExtendedSpendingKey &skOut) const;
 
     /**
      * Wallet status (encrypted, locked) changed.

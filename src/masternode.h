@@ -24,14 +24,12 @@
 #define MASTERNODE_REMOVAL_SECONDS (130 * 60)
 #define MASTERNODE_CHECK_SECONDS 5
 
-
 class CMasternode;
 class CMasternodeBroadcast;
 class CMasternodePing;
 extern std::map<int64_t, uint256> mapCacheBlockHashes;
 
 bool GetBlockHash(uint256& hash, int nBlockHeight);
-
 
 //
 // The Masternode Ping Class : Contains a different serialize method for sending pings from masternodes throughout the network
@@ -269,8 +267,9 @@ public:
     static CAmount GetMasternodeNodeCollateral(int nHeight);
     static CAmount GetBlockValue(int nHeight);
     static CAmount GetMasternodePayment(int nHeight);
+    static void InitMasternodeCollateralList();
+    static std::pair<int, CAmount> GetNextMasternodeCollateral(int nHeight);
 };
-
 
 //
 // The Masternode Broadcast Class : Contains a different serialize method for sending masternodes through the network

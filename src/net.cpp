@@ -1536,6 +1536,7 @@ void CConnman::ThreadDNSAddressSeed()
     LogPrintf("Loading addresses from DNS seeds (could take a while)\n");
 
     for (const CDNSSeedData& seed : vSeeds) {
+        if(stopping) return;
         if (HaveNameProxy()) {
             AddOneShot(seed.host);
         } else {
@@ -1544,6 +1545,7 @@ void CConnman::ThreadDNSAddressSeed()
             ServiceFlags requiredServiceBits = nRelevantServices;
             if (LookupHost(GetDNSHost(seed, &requiredServiceBits).c_str(), vIPs, 0, true)) {
                 for (CNetAddr& ip : vIPs) {
+                    if(stopping) return;
                     int nOneDay = 24 * 3600;
                     CAddress addr = CAddress(CService(ip, Params().GetDefaultPort()), requiredServiceBits);
                     addr.nTime = GetTime() - 3 * nOneDay - GetRand(4 * nOneDay); // use a random age between 3 and 7 days old
@@ -1557,6 +1559,7 @@ void CConnman::ThreadDNSAddressSeed()
             // resolve is not required at all.
             if (!vIPs.empty()) {
                 CService seedSource;
+                if(stopping) return;
                 Lookup(seed.name.c_str(), seedSource, 0, true);
                 addrman.Add(vAdd, seedSource);
             }
@@ -1565,17 +1568,6 @@ void CConnman::ThreadDNSAddressSeed()
 
     LogPrintf("%d addresses found from DNS seeds\n", found);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 void CConnman::DumpAddresses()
 {
@@ -2220,6 +2212,8 @@ void CConnman::Interrupt()
 
 void CConnman::Stop()
 {
+    stopping = true;
+
     if (threadMessageHandler.joinable())
         threadMessageHandler.join();
     if (threadOpenConnections.joinable())
@@ -2378,20 +2372,6 @@ bool CConnman::DisconnectNode(NodeId id)
         }
     }
     return false;
-}
-
-void CConnman::RelayTransactionLockReq(const CTransaction& tx, bool relayToAll)
-{
-    CInv inv(MSG_TXLOCK_REQUEST, tx.GetHash());
-
-    //broadcast the new lock
-    LOCK(cs_vNodes);
-    for (CNode* pnode : vNodes) {
-        if (!relayToAll && !pnode->fRelayTxes)
-            continue;
-
-        g_connman->PushMessage(pnode, CNetMsgMaker(pnode->GetSendVersion()).Make(NetMsgType::IX, tx));
-    }
 }
 
 void CConnman::RelayInv(CInv& inv)

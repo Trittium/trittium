@@ -333,11 +333,6 @@ account owner and payment request information, 2 = drop tx meta data)
 .PP
 Mining/Staking options:
 .HP
-\fB\-coldstaking=\fR<n>
-.IP
-Enable cold staking functionality (0\-1, default: 1). Disabled if
-staking=0
-.HP
 \fB\-gen\fR
 .IP
 Generate coins (default: 0)
@@ -370,10 +365,6 @@ Enable publish hash block in <address>
 .IP
 Enable publish hash transaction in <address>
 .HP
-\fB\-zmqpubhashtxlock=\fR<address>
-.IP
-Enable publish hash transaction (locked via SwiftX) in <address>
-.HP
 \fB\-zmqpubrawblock=\fR<address>
 .IP
 Enable publish raw block in <address>
@@ -381,10 +372,6 @@ Enable publish raw block in <address>
 \fB\-zmqpubrawtx=\fR<address>
 .IP
 Enable publish raw transaction in <address>
-.HP
-\fB\-zmqpubrawtxlock=\fR<address>
-.IP
-Enable publish raw transaction (locked via SwiftX) in <address>
 .PP
 Debugging/Testing options:
 .HP
@@ -447,7 +434,7 @@ Use the test network
 .HP
 \fB\-litemode=\fR<n>
 .IP
-Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX,
+Disable all PIVX specific functionality (Masternodes, Zerocoin,
 Budgeting) (0\-1, default: 0)
 .PP
 Masternode options:
@@ -485,18 +472,6 @@ Zerocoin options:
 .IP
 Delete all zerocoin spends and mints that have been recorded to the
 blockchain database and reindex them (0\-1, default: 0)
-.PP
-SwiftX options:
-.HP
-\fB\-enableswifttx=\fR<n>
-.IP
-Enable SwiftX, show confirmations for locked transactions (bool,
-default: true)
-.HP
-\fB\-swifttxdepth=\fR<n>
-.IP
-Show N confirmations for a successfully locked transaction (0\-9999,
-default: 5)
 .PP
 Node relay options:
 .HP

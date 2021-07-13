@@ -63,7 +63,6 @@ BASE_SCRIPTS= [
     'wallet_zapwallettxes.py',                  # ~ 300 sec
     'p2p_time_offset.py',                       # ~ 267 sec
     'rpc_fundrawtransaction.py',                # ~ 260 sec
-    'mining_pos_coldStaking.py',                # ~ 215 sec
     'mining_pos_reorg.py',                      # ~ 212 sec
     'wallet_abandonconflict.py',                # ~ 212 sec
     'wallet_hd.py',                             # ~ 210 sec
@@ -78,7 +77,6 @@ BASE_SCRIPTS= [
     'feature_proxy.py',                         # ~ 143 sec
     'feature_uacomment.py',                     # ~ 130 sec
     'wallet_upgrade.py',                        # ~ 124 sec
-    'wallet_import_stakingaddress.py',          # ~ 123 sec
 
     # vv Tests less than 2m vv
     'p2p_disconnect_ban.py',                    # ~ 118 sec
@@ -88,7 +86,6 @@ BASE_SCRIPTS= [
     'interface_http.py',                        # ~ 105 sec
     'wallet_listtransactions.py',               # ~ 97 sec
     'mempool_reorg.py',                         # ~ 92 sec
-    'sapling_wallet_persistence.py',            # ~ 90 sec
     'wallet_encryption.py',                     # ~ 89 sec
     'wallet_keypool.py',                        # ~ 88 sec
     'wallet_dump.py',                           # ~ 83 sec
@@ -177,7 +174,6 @@ LEGACY_SKIP_TESTS = [
     'rpc_net.py',
     'rpc_signmessage.py',
     'rpc_spork.py',
-    'sapling_wallet_persistence.py',
     'wallet_hd.py',         # no HD tests for pre-HD wallets
     'wallet_upgrade.py',    # can't upgrade to pre-HD wallet
 ]
@@ -540,7 +536,7 @@ def check_script_prefixes():
     # convention don't immediately cause the tests to fail.
     LEEWAY = 10
 
-    good_prefixes_re = re.compile("(example|feature|interface|mempool|mining|p2p|rpc|wallet|zerocoin|sapling)_")
+    good_prefixes_re = re.compile("(example|feature|interface|mempool|mining|p2p|rpc|wallet|zerocoin)_")
     bad_script_names = [script for script in ALL_SCRIPTS if good_prefixes_re.match(script) is None]
 
     if len(bad_script_names) > 0:

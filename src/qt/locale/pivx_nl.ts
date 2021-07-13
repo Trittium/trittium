@@ -440,33 +440,6 @@ voor bewijs van Inzet</translation>
     </message>
 </context>
 <context>
-    <name>CSRow</name>
-    <message>
-        <source>Form</source>
-        <translation>Formulier</translation>
-    </message>
-    <message>
-        <source>Savings</source>
-        <translation>Besparingen</translation>
-    </message>
-    <message>
-        <source>0,00 TRTT</source>
-        <translation>0,00 TRTT</translation>
-    </message>
-    <message>
-        <source>address</source>
-        <translation>adres</translation>
-    </message>
-    <message>
-        <source>Not Staking</source>
-        <translation>Niet aan het Staken</translation>
-    </message>
-    <message>
-        <source>Own delegation</source>
-        <translation>Eigen delegatie</translation>
-    </message>
-</context>
-<context>
     <name>ClientModel</name>
     <message>
         <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
@@ -676,10 +649,6 @@ voor bewijs van Inzet</translation>
         <translation>Kan +/- %1 u%2 per invoer verschillen.</translation>
     </message>
     <message>
-        <source>delegated to %1 for cold staking</source>
-        <translation>gedelegeerd naar %1 voor cold staking</translation>
-    </message>
-    <message>
         <source>Select All</source>
         <translation>Selecteer Alles</translation>
     </message>
@@ -722,242 +691,6 @@ voor bewijs van Inzet</translation>
     <message>
         <source>(change)</source>
         <translation>(wijzig)</translation>
-    </message>
-</context>
-<context>
-    <name>ColdStakingWidget</name>
-    <message>
-        <source>Form</source>
-        <translation>Formulier</translation>
-    </message>
-    <message>
-        <source>Owner address (optional, if empty a new address will be created)</source>
-        <translation>Eigenaarsadres (optioneel, indien leeg wordt er een nieuw adres aangemaakt)</translation>
-    </message>
-    <message>
-        <source>Total Staking:</source>
-        <translation>Totaal Staking:</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>Cold Staking</translation>
-    </message>
-    <message>
-        <source>Staker</source>
-        <translation>Staker</translation>
-    </message>
-    <message>
-        <source>Delegation</source>
-        <translation>Delegatie</translation>
-    </message>
-    <message>
-        <source>Delegate</source>
-        <translation>Delegeer</translation>
-    </message>
-    <message>
-        <source>Clear All</source>
-        <translation>Alles wissen</translation>
-    </message>
-    <message>
-        <source>Delegated balance history</source>
-        <translation>Gedelegeerde balanshistoriek</translation>
-    </message>
-    <message>
-        <source>No delegations yet</source>
-        <translation>Nog geen delegaties</translation>
-    </message>
-    <message>
-        <source>Total Staking: %1</source>
-        <translation>Totaal Staking: %1</translation>
-    </message>
-    <message>
-        <source>Error loading delegations: %1</source>
-        <translation>Fout bij laden delegaties: %1</translation>
-    </message>
-    <message>
-        <source>You can delegate your TRTTs, letting a hot node (24/7 online node)
-stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>Je kan jouw TRTTs delegeren en een hot node (24/7 online node)
-voor je laten staken, terwijl je de sleutels veilig offline opslag bewaart.</translation>
-    </message>
-    <message>
-        <source>Enter owner address</source>
-        <translation>Voer eigenaarsadres in</translation>
-    </message>
-    <message>
-        <source>Accept TRTT delegation / Delegate TRTT</source>
-        <translation>Accepteer TRTT delegatie / Delegeer TRTT</translation>
-    </message>
-    <message>
-        <source>Cold Staking address</source>
-        <translation>Cold Staking adres</translation>
-    </message>
-    <message>
-        <source>No receive addresses available, you can go to the receive screen and create some there!</source>
-        <translation>Geen ontvangstadressen beschikbare, je kan naar het ontvangstscherm gaan en daar enkele toevoegen!</translation>
-    </message>
-    <message>
-        <source>No contacts available, you can go to the contacts screen and add some there!</source>
-        <translation>Geen beschikbare contacten, je kan naar het contactscherm gaan en daar enkele toevoegen!</translation>
-    </message>
-    <message>
-        <source>Cannot send delegation, wallet locked</source>
-        <translation>Kan delegatie niet versturen, portemonnee vergrendeld</translation>
-    </message>
-    <message>
-        <source>Cold staking is networkely disabled</source>
-        <translation>Cold staking is uitgeschakeld</translation>
-    </message>
-    <message>
-        <source>Coin Control</source>
-        <translation>Munt Controle</translation>
-    </message>
-    <message>
-        <source>Select %1 outputs to delegate.</source>
-        <translation>Selecteer %1 uitvoeren om te delegeren.</translation>
-    </message>
-    <message>
-        <source>Create Cold Staking Address</source>
-        <translation>Cold Staking Adres aanmaken</translation>
-    </message>
-    <message>
-        <source>Creates an address to receive delegated coins
-and stake them on their owner's behalf.</source>
-        <translation>Maak een adres aan om muntdelegaties te ontvangen
-en deze te kunnen staken namens hun eigenaar.</translation>
-    </message>
-    <message>
-        <source>My Cold Staking Addresses</source>
-        <translation>Mijn Cold Staking Adressen</translation>
-    </message>
-    <message>
-        <source>List your own cold staking addresses.</source>
-        <translation>Oplijsten van uw cold staking adressen.</translation>
-    </message>
-    <message>
-        <source>Invalid entry</source>
-        <translation>Ongeldige invoer</translation>
-    </message>
-    <message>
-        <source>Invalid entry, minimum delegable amount is </source>
-        <translation>Ongeldige invoer, minimaal te delegeren bedrag is</translation>
-    </message>
-    <message>
-        <source>Owner address invalid</source>
-        <translation>Ongeldig eigenaarsadres</translation>
-    </message>
-    <message>
-        <source>ALERT!</source>
-        <translation>ALERT!</translation>
-    </message>
-    <message>
-        <source>Delegating to an external owner address!
-
-The delegated coins will NOT be spendable by this wallet.
-Spending these coins will need to be done from the wallet or
-device containing the owner address.
-
-Do you wish to proceed?</source>
-        <translation>Aan het delegeren naar een extern eigenaarsadres!
-
-De gedelegeerde munten zullen NIET besteedbaar zijn vanuit deze portemonnee.
-Het uitbesteden van deze munten zal gedaan kunnen worden vanuit de portemonnee of
-toestel welke het eigenaarsadres bevat.
-
-Wil je verdergaan?</translation>
-    </message>
-    <message>
-        <source>Staking address corresponds to this wallet, change it to an external node</source>
-        <translation>Stakingadres reageert op deze portemonnee, wijzig het in een externe node</translation>
-    </message>
-    <message>
-        <source>Cannot create transaction.</source>
-        <translation>Kan geen transactie aanmaken.</translation>
-    </message>
-    <message>
-        <source>Coins delegated</source>
-        <translation>Gedelegeerde Munten</translation>
-    </message>
-    <message>
-        <source>You don't have any %1 to select.</source>
-        <translation>Je hebt geen %1 om te selecteren.</translation>
-    </message>
-    <message>
-        <source>Cannot perform operation, wallet locked</source>
-        <translation>Kan deze actie niet uitvoeren, portemonnee vergrendeld</translation>
-    </message>
-    <message>
-        <source>URI copied to clipboard</source>
-        <translation>URI gekopieerd naar klembord</translation>
-    </message>
-    <message>
-        <source>Address copied to clipboard</source>
-        <translation>Adres gekopieerd naar klembord</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopieren</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Bewerk</translation>
-    </message>
-    <message>
-        <source>Stake</source>
-        <translation>Stake</translation>
-    </message>
-    <message>
-        <source>Blacklist</source>
-        <translation>Blacklist</translation>
-    </message>
-    <message>
-        <source>Edit Label</source>
-        <translation>Label wijzigen</translation>
-    </message>
-    <message>
-        <source>Copy owner
-address</source>
-        <translation>Kopieer eigenaarsadres</translation>
-    </message>
-    <message>
-        <source>Address copied</source>
-        <translation>Adres gekopieerd</translation>
-    </message>
-    <message>
-        <source>Edit Cold Address Label</source>
-        <translation>Label Cold Adres wijzigen</translation>
-    </message>
-    <message>
-        <source>Whitelist failed, please check the logs</source>
-        <translation>Veilige lijst mislukt, controleer de logs</translation>
-    </message>
-    <message>
-        <source> staking!</source>
-        <translation>staking!</translation>
-    </message>
-    <message>
-        <source>Blacklist failed, please check the logs</source>
-        <translation>Zwarte lijst mislukt, controleer de logs</translation>
-    </message>
-    <message>
-        <source> blacklisted from staking</source>
-        <translation>staking staat op de zwarte lijst</translation>
-    </message>
-    <message>
-        <source>Owner address copied</source>
-        <translation>Eigenaarsadres gekopieerd</translation>
-    </message>
-    <message>
-        <source>Edit Owner Address Label</source>
-        <translation>Label eigenaarsadres wijzigen</translation>
-    </message>
-    <message>
-        <source>Address label saved</source>
-        <translation>Adreslabel opgeslagen</translation>
-    </message>
-    <message>
-        <source>Error storing address label</source>
-        <translation>Fout bij bewaren adreslabel</translation>
     </message>
 </context>
 <context>
@@ -1728,12 +1461,6 @@ NODES</source>
 NODES</translation>
     </message>
     <message>
-        <source>COLD
-STAKING</source>
-        <translation>COLD
-STAKING</translation>
-    </message>
-    <message>
         <source>SETTINGS
 </source>
         <translation>INSTELLINGEN
@@ -2347,22 +2074,6 @@ Adres: %4
         <translation>Ontvangen</translation>
     </message>
     <message>
-        <source>Delegator</source>
-        <translation>Delegator</translation>
-    </message>
-    <message>
-        <source>Delegable</source>
-        <translation>Delegeerbaar</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>Cold Staking</translation>
-    </message>
-    <message>
-        <source>Cold Staking Contact</source>
-        <translation>Cold Staking Contact</translation>
-    </message>
-    <message>
         <source>Hidden</source>
         <translation>Verborgen</translation>
     </message>
@@ -2423,20 +2134,8 @@ Adres: %4
         <translation>Naar jezelf</translation>
     </message>
     <message>
-        <source>Cold stakes</source>
-        <translation>Cold stakes</translation>
-    </message>
-    <message>
         <source>Hot stakes</source>
         <translation>Hot stakes</translation>
-    </message>
-    <message>
-        <source>Delegated</source>
-        <translation>Gedelegeerd</translation>
-    </message>
-    <message>
-        <source>Delegations</source>
-        <translation>Delegaties</translation>
     </message>
     <message>
         <source>by Label</source>
@@ -3122,14 +2821,6 @@ Adres: %4
         <translation>GENEREER</translation>
     </message>
     <message>
-        <source>Creates an address to receive coin delegations and be able to stake them.</source>
-        <translation>Maak een adres aan om muntdelegaties te ontvangen en deze te kunnen staken.</translation>
-    </message>
-    <message>
-        <source>New Cold Staking Address</source>
-        <translation>Nieuw Cold Staking Adres</translation>
-    </message>
-    <message>
         <source>Amount (optional)</source>
         <translation>Bedrag (optioneel)</translation>
     </message>
@@ -3144,10 +2835,6 @@ Adres: %4
     <message>
         <source>Request for </source>
         <translation>Verzoek voor</translation>
-    </message>
-    <message>
-        <source>Cold Staking Address Generated</source>
-        <translation>Colg Staking Adres gegenereerd</translation>
     </message>
 </context>
 <context>
@@ -3179,10 +2866,6 @@ Adres: %4
     <message>
         <source>Invalid address</source>
         <translation>Ongeldig adres</translation>
-    </message>
-    <message>
-        <source>Cannot use cold staking addresses for change</source>
-        <translation>Kan geen colg staking adressen gebruiken voor specie</translation>
     </message>
 </context>
 <context>
@@ -3294,10 +2977,6 @@ Wilt u verdergaan?</translation>
         <translation>Ongeldige invoer, vorige invoeren moeten geldig zijn voordat je een nieuwe kan toevoegen</translation>
     </message>
     <message>
-        <source>Possibly spend coins delegated for cold-staking (currently available: %1</source>
-        <translation>Mogelijks besteedde munten gedelegeerd voor cold-staking (momenteel beschikbaar: %1</translation>
-    </message>
-    <message>
         <source>Invalid entry</source>
         <translation>Ongeldige invoer</translation>
     </message>
@@ -3312,14 +2991,6 @@ Wilt u verdergaan?</translation>
     <message>
         <source>Cannot create transaction.</source>
         <translation>Kan geen transactie aanmaken.</translation>
-    </message>
-    <message>
-        <source>WARNING:
-Transaction spends a cold-stake delegation, voiding it.
-These coins will no longer be cold-staked.</source>
-        <translation>WAARSCHUWING:
-Transactie besteedt een cold-stake delegatie om deze te vernietigen
-Deze munten zullen niet langer cold-staked zijn.</translation>
     </message>
     <message>
         <source>Transaction sent</source>
@@ -3979,7 +3650,6 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;Instant transactions (SwiftX)&lt;/li&gt;
                            &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
                            &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
@@ -4021,7 +3691,6 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;Directe transacties (SwiftX)&lt;/li&gt;
                            &lt;li&gt;Een gedecentralizeerd bestuur (Stemming Voorstel)&lt;/li&gt;
                            &lt;li&gt;Een gedecentralizeerd budgeteringssysteem (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validatie van transacties binnen elk blok&lt;/li&gt;
@@ -5008,10 +4677,6 @@ nieuwe back-up aangemaakt worden.
         <translation>Staking uitgeschakeld</translation>
     </message>
     <message>
-        <source>Cold Staking Disabled</source>
-        <translation>Cold Staking uitgeschakeld</translation>
-    </message>
-    <message>
         <source> %54 Synchronizing..</source>
         <translation>%54 Synchroniseren..</translation>
     </message>
@@ -5150,16 +4815,8 @@ nieuwe back-up aangemaakt worden.
         <translation>z%1 Stake</translation>
     </message>
     <message>
-        <source>%1 Cold Stake</source>
-        <translation>%1 Cold Stake</translation>
-    </message>
-    <message>
         <source>%1 Stake on behalf of</source>
         <translation>%1 Stake in naam van</translation>
-    </message>
-    <message>
-        <source>Stake delegation</source>
-        <translation>Stake delegatie</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5172,10 +4829,6 @@ nieuwe back-up aangemaakt worden.
     <message>
         <source>Payment to yourself</source>
         <translation>Betaling naar jezelf</translation>
-    </message>
-    <message>
-        <source>Stake delegation spent by</source>
-        <translation>Stake delegatie gespendeerd door</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -5359,10 +5012,6 @@ nieuwe back-up aangemaakt worden.
         <translation>Verzend Munten</translation>
     </message>
     <message>
-        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 %2.</source>
-        <translation>SwiftTX ondersteunt geen verzendwaarden die zo hoog zijn. Transacties zijn momenteel beperkt tot %1 %2.</translation>
-    </message>
-    <message>
         <source>Transaction creation failed!
 %1</source>
         <translation>Transactie creatie mislukt!
@@ -5493,10 +5142,6 @@ Trittium Portemonnee</translation>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
         <translation>Gedistribueerd onder de MIT software licentie, zie het bijgevoegde bestand COPYING of &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</translation>
-    </message>
-    <message>
-        <source>Enable cold staking functionality (0-1, default: %u). Disabled if staking=0</source>
-        <translation>Activeer cold staking functionaliteit (0-1, standaard: %u). Uitgeschakeld als staking=0</translation>
     </message>
     <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
@@ -5763,14 +5408,6 @@ Trittium Portemonnee</translation>
         <translation>Klaar met laden</translation>
     </message>
     <message>
-        <source>Enable publish hash transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>Activeer publicatie hash transactie (vergrendeld via SwiftTX) in &lt;address&gt;</translation>
-    </message>
-    <message>
-        <source>Enable publish raw transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>Activeer publicatie raw transactie (vergrendeld via SwiftTX) in &lt;address&gt;</translation>
-    </message>
-    <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
         <translation>Schakel de client in als masternode (0-1, standaard: %u)</translation>
     </message>
@@ -5911,20 +5548,12 @@ Trittium Portemonnee</translation>
         <translation>Geselecteerde munt waarde is minder dan het betalingsdoel</translation>
     </message>
     <message>
-        <source>SwiftX options:</source>
-        <translation>SwiftTX opties:</translation>
-    </message>
-    <message>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation>Dit is een pre-release test build - gebruik op eigen risico - niet gebruiken voor staking of handel applicaties!</translation>
     </message>
     <message>
-        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Schakel alle specifieke TRTT functionaliteit uit (Masternodes, Zerocoin, SwiftTX, Budgeting) (0-1, standaard: %u)</translation>
-    </message>
-    <message>
-        <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>Schakel SwiftX in, toon bevestigingen voor vergrendelde transacties (bool, standaard: %s)</translation>
+        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
+        <translation>Schakel alle specifieke TRTT functionaliteit uit (Masternodes, Zerocoin, Budgeting) (0-1, standaard: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -5945,10 +5574,6 @@ Trittium Portemonnee</translation>
     <message>
         <source>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</source>
         <translation>Specificeer aangepast back-up pad om een kopie van elke portemonnee back-up toe te voegen. Indien ingesteld als dir zal elke back-up een bestand genereren met een tijdstempel. Indien ingesteld als file zal elke back-up herschreven worden naar dat bestand.</translation>
-    </message>
-    <message>
-        <source>SwiftX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>SwiftTX vereist invoer van tenminste 6 bevestigingen, je dient wellicht een paar minuten te wachten en het opnieuw proberen.</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>
@@ -6706,10 +6331,6 @@ Trittium Portemonnee</translation>
     <message>
         <source>Reset to default</source>
         <translation>Terugzetten naar standaardinstelling</translation>
-    </message>
-    <message>
-        <source>Include delegated</source>
-        <translation>Reken delegatie mee</translation>
     </message>
 </context>
 </TS>

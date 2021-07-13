@@ -381,7 +381,7 @@ void CheckBalances(const CWalletTx& tx,
 
 /**
  * Validates the correct behaviour of the CWalletTx "standard" balance methods.
- * (where "standard" is defined by direct P2PKH scripts, no P2CS contracts nor other types)
+ * (where "standard" is defined by direct P2PKH scripts, no other types)
  *
  * 1) CWalletTx::GetCredit.
  * 2) CWalletTx::GetDebit.

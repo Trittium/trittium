@@ -21,6 +21,8 @@
 std::map<uint256, int> mapSeenMasternodeScanningErrors;
 // cache block hashes as we calculate them
 std::map<int64_t, uint256> mapCacheBlockHashes;
+// cache collaterals
+std::vector<std::pair<int,CAmount>> vecCollaterals;
 
 //Get the last hash that matches the modulus given. Processed in reverse order
 bool GetBlockHash(uint256& hash, int nBlockHeight)
@@ -316,80 +318,63 @@ bool CMasternode::IsInputAssociatedWithPubkey() const
     return false;
 }
 
+// Old blockchain snapshot is taken at 18.03.2021 00:00 UTC at Block 1493071 - Collateral is 100000 * COIN
+// At Block 1500000, collateral increases to 120000 * COIN
+// So we will put 1500000 - 1493071 = 6929 blocks for the collateral change block interval from coll = 100000 to coll = 120000
 CAmount CMasternode::GetMasternodeNodeCollateral(int nHeight) 
 {
-	// Old blockchain snapshot is taken at 18.03.2021 00:00 UTC at Block 1493071 - Collateral is 100000 * COIN
-	// At Block 1500000, collateral increases to 120000 * COIN
-	// So we will put 1500000 - 1493071 = 6929 blocks for the collateral change block interval from coll = 100000 to coll = 120000
-    if (nHeight <= 6929) { // Old blockchain block 1500000
-        return 100000 * COIN;
-    } else if (nHeight <= 106929) { // Old blockchain block 1600000
-        return 120000 * COIN;
-    } else if (nHeight <= 206929) { // Old blockchain block 1700000
-        return 140000 * COIN;
-    } else if (nHeight <= 306929) { // Old blockchain block 1800000
-        return 160000 * COIN;
-    } else if (nHeight <= 406929) { // Old blockchain block 1900000
-        return 180000 * COIN;
-    }
- 
-    return 200000 * COIN; // Old blockchain block above 1900000
+    if (nHeight > 406929) return 200000 * COIN; // Old blockchain block 1900000
+    if (nHeight > 306929) return 180000 * COIN; // Old blockchain block 1800000
+    if (nHeight > 206929) return 160000 * COIN; // Old blockchain block 1700000
+    if (nHeight > 106929) return 140000 * COIN; // Old blockchain block 1600000
+    if (nHeight >   6929) return 120000 * COIN; // Old blockchain block 1500000
+
+    return 100000 * COIN;
 }
 
 CAmount CMasternode::GetBlockValue(int nHeight)
 {
-    CAmount maxMoneyOut= Params().GetConsensus().nMaxMoneyOut;
+    if (nHeight > 606929) return       600 * COIN; // Old blockchain block 2100000
+    if (nHeight > 506929) return       700 * COIN; // Old blockchain block 2000000
+    if (nHeight > 406929) return       800 * COIN; // Old blockchain block 1900000
+    if (nHeight > 306929) return       900 * COIN; // Old blockchain block 1800000
+    if (nHeight > 206929) return      1000 * COIN; // Old blockchain block 1700000
+    if (nHeight > 166929) return      1200 * COIN; // Fork point
+    if (nHeight > 106929) return       800 * COIN; // Old blockchain block 1600000
+    if (nHeight >   6929) return       900 * COIN; // Old blockchain block 1500000
+    if (nHeight >      1) return      1000 * COIN; 
+    if (nHeight >      0) return 250000000 * COIN; //! Premine for sending coins to the coin holders. Circulating supply at block 1493071 is 242432073.45009165 TRTT so we emit 250M.
 
-    if(nMoneySupply >= maxMoneyOut) {
-        return 0;
-    }
-
-    CAmount nSubsidy;
-
-	if (nHeight == 1) {
-		nSubsidy = 250000000 * COIN;  //! Premine for sending coins to the coin holders. Circulating supply at block 1493071 is 242432073.45009165 TRTT so we emit 250M.
-	}
-	else if (nHeight <= 1000) { // Mining phase for mainnet
-		nSubsidy = 1000 * COIN;
-	}
-	else if (nHeight <= 6929) { // Old blockchain block 1500000
-		nSubsidy = 1000 * COIN;
-	}
-	else if (nHeight <= 106929) { // Old blockchain block 1600000
-		nSubsidy = 900 * COIN;
-	}
-	else if (nHeight <= 206929) { // Old blockchain block 1700000
-		nSubsidy = 800 * COIN;
-	}
-	else if (nHeight <= 306929) { // Old blockchain block 1800000
-		nSubsidy = 700 * COIN;
-	}
-	else if (nHeight <= 406929) { // Old blockchain block 1900000
-		nSubsidy = 600 * COIN;
-	}
-	else if (nHeight <= 506929) { // Old blockchain block 2000000
-		nSubsidy = 500 * COIN;
-	}
-	else if (nHeight <= 606929) { // Old blockchain block 2100000
-		nSubsidy = 450 * COIN;
-	} 
-    else if(nHeight > 606929) {
-		nSubsidy = 400 * COIN;
-	} 
-
-    if(nMoneySupply + nSubsidy > maxMoneyOut) {
-        return nMoneySupply + nSubsidy - maxMoneyOut;
-    }
-
-    return nSubsidy;
+    return 0;
 }
 
 CAmount CMasternode::GetMasternodePayment(int nHeight)
 {
-	if (nHeight <= 2880)
-		return 0;
-	
-   	return CMasternode::GetBlockValue(nHeight) * 90 / 100; // 90% of the block reward
+    if (nHeight > 166929) return CMasternode::GetBlockValue(nHeight) * 65 / 100; // 65% of the block reward
+    if (nHeight >   2880) return CMasternode::GetBlockValue(nHeight) * 90 / 100; // 90% of the block reward
+    
+    return 0;
+}
+
+void CMasternode::InitMasternodeCollateralList() {
+    CAmount prev = -1; 
+    for(int i = 0; i < 9999999; i++) {
+        CAmount c = GetMasternodeNodeCollateral(i);
+        if(prev != c) {
+            LogPrint(BCLog::MASTERNODE, "%s: Found collateral %d at block %d\n", __func__, c / COIN, i); 
+            prev = c;
+            vecCollaterals.push_back(std::make_pair(i, c));
+        }
+    }
+}
+
+std::pair<int, CAmount> CMasternode::GetNextMasternodeCollateral(int nHeight) {
+    for(auto p : vecCollaterals) {
+        if(p.first > nHeight) {
+            return std::make_pair(p.first - nHeight, p.second);
+        }
+    }
+    return std::make_pair(-1, -1);
 }
 
 CMasternodeBroadcast::CMasternodeBroadcast() :
@@ -496,7 +481,7 @@ bool CMasternodeBroadcast::Sign(const CKey& key, const CPubKey& pubKey)
     std::string strError = "";
     std::string strMessage;
 
-    if(Params().GetConsensus().NetworkUpgradeActive(chainActive.Height(), Consensus::UPGRADE_V3_4)) {
+    if(Params().GetConsensus().NetworkUpgradeActive(chainActive.Height(), Consensus::UPGRADE_STAKE_MODIFIER_V2)) {
         nMessVersion = MessageVersion::MESS_VER_HASH;
         strMessage = GetSignatureHash().GetHex();
 
@@ -583,9 +568,18 @@ bool CMasternodeBroadcast::CheckDefaultPort(CService service, std::string& strEr
 
 bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
 {
-    // make sure signature isn't in the future (past is OK)
-    if (sigTime > GetAdjustedTime() + 60 * 60) {
+    bool masternodeRankV2 = Params().GetConsensus().NetworkUpgradeActive(chainActive.Height(), Consensus::UPGRADE_MASTERNODE_RANK_V2);
+
+    // make sure signature isn't too far in the future
+    if (sigTime > GetAdjustedTime() + (masternodeRankV2 ? 5 * 60 : 60 * 60)) {
         LogPrint(BCLog::MASTERNODE, "mnb - Signature rejected, too far into the future %s\n", vin.prevout.ToStringShort());
+        nDos = 1;
+        return false;
+    }
+
+    // make sure signature isn't too far in the past 
+    if(masternodeRankV2 && sigTime < GetAdjustedTime() - (masternodeRankV2 ? 5 * 60 : 60 * 60)) {
+        LogPrint(BCLog::MASTERNODE, "mnb - Signature rejected, too far into the past %s\n", vin.prevout.ToStringShort());
         nDos = 1;
         return false;
     }
@@ -797,10 +791,12 @@ CMasternodePing::CMasternodePing(CTxIn& newVin) :
 
 uint256 CMasternodePing::GetHash() const
 {
+    int64_t salt = sporkManager.GetSporkValue(SPORK_103_PING_MESSAGE_SALT);
     CHashWriter ss(SER_GETHASH, PROTOCOL_VERSION);
     ss << vin;
     if (nMessVersion == MessageVersion::MESS_VER_HASH) ss << blockHash;
     ss << sigTime;
+    if (salt > 0) ss << salt;
     return ss.GetHash();
 }
 
@@ -808,22 +804,24 @@ std::string CMasternodePing::GetStrMessage() const
 {
     int64_t salt = sporkManager.GetSporkValue(SPORK_103_PING_MESSAGE_SALT);
 
-    if (salt != 0) {
-        return vin.ToString() + blockHash.ToString() + std::to_string(sigTime) + std::to_string(salt);
-    } else {
+    if(salt == 0) {
         return vin.ToString() + blockHash.ToString() + std::to_string(sigTime);
+    } else {
+        return vin.ToString() + blockHash.ToString() + std::to_string(sigTime) + std::to_string(salt);
     }
 }
 
 bool CMasternodePing::CheckAndUpdate(int& nDos, bool fRequireEnabled, bool fCheckSigTimeOnly)
 {
-    if (sigTime > GetAdjustedTime() + 60 * 60) {
+    bool masternodeRankV2 = Params().GetConsensus().NetworkUpgradeActive(chainActive.Height(), Consensus::UPGRADE_MASTERNODE_RANK_V2);
+
+    if (sigTime > GetAdjustedTime() + (masternodeRankV2 ? 5 * 60 : 60 * 60)) {
         LogPrint(BCLog::MNPING, "%s: Signature rejected, too far into the future %s\n", __func__, vin.prevout.ToStringShort());
         nDos = 1;
         return false;
     }
 
-    if (sigTime <= GetAdjustedTime() - 60 * 60) {
+    if (sigTime <= GetAdjustedTime() - (masternodeRankV2 ? 5 * 60 : 60 * 60)) {
         LogPrint(BCLog::MNPING, "%s: Signature rejected, too far into the past %s - %d %d \n", __func__, vin.prevout.ToStringShort(), sigTime, GetAdjustedTime());
         nDos = 1;
         return false;

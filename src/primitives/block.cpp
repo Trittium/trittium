@@ -14,6 +14,7 @@
 #include "utilstrencodings.h"
 #include "util.h"
 
+// TODO: Change X11KVS algorithm call to whatever the coin being adapted is used.
 uint256 CBlockHeader::GetHash() const
 {
      if (nVersion < 4)  { // nVersion = 1, 2, 3

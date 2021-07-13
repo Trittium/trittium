@@ -35,12 +35,9 @@ NavMenuWidget::NavMenuWidget(PIVXGUI *mainWindow, QWidget *parent) :
     ui->btnAddress->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     ui->btnMaster->setProperty("name", "master");
     ui->btnMaster->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    ui->btnColdStaking->setProperty("name", "cold-staking");
-    ui->btnColdStaking->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    ui->btnColdStaking->setVisible(false);
     ui->btnSettings->setProperty("name", "settings");
     ui->btnSettings->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    btns = {ui->btnDashboard, ui->btnSend, ui->btnReceive, ui->btnAddress, ui->btnMaster, ui->btnColdStaking, ui->btnSettings, ui->btnColdStaking};
+    btns = {ui->btnDashboard, ui->btnSend, ui->btnReceive, ui->btnAddress, ui->btnMaster, ui->btnSettings};
     onNavSelected(ui->btnDashboard, true);
 
     ui->scrollAreaNav->setWidgetResizable(true);
@@ -57,9 +54,7 @@ NavMenuWidget::NavMenuWidget(PIVXGUI *mainWindow, QWidget *parent) :
 }
 
 void NavMenuWidget::loadWalletModel() {
-    // if (walletModel && walletModel->getOptionsModel()) {
-    //     ui->btnColdStaking->setVisible(walletModel->getOptionsModel()->isColdStakingScreenEnabled());
-    // }
+
 }
 
 /**
@@ -72,14 +67,12 @@ void NavMenuWidget::connectActions() {
     connect(ui->btnMaster, &QPushButton::clicked, this, &NavMenuWidget::onMasterNodesClicked);
     connect(ui->btnSettings, &QPushButton::clicked, this, &NavMenuWidget::onSettingsClicked);
     connect(ui->btnReceive, &QPushButton::clicked, this, &NavMenuWidget::onReceiveClicked);
-    connect(ui->btnColdStaking, &QPushButton::clicked, this, &NavMenuWidget::onColdStakingClicked);
 
     ui->btnDashboard->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_1));
     ui->btnSend->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_2));
     ui->btnReceive->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_3));
     ui->btnAddress->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_4));
     ui->btnMaster->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_5));
-    //ui->btnColdStaking->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_6));
     ui->btnSettings->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_7));
 }
 
@@ -101,11 +94,6 @@ void NavMenuWidget::onAddressClicked(){
 void NavMenuWidget::onMasterNodesClicked(){
     window->goToMasterNodes();
     onNavSelected(ui->btnMaster);
-}
-
-void NavMenuWidget::onColdStakingClicked() {
-    window->goToColdStaking();
-    onNavSelected(ui->btnColdStaking);
 }
 
 void NavMenuWidget::onSettingsClicked(){
@@ -134,12 +122,6 @@ void NavMenuWidget::selectSettings() {
     onSettingsClicked();
 }
 
-void NavMenuWidget::onShowHideColdStakingChanged(bool show) {
-    // ui->btnColdStaking->setVisible(show);
-    // if (show)
-    //     ui->scrollAreaNav->verticalScrollBar()->setValue(ui->btnColdStaking->y());
-}
-
 void NavMenuWidget::showEvent(QShowEvent *event) {
     if (!init) {
         init = true;
@@ -154,8 +136,7 @@ void NavMenuWidget::updateButtonStyles(){
          ui->btnAddress,
          ui->btnMaster,
          ui->btnSettings,
-         ui->btnReceive,
-         ui->btnColdStaking
+         ui->btnReceive
     });
 }
 

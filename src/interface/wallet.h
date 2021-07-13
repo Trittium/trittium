@@ -22,16 +22,13 @@ struct WalletBalances
     CAmount watch_only_balance{0};
     CAmount unconfirmed_watch_only_balance{0};
     CAmount immature_watch_only_balance{0};
-    CAmount delegate_balance{0};
-    CAmount coldstaked_balance{0};
-
+    
     bool balanceChanged(const WalletBalances& prev) const
     {
         return balance != prev.balance || unconfirmed_balance != prev.unconfirmed_balance ||
                immature_balance != prev.immature_balance || watch_only_balance != prev.watch_only_balance ||
                unconfirmed_watch_only_balance != prev.unconfirmed_watch_only_balance ||
-               immature_watch_only_balance != prev.immature_watch_only_balance ||
-               delegate_balance != prev.delegate_balance || coldstaked_balance != prev.coldstaked_balance;
+               immature_watch_only_balance != prev.immature_watch_only_balance;
     }
 };
 

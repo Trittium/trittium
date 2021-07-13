@@ -352,8 +352,7 @@ bool CWallet::CreateZerocoinMintTransaction(const CAmount nValue,
         signSuccess = ProduceSignature(
                 TransactionSignatureCreator(this, &txNewConst, nIn, coin.first->vout[coin.second].nValue, SIGHASH_ALL),
                 scriptPubKey,
-                sigdata,
-                false // fColdStake = false
+                sigdata
         );
 
         if (!signSuccess) {

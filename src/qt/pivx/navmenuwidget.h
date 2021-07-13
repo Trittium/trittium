@@ -28,14 +28,12 @@ public:
 
 public Q_SLOTS:
     void selectSettings();
-    void onShowHideColdStakingChanged(bool show);
 
 private Q_SLOTS:
     void onSendClicked();
     void onDashboardClicked();
     void onAddressClicked();
     void onMasterNodesClicked();
-    void onColdStakingClicked();
     void onSettingsClicked();
     void onReceiveClicked();
     void updateButtonStyles();

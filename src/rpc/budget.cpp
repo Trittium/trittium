@@ -142,13 +142,6 @@ UniValue preparebudget(const JSONRPCRequest& request)
     if (!budgetProposalBroadcast.UpdateValid(nChainHeight, false))
         throw std::runtime_error("Proposal is not valid - " + proposalHash.ToString() + " - " + budgetProposalBroadcast.IsInvalidReason());
 
-    bool useIX = false; //true;
-    // if (request.params.size() > 7) {
-    //     if(request.params[7].get_str() != "false" && request.params[7].get_str() != "true")
-    //         return "Invalid use_ix, must be true or false";
-    //     useIX = request.params[7].get_str() == "true" ? true : false;
-    // }
-
     CWalletTx wtx;
     // make our change address
     CReserveKey keyChange(pwalletMain);
@@ -157,7 +150,7 @@ UniValue preparebudget(const JSONRPCRequest& request)
     }
 
     //send the tx to the network
-    const CWallet::CommitResult& res = pwalletMain->CommitTransaction(wtx, keyChange, g_connman.get(), useIX ? NetMsgType::IX : NetMsgType::TX);
+    const CWallet::CommitResult& res = pwalletMain->CommitTransaction(wtx, keyChange, g_connman.get());
     if (res.status != CWallet::CommitStatus::OK)
         throw JSONRPCError(RPC_WALLET_ERROR, res.ToString());
 

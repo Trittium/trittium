@@ -130,31 +130,27 @@ QPixmap encodeToQr(QString str, QString& errorStr, QColor qrColor)
     return QPixmap();
 }
 
-void setFilterAddressBook(QComboBox* filter, SortEdit* lineEdit)
+void setFilterAddressBook(QComboBox* filter)
 {
-    initComboBox(filter, lineEdit);
+    initComboBox(filter);
     filter->addItem(QObject::tr("All"), "");
     filter->addItem(QObject::tr("Receiving"), AddressTableModel::Receive);
     filter->addItem(QObject::tr("Contacts"), AddressTableModel::Send);
-    filter->addItem(QObject::tr("Cold Staking"), AddressTableModel::ColdStaking);
-    filter->addItem(QObject::tr("Delegator"), AddressTableModel::Delegator);
-    filter->addItem(QObject::tr("Delegable"), AddressTableModel::Delegable);
-    filter->addItem(QObject::tr("Staking Contacts"), AddressTableModel::ColdStakingSend);
 }
 
-void setSortTx(QComboBox* filter, SortEdit* lineEdit)
+void setSortTx(QComboBox* filter)
 {
     // Sort Transactions
-    initComboBox(filter, lineEdit);
+    initComboBox(filter);
     filter->addItem(QObject::tr("Date desc"), SortTx::DATE_DESC);
     filter->addItem(QObject::tr("Date asc"), SortTx::DATE_ASC);
     filter->addItem(QObject::tr("Amount desc"), SortTx::AMOUNT_ASC);
     filter->addItem(QObject::tr("Amount asc"), SortTx::AMOUNT_DESC);
 }
 
-void setSortTxTypeFilter(QComboBox* filter, SortEdit* lineEditType)
+void setSortTxTypeFilter(QComboBox* filter)
 {
-    initComboBox(filter, lineEditType);
+    initComboBox(filter);
     filter->addItem(QObject::tr("All"), TransactionFilterProxy::ALL_TYPES);
     filter->addItem(QObject::tr("Received"), TransactionFilterProxy::TYPE(TransactionRecord::RecvWithAddress) | TransactionFilterProxy::TYPE(TransactionRecord::RecvFromOther));
     filter->addItem(QObject::tr("Sent"), TransactionFilterProxy::TYPE(TransactionRecord::SendToAddress) | TransactionFilterProxy::TYPE(TransactionRecord::SendToOther));
@@ -162,16 +158,12 @@ void setSortTxTypeFilter(QComboBox* filter, SortEdit* lineEditType)
     filter->addItem(QObject::tr("Minted"), TransactionFilterProxy::TYPE(TransactionRecord::StakeMint));
     filter->addItem(QObject::tr("MN reward"), TransactionFilterProxy::TYPE(TransactionRecord::MNReward));
     filter->addItem(QObject::tr("To yourself"), TransactionFilterProxy::TYPE(TransactionRecord::SendToSelf));
-    filter->addItem(QObject::tr("Cold stakes"), TransactionFilterProxy::TYPE(TransactionRecord::StakeDelegated));
-    filter->addItem(QObject::tr("Hot stakes"), TransactionFilterProxy::TYPE(TransactionRecord::StakeHot));
-    filter->addItem(QObject::tr("Delegated"), TransactionFilterProxy::TYPE(TransactionRecord::P2CSDelegationSent) | TransactionFilterProxy::TYPE(TransactionRecord::P2CSDelegationSentOwner));
-    filter->addItem(QObject::tr("Delegations"), TransactionFilterProxy::TYPE(TransactionRecord::P2CSDelegation));
 }
 
 void setupSettings(QSettings* settings)
 {
     if (!settings->contains("lightTheme")) {
-        settings->setValue("lightTheme", true);
+        setTheme(false);
     }
 }
 
@@ -232,28 +224,22 @@ QColor getRowColor(bool isLightTheme, bool isHovered, bool isSelected)
     }
 }
 
-void initComboBox(QComboBox* combo, QLineEdit* lineEdit, QString cssClass)
+void initComboBox(QComboBox* combo, QString cssClass)
 {
     setCssProperty(combo, cssClass);
-    combo->setEditable(true);
-    if (lineEdit) {
-        lineEdit->setReadOnly(true);
-        lineEdit->setAlignment(Qt::AlignRight);
-        combo->setLineEdit(lineEdit);
-    }
     combo->setView(new QListView());
 }
 
-void fillAddressSortControls(SortEdit* seType, SortEdit* seOrder, QComboBox* boxType, QComboBox* boxOrder)
+void fillAddressSortControls(QComboBox* boxType, QComboBox* boxOrder)
 {
     // Sort Type
-    initComboBox(boxType, seType, "btn-combo-small");
+    initComboBox(boxType, "btn-combo-small");
     boxType->addItem(QObject::tr("by Label"), AddressTableModel::Label);
     boxType->addItem(QObject::tr("by Address"), AddressTableModel::Address);
     boxType->addItem(QObject::tr("by Date"), AddressTableModel::Date);
     boxType->setCurrentIndex(0);
     // Sort Order
-    initComboBox(boxOrder, seOrder, "btn-combo-small");
+    initComboBox(boxOrder, "btn-combo-small");
     boxOrder->addItem("asc", Qt::AscendingOrder);
     boxOrder->addItem("desc", Qt::DescendingOrder);
     boxOrder->setCurrentIndex(0);

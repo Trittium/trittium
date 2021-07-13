@@ -30,8 +30,6 @@ These are the dependencies currently used by Trittium Core. You can find instruc
 | xkbcommon |  |  |  |  | [Yes](https://github.com/pivx-project/pivx/blob/master/depends/packages/qt.mk#L86) (Linux only) |
 | ZeroMQ | [4.3.1](https://github.com/zeromq/libzmq/releases) | 4.0.0 | No |  |  |
 | zlib | [1.2.11](https://zlib.net/) |  |  |  | No |
-| Sodium | [1.0.15](https://github.com/jedisct1/libsodium) |
-| Rust | [1.42.0](https://www.rust-lang.org/) | 1.42.0 |
 
 Controlling dependencies
 ------------------------

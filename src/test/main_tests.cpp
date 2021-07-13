@@ -17,8 +17,7 @@ BOOST_FIXTURE_TEST_SUITE(main_tests, TestingSetup)
 
 enum BlockSignatureType{
     P2PK,
-    P2PKH,
-    P2CS
+    P2PKH
 };
 
 CScript GetScriptForType(CPubKey pubKey, BlockSignatureType type)

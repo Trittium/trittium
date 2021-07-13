@@ -73,7 +73,6 @@ SendWidget::SendWidget(PIVXGUI* parent) :
     connect(ui->btnChangeAddress, &OptionButton::clicked, this, &SendWidget::onChangeAddressClicked);
     connect(ui->btnUri, &OptionButton::clicked, this, &SendWidget::onOpenUriClicked);
     connect(ui->pushButtonReset, &QPushButton::clicked, [this](){ onResetCustomOptions(true); });
-    connect(ui->checkBoxDelegations, &QCheckBox::stateChanged, this, &SendWidget::onCheckBoxChanged);
 
     setCssProperty(ui->coinWidget, "container-coin-type");
     setCssProperty(ui->labelLine, "container-divider");
@@ -138,7 +137,7 @@ void SendWidget::refreshAmounts()
         ui->labelTitleTotalRemaining->setText(tr("Total remaining from the selected UTXO"));
     } else {
         // Wallet's unlocked balance
-        totalAmount = walletModel->getUnlockedBalance(nullptr, fDelegationsChecked) - total;
+        totalAmount = walletModel->getUnlockedBalance() - total;
         ui->labelTitleTotalRemaining->setText(tr("Unlocked remaining"));
     }
     ui->labelAmountRemaining->setText(
@@ -148,8 +147,6 @@ void SendWidget::refreshAmounts()
                     false
                     )
     );
-    // show or hide delegations checkbox if need be
-    showHideCheckBoxDelegations();
 }
 
 void SendWidget::loadClientModel()
@@ -214,7 +211,6 @@ void SendWidget::onResetCustomOptions(bool fRefreshAmounts)
     coinControlDialog->coinControl->SetNull();
     ui->btnChangeAddress->setActive(false);
     ui->btnCoinControl->setActive(false);
-    if (ui->checkBoxDelegations->isChecked()) ui->checkBoxDelegations->setChecked(false);
     if (fRefreshAmounts) {
         refreshAmounts();
     }
@@ -286,34 +282,11 @@ void SendWidget::showEvent(QShowEvent *event)
 {
     // Set focus on last recipient address when Send-window is displayed
     setFocusOnLastEntry();
-
-    // Update cached delegated balance
-    CAmount cachedDelegatedBalance_new = walletModel->getDelegatedBalance();
-    if (cachedDelegatedBalance != cachedDelegatedBalance_new) {
-        cachedDelegatedBalance = cachedDelegatedBalance_new;
-        refreshAmounts();
-    }
 }
 
 void SendWidget::setFocusOnLastEntry()
 {
     if (!entries.isEmpty()) entries.last()->setFocus();
-}
-
-void SendWidget::showHideCheckBoxDelegations()
-{
-    // Show checkbox only when there is any available owned delegation and
-    // coincontrol is not selected.
-    const bool isCControl = coinControlDialog->coinControl->HasSelected();
-    const bool hasDel = cachedDelegatedBalance > 0;
-
-    const bool showCheckBox = !isCControl && hasDel;
-    ui->checkBoxDelegations->setVisible(showCheckBox);
-    if (showCheckBox)
-        ui->checkBoxDelegations->setToolTip(
-                tr("Possibly spend coins delegated for cold-staking (currently available: %1").arg(
-                        GUIUtil::formatBalance(cachedDelegatedBalance, nDisplayUnit, false))
-        );
 }
 
 void SendWidget::onSendClicked()
@@ -358,7 +331,7 @@ bool SendWidget::send(QList<SendCoinsRecipient> recipients)
     WalletModelTransaction currentTransaction(recipients);
     WalletModel::SendCoinsReturn prepareStatus;
 
-    prepareStatus = walletModel->prepareTransaction(currentTransaction, coinControlDialog->coinControl, fDelegationsChecked);
+    prepareStatus = walletModel->prepareTransaction(currentTransaction, coinControlDialog->coinControl);
 
     // process prepareStatus and on error generate message shown to user
     GuiTransactionsUtils::ProcessSendCoinsReturnAndInform(
@@ -376,11 +349,7 @@ bool SendWidget::send(QList<SendCoinsRecipient> recipients)
     }
 
     showHideOp(true);
-    const bool fStakeDelegationVoided = currentTransaction.getTransaction()->fStakeDelegationVoided;
     QString warningStr = QString();
-    if (fStakeDelegationVoided)
-        warningStr = tr("WARNING:\nTransaction spends a cold-stake delegation, voiding it.\n"
-                     "These coins will no longer be cold-staked.");
     TxDetailDialog* dialog = new TxDetailDialog(window, true, warningStr);
     dialog->setDisplayUnit(walletModel->getOptionsModel()->getDisplayUnit());
     dialog->setData(walletModel, currentTransaction);
@@ -398,9 +367,6 @@ bool SendWidget::send(QList<SendCoinsRecipient> recipients)
         );
 
         if (sendStatus.status == WalletModel::OK) {
-            // if delegations were spent, update cachedBalance
-            if (fStakeDelegationVoided)
-                cachedDelegatedBalance = walletModel->getDelegatedBalance();
             clearAll(false);
             inform(tr("Transaction sent"));
             dialog->deleteLater();
@@ -546,15 +512,6 @@ void SendWidget::setCoinControlPayAmounts()
 void SendWidget::onValueChanged()
 {
     refreshAmounts();
-}
-
-void SendWidget::onCheckBoxChanged()
-{
-    const bool checked = ui->checkBoxDelegations->isChecked();
-    if (checked != fDelegationsChecked) {
-        fDelegationsChecked = checked;
-        refreshAmounts();
-    }
 }
 
 void SendWidget::onContactsClicked(SendMultiRow* entry)

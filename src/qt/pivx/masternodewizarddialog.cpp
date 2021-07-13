@@ -216,8 +216,8 @@ bool MasterNodeWizardDialog::createMN()
         WalletModelTransaction currentTransaction(recipients);
         WalletModel::SendCoinsReturn prepareStatus;
 
-        // no coincontrol, no P2CS delegations
-        prepareStatus = walletModel->prepareTransaction(currentTransaction, nullptr, false);
+        // no coincontrol
+        prepareStatus = walletModel->prepareTransaction(currentTransaction, nullptr);
 
         QString returnMsg = tr("Unknown error");
         // process prepareStatus and on error generate message shown to user

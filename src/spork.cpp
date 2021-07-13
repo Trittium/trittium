@@ -15,23 +15,30 @@
 #define MAKE_SPORK_DEF(name, defaultValue) CSporkDef(name, defaultValue, #name)
 
 std::vector<CSporkDef> sporkDefs = {
-    MAKE_SPORK_DEF(SPORK_2_SWIFTTX,                         4070908800ULL), // ON
-    MAKE_SPORK_DEF(SPORK_3_SWIFTTX_BLOCK_FILTERING,         4070908800ULL), // ON
-    MAKE_SPORK_DEF(SPORK_5_MAX_VALUE,                       1000),          // 1000
     MAKE_SPORK_DEF(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT,  4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_9_MASTERNODE_BUDGET_ENFORCEMENT,   4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_13_ENABLE_SUPERBLOCKS,             4070908800ULL), // OFF
     MAKE_SPORK_DEF(SPORK_14_MIN_PROTOCOL_ACCEPTED,          4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_16_ZEROCOIN_MAINTENANCE_MODE,      4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_17_COLDSTAKING_ENFORCEMENT,        4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_18_ZEROCOIN_PUBLICSPEND_V4,        4070908800ULL), // OFF
 
     MAKE_SPORK_DEF(SPORK_101_SERVICES_ENFORCEMENT,          4070908800ULL), // OFF
     MAKE_SPORK_DEF(SPORK_102_FORCE_ENABLED_MASTERNODE ,     4070908800ULL), // OFF
     MAKE_SPORK_DEF(SPORK_103_PING_MESSAGE_SALT,             0),             // OFF
     MAKE_SPORK_DEF(SPORK_104_MAX_BLOCK_TIME,                4070908800ULL), // OFF
     MAKE_SPORK_DEF(SPORK_105_MAX_BLOCK_SIZE,                4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_106_STAKING_SKIP_MN_SYNC,          1),             // ON
+    MAKE_SPORK_DEF(SPORK_106_STAKING_SKIP_MN_SYNC,          4070908800ULL), // OFF
+
+    MAKE_SPORK_DEF(SPORK_2_NOOP,                            4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_3_NOOP,                            4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_5_NOOP,                            4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_7_NOOP,                            4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_9_NOOP,                            4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_10_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_11_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_12_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_13_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_15_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_16_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_17_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_18_NOOP,                           4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_19_NOOP,                           4070908800ULL), // OFF
 };
 
 CSporkManager sporkManager;
@@ -99,11 +106,9 @@ void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStr
             return;
         }
 
-        if (Params().GetConsensus().NetworkUpgradeActive(chainActive.Tip()->nHeight, Consensus::UPGRADE_V4_0) &&
-			spork.nMessVersion != MessageVersion::MESS_VER_HASH) {
-        	
-			LogPrintf("%s : nMessVersion=%d not accepted anymore\n", __func__, spork.nMessVersion);
-
+        if (Params().GetConsensus().NetworkUpgradeActive(chainActive.Tip()->nHeight, Consensus::UPGRADE_TIME_PROTOCOL_V2) &&
+            spork.nMessVersion != MessageVersion::MESS_VER_HASH) {
+            LogPrintf("%s : nMessVersion=%d not accepted anymore\n", __func__, spork.nMessVersion);
             return;
         }
 

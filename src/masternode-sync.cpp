@@ -45,9 +45,7 @@ bool CMasternodeSync::NotCompleted()
 {
     return (!IsSynced() && (
             !IsSporkListSynced() ||
-            sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT) ||
-            sporkManager.IsSporkActive(SPORK_9_MASTERNODE_BUDGET_ENFORCEMENT) ||
-            sporkManager.IsSporkActive(SPORK_13_ENABLE_SUPERBLOCKS)));
+            sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)));
 }
 
 bool CMasternodeSync::IsBlockchainSynced()

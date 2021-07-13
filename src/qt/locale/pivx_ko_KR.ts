@@ -405,33 +405,6 @@ for staking</source>
     </message>
 </context>
 <context>
-    <name>CSRow</name>
-    <message>
-        <source>Form</source>
-        <translation>양식</translation>
-    </message>
-    <message>
-        <source>Savings</source>
-        <translation>계좌</translation>
-    </message>
-    <message>
-        <source>0,00 TRTT</source>
-        <translation>0,00 TRTT</translation>
-    </message>
-    <message>
-        <source>address</source>
-        <translation>주소</translation>
-    </message>
-    <message>
-        <source>Not Staking</source>
-        <translation>스테이킹 비활성 상태</translation>
-    </message>
-    <message>
-        <source>Own delegation</source>
-        <translation>오너 위임</translation>
-    </message>
-</context>
-<context>
     <name>ClientModel</name>
     <message>
         <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
@@ -637,10 +610,6 @@ for staking</source>
         <translation>예</translation>
     </message>
     <message>
-        <source>delegated to %1 for cold staking</source>
-        <translation>콜드 스테이킹 주소 %1 로 위임 됨</translation>
-    </message>
-    <message>
         <source>Select All</source>
         <translation>모두 선택</translation>
     </message>
@@ -683,215 +652,6 @@ for staking</source>
     <message>
         <source>(change)</source>
         <translation>(잔돈)</translation>
-    </message>
-</context>
-<context>
-    <name>ColdStakingWidget</name>
-    <message>
-        <source>Form</source>
-        <translation>양식</translation>
-    </message>
-    <message>
-        <source>Owner address (optional, if empty a new address will be created)</source>
-        <translation>오너 주소 (선택과목, 입력 하지 않을경우 새로운 주소가 생성됨)</translation>
-    </message>
-    <message>
-        <source>Total Staking:</source>
-        <translation>스테이킹 총 액수</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>콜드 스테이킹</translation>
-    </message>
-    <message>
-        <source>Staker</source>
-        <translation>스테이커</translation>
-    </message>
-    <message>
-        <source>Delegation</source>
-        <translation>위임</translation>
-    </message>
-    <message>
-        <source>Delegate</source>
-        <translation>위임 함</translation>
-    </message>
-    <message>
-        <source>Clear All</source>
-        <translation>전체 지우기</translation>
-    </message>
-    <message>
-        <source>Delegated balance history</source>
-        <translation>위임된 액수 기록</translation>
-    </message>
-    <message>
-        <source>No delegations yet</source>
-        <translation>아직 위임된 액수가 없습니다</translation>
-    </message>
-    <message>
-        <source>Total Staking: %1</source>
-        <translation>스테이킹 총 액수: %1</translation>
-    </message>
-    <message>
-        <source>Error loading delegations: %1</source>
-        <translation>위임 데이터 로딩 에러: %1</translation>
-    </message>
-    <message>
-        <source>You can delegate your TRTTs, letting a hot node (24/7 online node)
-stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>안전히 개인 프라이빗 키를 오프라인으로 보관한 상태로, 가지고 계신 TRTT 를 매일 24시간 온라인으로 돌아가는 핫 노드로 위임하여, 대신 스테이킹을 하게 할수 있습니다. </translation>
-    </message>
-    <message>
-        <source>Enter owner address</source>
-        <translation>Owner 주소 입력</translation>
-    </message>
-    <message>
-        <source>Accept TRTT delegation / Delegate TRTT</source>
-        <translation>TRTT 위임권 수락하기 / TRTT 위임 하기</translation>
-    </message>
-    <message>
-        <source>Cold Staking address</source>
-        <translation>콜드 스테이킹 주소</translation>
-    </message>
-    <message>
-        <source>No receive addresses available, you can go to the receive screen and create some there!</source>
-        <translation>존재하는 입금 주소가 없습니다. 입금 화면에서 생성 하실수 있습니다.</translation>
-    </message>
-    <message>
-        <source>No contacts available, you can go to the contacts screen and add some there!</source>
-        <translation>존재하는 연락처가 없습니다. 연락처 화면에서 추가 하실수 있습니다.</translation>
-    </message>
-    <message>
-        <source>Cannot send delegation, wallet locked</source>
-        <translation>위임을 할수가 없습니다. 지갑이 잠겨 있습니다.</translation>
-    </message>
-    <message>
-        <source>Cold staking is networkely disabled</source>
-        <translation>콜드 스테이킹 네트워크가 비활성화 된 상태입니다.</translation>
-    </message>
-    <message>
-        <source>Coin Control</source>
-        <translation>코인 설정</translation>
-    </message>
-    <message>
-        <source>Invalid entry</source>
-        <translation>잘못된 입력</translation>
-    </message>
-    <message>
-        <source>Invalid entry, minimum delegable amount is </source>
-        <translation>유효한 입력이 아닙니다. 최소 위임 액수: </translation>
-    </message>
-    <message>
-        <source>Owner address invalid</source>
-        <translation>유효한 오너 주소가 아닙니다.</translation>
-    </message>
-    <message>
-        <source>ALERT!</source>
-        <translation>경보!</translation>
-    </message>
-    <message>
-        <source>Delegating to an external owner address!
-
-The delegated coins will NOT be spendable by this wallet.
-Spending these coins will need to be done from the wallet or
-device containing the owner address.
-
-Do you wish to proceed?</source>
-        <translation>지갑 밖의 오너 주소로 위임을 선택 하셨습니다.
-
-위임된 코인들은 이 지갑에서 더 이상 전송이 불가해집니다.
-위임된 코인들의 사용/전송권은 위임된 오너 주소를 보유하고 있는 지갑으로 넘어갑니다.
-
-계속 진행 하시겠습니까?</translation>
-    </message>
-    <message>
-        <source>Staking address corresponds to this wallet, change it to an external node</source>
-        <translation>스테이킹 주소가 이 지갑과 일치합니다. 스테이킹 주소를 외부 노드로 변경하십시오.</translation>
-    </message>
-    <message>
-        <source>Cannot create transaction.</source>
-        <translation>전송 불가</translation>
-    </message>
-    <message>
-        <source>Coins delegated</source>
-        <translation>위임된 코인</translation>
-    </message>
-    <message>
-        <source>Cannot perform operation, wallet locked</source>
-        <translation>명령을 수행할 수 없습니다. 지갑이 잠겨 있습니다.</translation>
-    </message>
-    <message>
-        <source>URI copied to clipboard</source>
-        <translation>URI가 클립보드에 복사되었습니다.</translation>
-    </message>
-    <message>
-        <source>Address copied to clipboard</source>
-        <translation>주소가 클립보드에 복사됨</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>복사</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>수정</translation>
-    </message>
-    <message>
-        <source>Stake</source>
-        <translation>스테이크</translation>
-    </message>
-    <message>
-        <source>Blacklist</source>
-        <translation>블랙리스트</translation>
-    </message>
-    <message>
-        <source>Edit Label</source>
-        <translation>라벨 수정하기</translation>
-    </message>
-    <message>
-        <source>Copy owner
-address</source>
-        <translation>소유자 복사
-주소</translation>
-    </message>
-    <message>
-        <source>Address copied</source>
-        <translation>주소가 복사되었습니다.</translation>
-    </message>
-    <message>
-        <source>Edit Cold Address Label</source>
-        <translation>콜드 주소 라벨 수정하기</translation>
-    </message>
-    <message>
-        <source>Whitelist failed, please check the logs</source>
-        <translation>화이트 리스트 설정 실패, 로그를 확인해주세요.</translation>
-    </message>
-    <message>
-        <source> staking!</source>
-        <translation>스테이킹!</translation>
-    </message>
-    <message>
-        <source>Blacklist failed, please check the logs</source>
-        <translation>블랙리스트 설정 실패, 로그를 확인해주세요.</translation>
-    </message>
-    <message>
-        <source> blacklisted from staking</source>
-        <translation>블랙리스트 처리됨</translation>
-    </message>
-    <message>
-        <source>Owner address copied</source>
-        <translation>소유자 주소 복사됨</translation>
-    </message>
-    <message>
-        <source>Edit Owner Address Label</source>
-        <translation>소유자 주소 라벨 수정하기</translation>
-    </message>
-    <message>
-        <source>Address label saved</source>
-        <translation>주소 라벨이 저장됨</translation>
-    </message>
-    <message>
-        <source>Error storing address label</source>
-        <translation>주소 라벨 저장 오류</translation>
     </message>
 </context>
 <context>
@@ -2176,14 +1936,6 @@ Address: %4
         <translation>받는중</translation>
     </message>
     <message>
-        <source>Cold Staking</source>
-        <translation>콜드 스테이킹</translation>
-    </message>
-    <message>
-        <source>Cold Staking Contact</source>
-        <translation>콜드 스테이킹 연락처</translation>
-    </message>
-    <message>
         <source>Hidden</source>
         <translation>Hidden</translation>
     </message>
@@ -2242,10 +1994,6 @@ Address: %4
     <message>
         <source>To yourself</source>
         <translation>자신에게</translation>
-    </message>
-    <message>
-        <source>Cold stakes</source>
-        <translation>콜드 스테이크</translation>
     </message>
     </context>
 <context>
@@ -2836,10 +2584,6 @@ Address: %4
         <translation>생성</translation>
     </message>
     <message>
-        <source>New Cold Staking Address</source>
-        <translation>새로운 콜드 스테이킹 주소</translation>
-    </message>
-    <message>
         <source>Amount (optional)</source>
         <translation>액수 (선택 과목)</translation>
     </message>
@@ -2962,14 +2706,6 @@ Address: %4
     <message>
         <source>Cannot create transaction.</source>
         <translation>전송 불가</translation>
-    </message>
-    <message>
-        <source>WARNING:
-Transaction spends a cold-stake delegation, voiding it.
-These coins will no longer be cold-staked.</source>
-        <translation>주의 :
-Cold-staking 중인 코인을 사용하여 전송하며, 무효화됩니다.
-이 코인은 더이상  cold-staking 되지 않습니다.</translation>
     </message>
     <message>
         <source>Transaction sent</source>
@@ -4326,10 +4062,6 @@ NOTE: 업그레이드 이후에는
         <translation>수신됨</translation>
     </message>
     <message>
-        <source>Stake delegation</source>
-        <translation>Stake delegation</translation>
-    </message>
-    <message>
         <source>Sent to</source>
         <translation>대상 전송</translation>
     </message>
@@ -4847,14 +4579,6 @@ Trittium Wallet</translation>
         <translation>로딩 완료</translation>
     </message>
     <message>
-        <source>Enable publish hash transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>&lt;address&gt; 에서 해시 전송 게시 가능 (SwiftTX로 설정된)</translation>
-    </message>
-    <message>
-        <source>Enable publish raw transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>&lt;address&gt;에서 Raw 트랜잭션 게시 지원 (SwiftTX를 통해 잠겨진)</translation>
-    </message>
-    <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
         <translation>클라이언트가 마스터노드로 작동하는 것을 활성화 (0-1, 기본값: %u)</translation>
     </message>
@@ -4995,20 +4719,12 @@ Trittium Wallet</translation>
         <translation>지불대상보다 적은 코인 선택됨</translation>
     </message>
     <message>
-        <source>SwiftX options:</source>
-        <translation>SwiftX 옵션:</translation>
-    </message>
-    <message>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation>이것은 사전 릴리스 테스트 빌드입니다 - 사용상 책임은 귀하에게 있습니다. - staking이나 상업적인 용도로는 절대 사용하지 마십시오!</translation>
     </message>
     <message>
-        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>TRTT의 모든 특정 기능들을 비활성화합니다(마스터노드, 난독화, SwiftTX, Budgeting) (0-1, 기본값: %u)</translation>
-    </message>
-    <message>
-        <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>swiftTX 활성화, 잠긴 트랜잭션들에 대한 확인 표시 (bool, 기본값: %s)</translation>
+        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
+        <translation>TRTT의 모든 특정 기능들을 비활성화합니다(마스터노드, 난독화, Budgeting) (0-1, 기본값: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -5029,10 +4745,6 @@ Trittium Wallet</translation>
     <message>
         <source>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</source>
         <translation>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</translation>
-    </message>
-    <message>
-        <source>SwiftX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>SwiftTX는 최소 6회 확인이 필요한 입력으로 몇 분 후에 다시 시도해야 할 수 있습니다.</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>
@@ -5604,10 +5316,6 @@ Trittium Wallet</translation>
     <message>
         <source>Reset to default</source>
         <translation>기본값으로 리셋</translation>
-    </message>
-    <message>
-        <source>Include delegated</source>
-        <translation>위임된 코인 포함</translation>
     </message>
 </context>
 </TS>

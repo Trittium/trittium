@@ -20,7 +20,6 @@
 #include "script/script_error.h"
 #include "script/sign.h"
 #include "script/standard.h"
-#include "swifttx.h"
 #include "uint256.h"
 #include "utilmoneystr.h"
 #include "zpivchain.h"
@@ -773,17 +772,10 @@ UniValue signrawtransaction(const JSONRPCRequest& request)
 
         txin.scriptSig.clear();
 
-        // if this is a P2CS script, select which key to use
-        bool fColdStake = false;
-        if (prevPubKey.IsPayToColdStaking()) {
-            // if we have both keys, sign with the spender key
-            fColdStake = !bool(IsMine(keystore, prevPubKey) & ISMINE_SPENDABLE_DELEGATED);
-        }
-
         SignatureData sigdata;
         // Only sign SIGHASH_SINGLE if there's a corresponding output:
         if (!fHashSingle || (i < mergedTx.vout.size()))
-            ProduceSignature(MutableTransactionSignatureCreator(&keystore, &mergedTx, i, amount, nHashType), prevPubKey, sigdata, fColdStake);
+            ProduceSignature(MutableTransactionSignatureCreator(&keystore, &mergedTx, i, amount, nHashType), prevPubKey, sigdata);
 
         // ... and merge in other signatures:
         for (const CMutableTransaction& txv : txVariants) {
@@ -820,7 +812,6 @@ UniValue sendrawtransaction(const JSONRPCRequest& request)
             "\nArguments:\n"
             "1. \"hexstring\"    (string, required) The hex string of the raw transaction)\n"
             "2. allowhighfees    (boolean, optional, default=false) Allow high fees\n"
-            "3. swiftx           (boolean, optional, default=false) Use SwiftX to send this transaction\n"
 
             "\nResult:\n"
             "\"hex\"             (string) The transaction hash in hex\n"
@@ -844,10 +835,6 @@ UniValue sendrawtransaction(const JSONRPCRequest& request)
     if (request.params.size() > 1)
         fOverrideFees = request.params[1].get_bool();
 
-    bool fSwiftX = false;
-    if (request.params.size() > 2)
-        fSwiftX = request.params[2].get_bool();
-
     AssertLockNotHeld(cs_main);
     CCoinsViewCache& view = *pcoinsTip;
     bool fHaveChain = false;
@@ -858,11 +845,6 @@ UniValue sendrawtransaction(const JSONRPCRequest& request)
     bool fHaveMempool = mempool.exists(hashTx);
     if (!fHaveMempool && !fHaveChain) {
         // push to local node and sync with wallets
-        if (fSwiftX) {
-            mapTxLockReq.insert(std::make_pair(tx.GetHash(), tx));
-            CreateNewLock(tx);
-            g_connman->RelayTransactionLockReq(tx, true);
-        }
         CValidationState state;
         bool fMissingInputs;
         if (!AcceptToMemoryPool(mempool, state, tx, false, &fMissingInputs, false, !fOverrideFees)) {

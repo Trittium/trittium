@@ -7,6 +7,8 @@ reset-files.bash
 *.tar.gz
 
 *.exe
+
+# DSW
 src/__decenomy__
 src/__decenomy__d
 src/__decenomy__-cli
@@ -14,14 +16,51 @@ src/__decenomy__-tx
 src/bench/bench___decenomy__
 src/test/test___decenomy__
 src/qt/test/test___decenomy__-qt
-src/bench/bench_trittium
-src/qt/test/test_trittium-qt
-src/qt/trittium-qt
-src/test/test_trittium
-src/trittium-cli
-src/trittium-tx
-src/trittiumd
 
+# Sapphire
+src/bench/bench_sapphire
+src/sapphire-cli
+src/sapphire-tx
+src/sapphired
+src/qt/sapphire-qt
+src/test/test_sapphire
+src/qt/test/test_sapphire-qt
+
+# Kyanite
+src/bench/bench_kyanite
+src/kyanite-cli
+src/kyanite-tx
+src/kyanited
+src/qt/kyanite-qt
+src/test/test_kyanite
+src/qt/test/test_kyanite-qt
+
+# Jackpot
+src/bench/bench_jackpot
+src/jackpot-cli
+src/jackpot-tx
+src/jackpotd
+src/qt/jackpot-qt
+src/test/test_jackpot
+src/qt/test/test_jackpot-qt
+
+# Dash Diamond
+src/bench/bench_dashdiamond
+src/dashdiamond-cli
+src/dashdiamond-tx
+src/dashdiamondd
+src/qt/dashdiamond-qt
+src/test/test_dashdiamond
+src/qt/test/test_dashdiamond-qt
+
+# CryptoFlow
+src/bench/bench_cryptoflow
+src/cryptoflow-cli
+src/cryptoflow-tx
+src/cryptoflowd
+src/qt/cryptoflow-qt
+src/test/test_cryptoflow
+src/qt/test/test_cryptoflow-qt
 
 ## Trittium ##
 src/bench/bench_trittium
@@ -32,14 +71,68 @@ src/trittium-cli
 src/trittium-tx
 src/trittiumd
 
-## CryptoFlow ##
-src/bench/bench_cryptoflow
-src/qt/test/test_cryptoflow-qt
-src/qt/cryptoflow-qt
-src/test/test_cryptoflow
-src/cryptoflow-cli
-src/cryptoflow-tx
-src/cryptoflowd
+# Aezora
+src/bench/bench_aezora
+src/qt/test/test_aezora-qt
+src/qt/aezora-qt
+src/test/test_aezora
+src/aezora-cli
+src/aezora-tx
+src/aezorad
+
+# Beacon
+src/bench/bench_beacon
+src/qt/test/test_beacon-qt
+src/qt/beacon-qt
+src/test/test_beacon
+src/beacon-cli
+src/beacon-tx
+src/beacond
+
+# Peony
+src/bench/bench_peony
+src/qt/test/test_peony-qt
+src/qt/peony-qt
+src/test/test_peony
+src/peony-cli
+src/peony-tx
+src/peonyd
+
+# CryptoSaga
+src/bench/bench_cryptosaga
+src/qt/test/test_cryptosaga-qt
+src/qt/cryptosaga-qt
+src/test/test_cryptosaga
+src/cryptosaga-cli
+src/cryptosaga-tx
+src/cryptosagad
+
+# Monk
+src/bench/bench_monk
+src/qt/test/test_monk-qt
+src/qt/monk-qt
+src/test/test_monk
+src/monk-cli
+src/monk-tx
+src/monkd
+
+# Suvereno
+src/bench/bench_suvereno
+src/qt/test/test_suvereno-qt
+src/qt/suvereno-qt
+src/test/test_suvereno
+src/suvereno-cli
+src/suvereno-tx
+src/suverenod
+
+# Eskacoin
+src/bench/bench_eskacoin
+src/qt/test/test_eskacoin-qt
+src/qt/eskacoin-qt
+src/test/test_eskacoin
+src/eskacoin-cli
+src/eskacoin-tx
+src/eskacoind
 
 ##########################################
 # clear this section when it's fixed

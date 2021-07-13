@@ -140,17 +140,12 @@ public:
 typedef CBitcoinExtKeyBase<CExtKey, BIP32_EXTKEY_SIZE, CChainParams::EXT_SECRET_KEY> CBitcoinExtKey;
 typedef CBitcoinExtKeyBase<CExtPubKey, BIP32_EXTKEY_SIZE, CChainParams::EXT_PUBLIC_KEY> CBitcoinExtPubKey;
 
-
-std::string EncodeDestination(const CTxDestination& dest, bool isStaking);
 std::string EncodeDestination(const CTxDestination& dest, const CChainParams::Base58Type addrType = CChainParams::PUBKEY_ADDRESS);
-// DecodeDestinationisStaking flag is set to true when the string arg is from an staking address
-CTxDestination DecodeDestination(const std::string& str, bool& isStaking);
+
 CTxDestination DecodeDestination(const std::string& str);
 // Return true if the address is valid without care on the type.
 bool IsValidDestinationString(const std::string& str);
-// Return true if the address is valid and is following the fStaking flag type (true means that the destination must be a staking address, false the opposite).
-bool IsValidDestinationString(const std::string& str, bool fStaking);
-bool IsValidDestinationString(const std::string& str, bool fStaking, const CChainParams& params);
+bool IsValidDestinationString(const std::string& str, const CChainParams& params);
 
 /**
  * Wrapper class for every supported address
@@ -158,15 +153,13 @@ bool IsValidDestinationString(const std::string& str, bool fStaking, const CChai
 struct Destination {
 public:
     explicit Destination() {}
-    explicit Destination(const CTxDestination& _dest, bool _isP2CS) : dest(_dest), isP2CS(_isP2CS) {}
+    explicit Destination(const CTxDestination& _dest) : dest(_dest) {}
 
     CTxDestination dest{CNoDestination()};
-    bool isP2CS{false};
 
     Destination& operator=(const Destination& from)
     {
         this->dest = from.dest;
-        this->isP2CS = from.isP2CS;
         return *this;
     }
 
@@ -176,7 +169,7 @@ public:
             // Invalid address
             return "";
         }
-        return EncodeDestination(dest, isP2CS ? CChainParams::STAKING_ADDRESS : CChainParams::PUBKEY_ADDRESS);
+        return EncodeDestination(dest, CChainParams::PUBKEY_ADDRESS);
     }
 };
 

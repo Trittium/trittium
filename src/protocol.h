@@ -222,15 +222,6 @@ extern const char* REJECT;
  */
 extern const char* SENDHEADERS;
 /**
- * The ix message transmits a single SwiftX transaction
- */
-extern const char* IX;
-/**
- * The ixlockvote message is used to reach consensus for SwiftX
- * transaction locks
- */
-extern const char* IXLOCKVOTE;
-/**
  * The spork message is used to send spork values to connected
  * peers
  */
@@ -383,24 +374,24 @@ public:
 };
 
 enum {
-    MSG_TX = 1,
-    MSG_BLOCK,
+    MSG_TX                          = 1,
+    MSG_BLOCK                       = 2,
     // Nodes may always request a MSG_FILTERED_BLOCK in a getdata, however,
     // MSG_FILTERED_BLOCK should not appear in any invs except as a part of getdata.
-    MSG_FILTERED_BLOCK,
-    MSG_TXLOCK_REQUEST,
-    MSG_TXLOCK_VOTE,
-    MSG_SPORK,
-    MSG_MASTERNODE_WINNER,
-    MSG_MASTERNODE_SCANNING_ERROR,
-    MSG_BUDGET_VOTE,
-    MSG_BUDGET_PROPOSAL,
-    MSG_BUDGET_FINALIZED,
-    MSG_BUDGET_FINALIZED_VOTE,
-    MSG_MASTERNODE_QUORUM,
-    MSG_MASTERNODE_ANNOUNCE,
-    MSG_MASTERNODE_PING,
-    MSG_DSTX
+    MSG_FILTERED_BLOCK              = 3,
+    // MSG_TXLOCK_REQUEST              = 4,
+    // MSG_TXLOCK_VOTE                 = 5,
+    MSG_SPORK                       = 6,
+    MSG_MASTERNODE_WINNER           = 7,
+    MSG_MASTERNODE_SCANNING_ERROR   = 8,
+    MSG_BUDGET_VOTE                 = 9,
+    MSG_BUDGET_PROPOSAL             = 10,
+    MSG_BUDGET_FINALIZED            = 11,
+    MSG_BUDGET_FINALIZED_VOTE       = 12,
+    MSG_MASTERNODE_QUORUM           = 13,
+    MSG_MASTERNODE_ANNOUNCE         = 14,
+    MSG_MASTERNODE_PING             = 15,
+    MSG_DSTX                        = 16,
 };
 
 #endif // BITCOIN_PROTOCOL_H

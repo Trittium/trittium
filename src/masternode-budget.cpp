@@ -85,7 +85,7 @@ bool IsBudgetCollateralValid(const uint256& nTxCollateralHash, const uint256& nE
         - nTime is never validated via the hashing mechanism and comes from a full-validated source (the blockchain)
     */
 
-    int conf = GetIXConfirmations(nTxCollateralHash);
+    int conf = 0;
     if (!nBlockHash.IsNull()) {
         BlockMap::iterator mi = mapBlockIndex.find(nBlockHash);
         if (mi != mapBlockIndex.end() && (*mi).second) {
@@ -99,7 +99,6 @@ bool IsBudgetCollateralValid(const uint256& nTxCollateralHash, const uint256& nE
 
     nConf = conf;
 
-    //if we're syncing we won't have swiftTX information, so accept 1 confirmation
     const int nRequiredConfs = Params().GetConsensus().nBudgetFeeConfirmations;
     if (conf >= nRequiredConfs) {
         return true;
@@ -207,8 +206,8 @@ void CBudgetManager::SubmitFinalBudget()
             return;
         }
 
-        // Send the tx to the network. Do NOT use SwiftTx, locking might need too much time to propagate, especially for testnet
-        const CWallet::CommitResult& res = pwalletMain->CommitTransaction(wtx, keyChange, g_connman.get(), "NO-ix");
+        // Send the tx to the network.
+        const CWallet::CommitResult& res = pwalletMain->CommitTransaction(wtx, keyChange, g_connman.get());
         if (res.status != CWallet::CommitStatus::OK)
             return;
         tx = (CTransaction)wtx;
@@ -1031,7 +1030,7 @@ void CBudgetManager::ProcessMessage(CNode* pfrom, std::string& strCommand, CData
                 if (pfrom->HasFulfilledRequest("budgetvotesync")) {
                     LogPrint(BCLog::MNBUDGET,"mnvs - peer already asked me for the list\n");
                     LOCK(cs_main);
-                    Misbehaving(pfrom->GetId(), 20);
+                    if (CMasternode::GetMasternodePayment(chainActive.Height()) > 0) Misbehaving(pfrom->GetId(), 20);
                     return;
                 }
                 pfrom->FulfilledRequest("budgetvotesync");

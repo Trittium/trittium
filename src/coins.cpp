@@ -126,8 +126,6 @@ const Coin& CCoinsViewCache::AccessCoin(const COutPoint& outpoint) const
 bool CCoinsViewCache::HaveCoin(const COutPoint& outpoint) const
 {
     CCoinsMap::const_iterator it = FetchCoin(outpoint);
-    if(it != cacheCoins.end() && it->second.coin.IsSpent())
-        error("%s : spent input %s", __func__, it->first.ToString());
     return (it != cacheCoins.end() && !it->second.coin.IsSpent());
 }
 

@@ -440,33 +440,6 @@ para staking</translation>
     </message>
 </context>
 <context>
-    <name>CSRow</name>
-    <message>
-        <source>Form</source>
-        <translation>Formulario</translation>
-    </message>
-    <message>
-        <source>Savings</source>
-        <translation>Ahorros</translation>
-    </message>
-    <message>
-        <source>0,00 TRTT</source>
-        <translation>0,00 TRTT</translation>
-    </message>
-    <message>
-        <source>address</source>
-        <translation>Dirección </translation>
-    </message>
-    <message>
-        <source>Not Staking</source>
-        <translation>Sin Stake </translation>
-    </message>
-    <message>
-        <source>Own delegation</source>
-        <translation>Delegación propia </translation>
-    </message>
-</context>
-<context>
     <name>ClientModel</name>
     <message>
         <source>Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)</source>
@@ -676,10 +649,6 @@ para staking</translation>
         <translation>Puede variar +/- %1 u%2 por entrada.</translation>
     </message>
     <message>
-        <source>delegated to %1 for cold staking</source>
-        <translation>delegar a %1 para hacer cold staking</translation>
-    </message>
-    <message>
         <source>Select All</source>
         <translation>Deseleccionar Todo</translation>
     </message>
@@ -722,244 +691,6 @@ para staking</translation>
     <message>
         <source>(change)</source>
         <translation>(cambio)</translation>
-    </message>
-</context>
-<context>
-    <name>ColdStakingWidget</name>
-    <message>
-        <source>Form</source>
-        <translation>Formulario</translation>
-    </message>
-    <message>
-        <source>Owner address (optional, if empty a new address will be created)</source>
-        <translation>Dirección del propietario (opcional, si está vacía se creará una nueva dirección)</translation>
-    </message>
-    <message>
-        <source>Total Staking:</source>
-        <translation>Staking Total:</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>Cold Staking</translation>
-    </message>
-    <message>
-        <source>Staker</source>
-        <translation>Inversor de Stake</translation>
-    </message>
-    <message>
-        <source>Delegation</source>
-        <translation>Delegación </translation>
-    </message>
-    <message>
-        <source>Delegate</source>
-        <translation>Delegado</translation>
-    </message>
-    <message>
-        <source>Clear All</source>
-        <translation>Borrar todo</translation>
-    </message>
-    <message>
-        <source>Delegated balance history</source>
-        <translation>Historial de saldo delegado</translation>
-    </message>
-    <message>
-        <source>No delegations yet</source>
-        <translation>Aún no hay delegaciones</translation>
-    </message>
-    <message>
-        <source>Total Staking: %1</source>
-        <translation>Total en Stake: %1</translation>
-    </message>
-    <message>
-        <source>Error loading delegations: %1</source>
-        <translation>Error al cargar las delegaciones: %1</translation>
-    </message>
-    <message>
-        <source>You can delegate your TRTTs, letting a hot node (24/7 online node)
-stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>Puedes delegar tus TRTT, dejando un nodo activo (nodo en línea 24/7)
-Haga Stake en tu nombre, manteniendo las llaves en un lugar seguro fuera de línea.</translation>
-    </message>
-    <message>
-        <source>Enter owner address</source>
-        <translation>Ingresa la dirección del propietario</translation>
-    </message>
-    <message>
-        <source>Accept TRTT delegation / Delegate TRTT</source>
-        <translation>Aceptar delegación de TRTT / TRTT Delegados</translation>
-    </message>
-    <message>
-        <source>Cold Staking address</source>
-        <translation>Dirección de Cold Staking</translation>
-    </message>
-    <message>
-        <source>No receive addresses available, you can go to the receive screen and create some there!</source>
-        <translation>No hay direcciones de recepción disponibles, puedes ir a la pantalla de recepción y añadir algunas allí!</translation>
-    </message>
-    <message>
-        <source>No contacts available, you can go to the contacts screen and add some there!</source>
-        <translation>Sin contactos disponibles, ¡puedes ir a la pantalla de contactos y añadir alguno allí!</translation>
-    </message>
-    <message>
-        <source>Cannot send delegation, wallet locked</source>
-        <translation>No se puede enviar delegación, la wallet está bloqueada</translation>
-    </message>
-    <message>
-        <source>Cold staking is networkely disabled</source>
-        <translation>El Cold Stake está desactivado en la red </translation>
-    </message>
-    <message>
-        <source>Coin Control</source>
-        <translation>Control de moneda</translation>
-    </message>
-    <message>
-        <source>Select %1 outputs to delegate.</source>
-        <translation>Selecciona %1 salidas para delegar.</translation>
-    </message>
-    <message>
-        <source>Create Cold Staking Address</source>
-        <translation>Crear direccion de apuesta en frio</translation>
-    </message>
-    <message>
-        <source>Creates an address to receive delegated coins
-and stake them on their owner's behalf.</source>
-        <translation>Crea una dirección para recibir monedas delegadas y apostarlas en nombre de su propietario.</translation>
-    </message>
-    <message>
-        <source>My Cold Staking Addresses</source>
-        <translation>Mis direcciones de Cold Staking
-
-</translation>
-    </message>
-    <message>
-        <source>List your own cold staking addresses.</source>
-        <translation>Enumere sus propias direcciones de apuesta en frío.</translation>
-    </message>
-    <message>
-        <source>Invalid entry</source>
-        <translation>Entrada inválida</translation>
-    </message>
-    <message>
-        <source>Invalid entry, minimum delegable amount is </source>
-        <translation>Entrada no válida, la cantidad mínima para delegar es de</translation>
-    </message>
-    <message>
-        <source>Owner address invalid</source>
-        <translation>Dirección del propietario inválida</translation>
-    </message>
-    <message>
-        <source>ALERT!</source>
-        <translation>¡ALERTA!</translation>
-    </message>
-    <message>
-        <source>Delegating to an external owner address!
-
-The delegated coins will NOT be spendable by this wallet.
-Spending these coins will need to be done from the wallet or
-device containing the owner address.
-
-Do you wish to proceed?</source>
-        <translation>¡Delegar en una dirección de propietario externa!
-
-Las monedas delegadas NO se podrán gastar en esta wallet.
-El gasto de estas monedas tendrá que hacerse desde la wallet o
-el dispositivo que contiene la dirección del propietario.
-
-¿Deseas continuar?</translation>
-    </message>
-    <message>
-        <source>Staking address corresponds to this wallet, change it to an external node</source>
-        <translation>La dirección de Stake corresponde a esta wallet, cámbiala a un nodo externo.</translation>
-    </message>
-    <message>
-        <source>Cannot create transaction.</source>
-        <translation>No se puede crear la transacción.</translation>
-    </message>
-    <message>
-        <source>Coins delegated</source>
-        <translation>Monedas delegadas </translation>
-    </message>
-    <message>
-        <source>You don't have any %1 to select.</source>
-        <translation>No tiene %1 para seleccionar.</translation>
-    </message>
-    <message>
-        <source>Cannot perform operation, wallet locked</source>
-        <translation>No se puede realizar la operación, la wallet está bloqueada</translation>
-    </message>
-    <message>
-        <source>URI copied to clipboard</source>
-        <translation>URL copiado al portapapeles</translation>
-    </message>
-    <message>
-        <source>Address copied to clipboard</source>
-        <translation>Dirección copiada al portapapeles</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Copiar</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Editar</translation>
-    </message>
-    <message>
-        <source>Stake</source>
-        <translation>Stake</translation>
-    </message>
-    <message>
-        <source>Blacklist</source>
-        <translation>Lista negra</translation>
-    </message>
-    <message>
-        <source>Edit Label</source>
-        <translation>Editar etiqueta</translation>
-    </message>
-    <message>
-        <source>Copy owner
-address</source>
-        <translation>Copiar dirección
-del propietario </translation>
-    </message>
-    <message>
-        <source>Address copied</source>
-        <translation>Dirección copiada</translation>
-    </message>
-    <message>
-        <source>Edit Cold Address Label</source>
-        <translation>Editar la Etiqueta de la Dirección Cold </translation>
-    </message>
-    <message>
-        <source>Whitelist failed, please check the logs</source>
-        <translation>La lista blanca falló, por favor revisa los registros.</translation>
-    </message>
-    <message>
-        <source> staking!</source>
-        <translation>¡Haciendo Stake! </translation>
-    </message>
-    <message>
-        <source>Blacklist failed, please check the logs</source>
-        <translation>La lista negra falló, por favor revisa los registros.</translation>
-    </message>
-    <message>
-        <source> blacklisted from staking</source>
-        <translation>Lista negra de hacer Stake</translation>
-    </message>
-    <message>
-        <source>Owner address copied</source>
-        <translation>Dirección del propietario copiada </translation>
-    </message>
-    <message>
-        <source>Edit Owner Address Label</source>
-        <translation>Editar la Etiqueta de Dirección del Propietario </translation>
-    </message>
-    <message>
-        <source>Address label saved</source>
-        <translation>Dirección de etiqueta guardada</translation>
-    </message>
-    <message>
-        <source>Error storing address label</source>
-        <translation>Error al almacenar la etiqueta de dirección</translation>
     </message>
 </context>
 <context>
@@ -1724,12 +1455,6 @@ NODES</source>
 MAESTROS</translation>
     </message>
     <message>
-        <source>COLD
-STAKING</source>
-        <translation>APUESTA
-EN FRIO</translation>
-    </message>
-    <message>
         <source>SETTINGS
 </source>
         <translation>CONFIGURACIONES
@@ -2347,22 +2072,6 @@ Dirección: %4
         <translation>Recibiendo</translation>
     </message>
     <message>
-        <source>Delegator</source>
-        <translation>Delegador</translation>
-    </message>
-    <message>
-        <source>Delegable</source>
-        <translation>Delegable</translation>
-    </message>
-    <message>
-        <source>Cold Staking</source>
-        <translation>Cold Staking</translation>
-    </message>
-    <message>
-        <source>Cold Staking Contact</source>
-        <translation>Contacto de Cold Staking</translation>
-    </message>
-    <message>
         <source>Hidden</source>
         <translation>Oculto</translation>
     </message>
@@ -2423,20 +2132,8 @@ Dirección: %4
         <translation>A usted mismo</translation>
     </message>
     <message>
-        <source>Cold stakes</source>
-        <translation>Stake en frío</translation>
-    </message>
-    <message>
         <source>Hot stakes</source>
         <translation>Stake en caliente</translation>
-    </message>
-    <message>
-        <source>Delegated</source>
-        <translation>Delegado </translation>
-    </message>
-    <message>
-        <source>Delegations</source>
-        <translation>Delegaciones </translation>
     </message>
     <message>
         <source>by Label</source>
@@ -3122,14 +2819,6 @@ Dirección: %4
         <translation>GENERAR</translation>
     </message>
     <message>
-        <source>Creates an address to receive coin delegations and be able to stake them.</source>
-        <translation>Crea una dirección para recibir delegaciones de monedas y poder hacer stake con ellas. </translation>
-    </message>
-    <message>
-        <source>New Cold Staking Address</source>
-        <translation>Nueva dirección de Cold Staking</translation>
-    </message>
-    <message>
         <source>Amount (optional)</source>
         <translation>Cantidad (opcional)</translation>
     </message>
@@ -3144,10 +2833,6 @@ Dirección: %4
     <message>
         <source>Request for </source>
         <translation>Solicitud para</translation>
-    </message>
-    <message>
-        <source>Cold Staking Address Generated</source>
-        <translation>Dirección de Cold Staking generada</translation>
     </message>
 </context>
 <context>
@@ -3179,10 +2864,6 @@ Dirección: %4
     <message>
         <source>Invalid address</source>
         <translation>Dirección inválida</translation>
-    </message>
-    <message>
-        <source>Cannot use cold staking addresses for change</source>
-        <translation>No se pueden usar direcciones de staking en frío para el cambio</translation>
     </message>
 </context>
 <context>
@@ -3294,10 +2975,6 @@ Do you want to continue?</source>
         <translation>Entrada inválida, las entradas anteriores deben ser válidas antes de añadir una nueva</translation>
     </message>
     <message>
-        <source>Possibly spend coins delegated for cold-staking (currently available: %1</source>
-        <translation>Posiblemente gaste monedas delegadas en cold-staking (actualmente disponible: %1</translation>
-    </message>
-    <message>
         <source>Invalid entry</source>
         <translation>Entrada inválida</translation>
     </message>
@@ -3312,14 +2989,6 @@ Do you want to continue?</source>
     <message>
         <source>Cannot create transaction.</source>
         <translation>No se puede crear la transacción.</translation>
-    </message>
-    <message>
-        <source>WARNING:
-Transaction spends a cold-stake delegation, voiding it.
-These coins will no longer be cold-staked.</source>
-        <translation>ADVERTENCIA:
-La transacción gasta una comisión del Cold-Stake,  y se anula.
-Estas monedas ya no serán puestas en Cold-Staked</translation>
     </message>
     <message>
         <source>Transaction sent</source>
@@ -3951,7 +3620,6 @@ Tu cartera TRTT también necesita estar completamente sincronizada para que pued
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            &lt;ul&gt;
-                           &lt;li&gt;Instant transactions (SwiftX)&lt;/li&gt;
                            &lt;li&gt;A decentralized governance (Proposal Voting)&lt;/li&gt;
                            &lt;li&gt;A decentralized budgeting system (Treasury)&lt;/li&gt;
                            &lt;li&gt;Validation of transactions within each block&lt;/li&gt;
@@ -3993,7 +3661,6 @@ regularmente. Estos servicios incluyen:
 &lt;/p&gt;&lt;p align="justify"&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Transacciones instantáneas (SwiftX)&lt;/li&gt;
 &lt;li&gt;Una gobernanza descentralizada (Propuesta de Votación)&lt;/li&gt;
 &lt;li&gt;Un sistema de presupuestación descentralizado (Tesorería)&lt;/li&gt;
 &lt;li&gt;Validación de transacciones dentro de cada bloque&lt;/li&gt;
@@ -4978,10 +4645,6 @@ una nueva copia de seguridad.
         <translation>Staking Desabilitado</translation>
     </message>
     <message>
-        <source>Cold Staking Disabled</source>
-        <translation>Staking en frio Deshabilitado</translation>
-    </message>
-    <message>
         <source> %54 Synchronizing..</source>
         <translation>%54 Sincronizando...</translation>
     </message>
@@ -5124,16 +4787,8 @@ una nueva copia de seguridad.
         <translation>z%1 Apuesta</translation>
     </message>
     <message>
-        <source>%1 Cold Stake</source>
-        <translation>%1 apuesta en frio</translation>
-    </message>
-    <message>
         <source>%1 Stake on behalf of</source>
         <translation>%1 Participa en nombre de</translation>
-    </message>
-    <message>
-        <source>Stake delegation</source>
-        <translation>Delegación de Stake</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5146,10 +4801,6 @@ una nueva copia de seguridad.
     <message>
         <source>Payment to yourself</source>
         <translation>Pago a usted mismo</translation>
-    </message>
-    <message>
-        <source>Stake delegation spent by</source>
-        <translation>Delegación de Stake gastada por</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -5333,10 +4984,6 @@ una nueva copia de seguridad.
         <translation>Enviar Monedas</translation>
     </message>
     <message>
-        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 %2.</source>
-        <translation>SwiftX aún no admite el envío de valores tan altos. Actualmente, las transacciones están limitadas a %1 %2.</translation>
-    </message>
-    <message>
         <source>Transaction creation failed!
 %1</source>
         <translation>Error al crear la transacción!
@@ -5445,20 +5092,8 @@ Trittium Wallet</translation>
         <translation>Escuchar únicamente a la tarjeta de red indicada para conexiones JSON-RPC. Use la notación [host]:puerto para IPv6. Esta opción puede ser especificada varias veces (por defecto: escuchar en todas las tarjetas de red)</translation>
     </message>
     <message>
-        <source>Cannot find the Sapling parameters in the following directory:
-%s
-Please run 'sapling-fetch-params' or './util/fetch-params.sh' and then restart.</source>
-        <translation>No se pueden encontrar los parámetros de Sapling en el siguiente directorio:
- %s
-Ejecute 'sapling-fetch-params' o './util/fetch-params.sh' y luego reinicie.</translation>
-    </message>
-    <message>
         <source>Cannot obtain a lock on data directory %s. Trittium is probably already running.</source>
         <translation>No se puede obtener un bloqueo sobre el directorio de datos %s. Trittium esta probablemente en ejecución.</translation>
-    </message>
-    <message>
-        <source>Cannot upgrade to Sapling wallet (already running Sapling support). Version: %d</source>
-        <translation>No se puede actualizar a la billetera Sapling (ya se está ejecutando el soporte de Sapling). Versión: %d</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -5483,10 +5118,6 @@ Ejecute 'sapling-fetch-params' o './util/fetch-params.sh' y luego reinicie.</tra
     <message>
         <source>Distributed under the MIT software license, see the accompanying file COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;.</source>
         <translation>Distribuido bajo licencia MIT software license, ver el archivo adjunto COPYING or &lt;http://www.opensource.org/licenses/mit-license.php&gt;</translation>
-    </message>
-    <message>
-        <source>Enable cold staking functionality (0-1, default: %u). Disabled if staking=0</source>
-        <translation>Activar funcionalidad de cold staking (0-1, por defecto: %u). Desactivado si staking=0</translation>
     </message>
     <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
@@ -5753,14 +5384,6 @@ Ejecute 'sapling-fetch-params' o './util/fetch-params.sh' y luego reinicie.</tra
         <translation>Realizando carga</translation>
     </message>
     <message>
-        <source>Enable publish hash transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>Activar inclusión del hash de la transacción (fijada mediante SwiftTX) en &lt;address&gt;</translation>
-    </message>
-    <message>
-        <source>Enable publish raw transaction (locked via SwiftX) in &lt;address&gt;</source>
-        <translation>Activar inclusión de la transacción en bruto (fijada mediante SwiftTX) en &lt;address&gt;</translation>
-    </message>
-    <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
         <translation>Habilitar al cliente para actuar como un nodo maestro (0-1. predeterminado: %u)</translation>
     </message>
@@ -5909,20 +5532,12 @@ Ejecute 'sapling-fetch-params' o './util/fetch-params.sh' y luego reinicie.</tra
         <translation>Especifique parametros zk de directorio (predeterminado: %s)</translation>
     </message>
     <message>
-        <source>SwiftX options:</source>
-        <translation>Opciones SwiftX:</translation>
-    </message>
-    <message>
         <source>This is a pre-release test build - use at your own risk - do not use for staking or merchant applications!</source>
         <translation>Esto es una versión pre-release de prueba - use bajo su propia responsabilidad - ¡No lo utilice para recompensa de participación ni aplicaciones de comercio!</translation>
     </message>
     <message>
-        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Desabilitar toda la funcionalidad especifica TRTT (Masternodes, Obfuscation, SwiftTX, Budgeting) (0-1, predeterminado: %u)</translation>
-    </message>
-    <message>
-        <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
-        <translation>Activar swifttx, mostrar confirmaciones para transacciones bloqueadas (bool, predeterminado: %s)</translation>
+        <source>Disable all TRTT specific functionality (Masternodes, Zerocoin, Budgeting) (0-1, default: %u)</source>
+        <translation>Desabilitar toda la funcionalidad especifica TRTT (Masternodes, Obfuscation, Budgeting) (0-1, predeterminado: %u)</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -checklevel found. Checklevel must be level 4.</source>
@@ -5943,10 +5558,6 @@ Ejecute 'sapling-fetch-params' o './util/fetch-params.sh' y luego reinicie.</tra
     <message>
         <source>Specify custom backup path to add a copy of any wallet backup. If set as dir, every backup generates a timestamped file. If set as file, will rewrite to that file every backup.</source>
         <translation>Especifique una ruta de copia de seguridad personalizada para agregar una copia de cualquier copia de seguridad de la wallet. Si se establece como directorio, cada copia de seguridad genera un archivo con marcas de tiempo. Si se establece como archivo, se reescribirá en ese archivo cada copia de seguridad generada.</translation>
-    </message>
-    <message>
-        <source>SwiftX requires inputs with at least 6 confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>SwiftX requiere entradas con al menos 6 confirmaciones, es posible que deba esperar unos minutos e intente de nuevo.</translation>
     </message>
     <message>
         <source>Warning: error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
@@ -6726,10 +6337,6 @@ Ejecute 'sapling-fetch-params' o './util/fetch-params.sh' y luego reinicie.</tra
     <message>
         <source>Reset to default</source>
         <translation>Reestablecer los valores predeterminados</translation>
-    </message>
-    <message>
-        <source>Include delegated</source>
-        <translation>Incluir delegado</translation>
     </message>
 </context>
 </TS>

@@ -1,18 +1,22 @@
 /****************************************************************************************/
 /* Global color codes:                                                                  */
-/* dark-purple:        #382f44                                                          */
-/* transparent-purple: #e9e7ef (for inactive backgrounds)                               */
 /*                                                                                      */
-/* light-purple1:      #b396f6 (main purple for white backgrounds)                      */
-/* light-purple2:      #9179c7 (sligtly darker for gradients)                           */
+/* These color codes should be blanket find/replaced in every file of the build         */
+/* (all files need to be replaced....including the .ui, .cpp, .svg, any file type)      */
+/* Ensure to persist the spacing used in the rgba() and QColor() constructs as shown    */
 /*                                                                                      */
-/* medium-purple1:     #6f5ca3 (on hover)                                               */
-/* medium-purple1:     #5c4c7c (main purple for dark backgrounds)                       */
-/* medium-purple2:     #5b4c86 (sligtly darker for gradients)                           */
+/* standard lighter brand color:                   #c226d6                              */
+/* standard darker brand color:                    #810890                              */
+/* standard darker brand color as RGB                                                   */
+/*    with a 70% transparency indicator:           rgba(129, 8, 144, 0.7)               */
+/* dark tinted background brand color:             #4b1452                              */
 /*                                                                                      */
-/* fuchsia:            #df1cca                                                          */
-/* background:         #f8f6f6                                                          */
-/* input fields:       #e7e7e7                                                          */
+/* staking chart POS color:                        #dd8b14                              */
+/* staking chart POS color as RGB:                 QColor(221,139,20)                   */
+/* staking chart MN color:                         #c06416                              */
+/* staking chart MN color as RGB:                  QColor(192,100,22)                   */
+/*                                                                                      */
+/* dark theme background color:                    #000000                              */
 /****************************************************************************************/
 /*                                                                                      */
 /* Note: it's sometimes not easy to figure out all those screen elements, so unused     */
@@ -1367,17 +1371,6 @@ font-weight:bold;
 border-radius:5px;
 padding-top:20px;
 padding-bottom:18px;
-}
-
-QDialog#SendCoinsDialog .QCheckBox#checkSwiftTX { /* SwiftTX Checkbox */
-color:#616161;
-font-weight:bold;
-/*background: qradialgradient(cx:0.5, cy:0.5, radius: 0.5, fx:0.5, fy:0.5, stop:0 rgba(248, 246, 246, 128), stop: 1 rgba(0, 0, 0, 0));*/
-border-radius:5px;
-padding-top:20px;
-padding-bottom:18px;
-margin-left:10px;
-margin-right:20px;
 }
 
 /* This QLabel uses name = "label" which conflicts with Address Book -> New Address */

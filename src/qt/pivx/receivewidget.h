@@ -70,7 +70,7 @@ private:
 
     void updateQr(QString address);
     void updateLabel();
-    void showAddressGenerationDialog(bool isPaymentRequest);
+    void showAddressGenerationDialog();
     void sortAddresses();
 
     bool isShowingDialog = false;

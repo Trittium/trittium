@@ -38,18 +38,12 @@ SettingsExportCSV::SettingsExportCSV(PIVXGUI* _window, QWidget *parent) :
     setShadow(ui->pushButtonAddressDocuments);
     ui->labelDivider->setProperty("cssClass", "container-divider");
 
-    SortEdit* lineEdit = new SortEdit(ui->comboBoxSort);
-    connect(lineEdit, &SortEdit::Mouse_Pressed, [this](){ui->comboBoxSort->showPopup();});
-    setSortTx(ui->comboBoxSort, lineEdit);
+    setSortTx(ui->comboBoxSort);
 
-    SortEdit* lineEditType = new SortEdit(ui->comboBoxSortType);
-    connect(lineEditType, &SortEdit::Mouse_Pressed, [this](){ui->comboBoxSortType->showPopup();});
-    setSortTxTypeFilter(ui->comboBoxSortType, lineEditType);
+    setSortTxTypeFilter(ui->comboBoxSortType);
     ui->comboBoxSortType->setCurrentIndex(0);
 
-    SortEdit* lineEditAddressBook = new SortEdit(ui->comboBoxSortAddressType);
-    connect(lineEditAddressBook, &SortEdit::Mouse_Pressed, [this](){ui->comboBoxSortAddressType->showPopup();});
-    setFilterAddressBook(ui->comboBoxSortAddressType, lineEditAddressBook);
+    setFilterAddressBook(ui->comboBoxSortAddressType);
     ui->comboBoxSortAddressType->setCurrentIndex(0);
 
     connect(ui->pushButtonDocuments, &QPushButton::clicked, [this](){selectFileOutput(true);});

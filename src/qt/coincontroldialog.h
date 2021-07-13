@@ -45,7 +45,7 @@ class CoinControlDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit CoinControlDialog(QWidget* parent = nullptr, bool _forDelegation = false);
+    explicit CoinControlDialog(QWidget* parent = nullptr);
     ~CoinControlDialog();
 
     void setModel(WalletModel* model);
@@ -66,7 +66,6 @@ private:
     WalletModel* model;
     int sortColumn;
     Qt::SortOrder sortOrder;
-    bool forDelegation;
     QList<CAmount> payAmounts{};
     unsigned int nSelectableInputs{0};
 

@@ -16,8 +16,7 @@ JSON_TEST_FILES = \
   test/data/script_invalid.json \
   test/data/tx_invalid.json \
   test/data/tx_valid.json \
-  test/data/sighash.json \
-  test/data/sapling_key_components.json
+  test/data/sighash.json
 
 RAW_TEST_FILES =
 
@@ -44,7 +43,6 @@ BITCOIN_TESTS =\
   test/base32_tests.cpp \
   test/base58_tests.cpp \
   test/base64_tests.cpp \
-  test/bech32_tests.cpp \
   test/budget_tests.cpp \
   test/checkblock_tests.cpp \
   test/Checkpoints_tests.cpp \
@@ -108,11 +106,9 @@ if ENABLE_WALLET
 test_test_trittium_LDADD += $(LIBBITCOIN_WALLET)
 endif
 
-test_test_trittium_LDADD += $(LIBSAPLING)
-
 test_test_trittium_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
-test_test_trittium_LDADD += $(LIBRUSTZCASH) $(LIBBITCOIN_CONSENSUS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBZCASH_LIBS)
+test_test_trittium_LDADD += $(LIBBITCOIN_CONSENSUS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBZCASH_LIBS)
 test_test_trittium_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -static
 
 if ENABLE_ZMQ

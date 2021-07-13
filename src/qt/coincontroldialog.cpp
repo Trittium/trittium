@@ -42,10 +42,9 @@ bool CCoinControlWidgetItem::operator<(const QTreeWidgetItem &other) const {
 }
 
 
-CoinControlDialog::CoinControlDialog(QWidget* parent, bool _forDelegation) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+CoinControlDialog::CoinControlDialog(QWidget* parent) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                                         ui(new Ui::CoinControlDialog),
-                                                        model(0),
-                                                        forDelegation(_forDelegation)
+                                                        model(0)
 {
     coinControl = new CCoinControl();
     ui->setupUi(this);
@@ -252,11 +251,7 @@ void CoinControlDialog::buttonToggleLockClicked()
             if (model->isLockedCoin(uint256(item->text(COLUMN_TXHASH).toStdString()), item->text(COLUMN_VOUT_INDEX).toUInt())) {
                 model->unlockCoin(outpt);
                 item->setDisabled(false);
-                // restore cold-stake snowflake icon for P2CS which were previously locked
-                if (item->data(COLUMN_CHECKBOX, Qt::UserRole) == QString("Delegated"))
-                    item->setIcon(COLUMN_CHECKBOX, QIcon("://ic-check-cold-staking-off"));
-                else
-                    item->setIcon(COLUMN_CHECKBOX, QIcon());
+                item->setIcon(COLUMN_CHECKBOX, QIcon());
             } else {
                 model->lockCoin(outpt);
                 item->setDisabled(true);
@@ -355,11 +350,7 @@ void CoinControlDialog::unlockCoin()
     COutPoint outpt(uint256(contextMenuItem->text(COLUMN_TXHASH).toStdString()), contextMenuItem->text(COLUMN_VOUT_INDEX).toUInt());
     model->unlockCoin(outpt);
     contextMenuItem->setDisabled(false);
-    // restore cold-stake snowflake icon for P2CS which were previously locked
-    if (contextMenuItem->data(COLUMN_CHECKBOX, Qt::UserRole) == QString("Delegated"))
-        contextMenuItem->setIcon(COLUMN_CHECKBOX, QIcon("://ic-check-cold-staking-off"));
-    else
-        contextMenuItem->setIcon(COLUMN_CHECKBOX, QIcon());
+    contextMenuItem->setIcon(COLUMN_CHECKBOX, QIcon());
     updateLabelLocked();
 }
 
@@ -623,10 +614,6 @@ void CoinControlDialog::updateLabels()
                 nBytesInputs += 148; // in all error cases, simply assume 148 here
         } else
             nBytesInputs += 148;
-
-        // Additional byte for P2CS
-        if (out.tx->vout[out.i].scriptPubKey.IsPayToColdStaking())
-            nBytesInputs++;
     }
 
     // update SelectAll button state
@@ -636,10 +623,9 @@ void CoinControlDialog::updateLabels()
 
     // calculation
     const int P2PKH_OUT_SIZE = 34;
-    const int P2CS_OUT_SIZE = 61;
     if (nQuantity > 0) {
         // Bytes: nBytesInputs + (num_of_outputs * bytes_per_output)
-        nBytes = nBytesInputs + std::max(1, payAmounts.size()) * (forDelegation ? P2CS_OUT_SIZE : P2PKH_OUT_SIZE);
+        nBytes = nBytesInputs + std::max(1, payAmounts.size()) * P2PKH_OUT_SIZE;
         // always assume +1 (p2pkh) output for change here
         nBytes += P2PKH_OUT_SIZE;
         // nVersion, nLockTime and vin/vout len sizes
@@ -653,8 +639,6 @@ void CoinControlDialog::updateLabels()
         // Fee
         nPayFee = CWallet::GetMinimumFee(nBytes, nTxConfirmTarget, mempool);
 
-        // IX Fee
-        if (coinControl->useSwiftTX) nPayFee = std::max(nPayFee, CENT);
         // Allow free? (require at least hard-coded threshold and default to that if no estimate)
         double dPriorityNeeded = std::max(mempoolEstimatePriority, AllowFreeThreshold());
         if (dPriorityNeeded <= 0)
@@ -822,22 +806,11 @@ void CoinControlDialog::updateView()
             itemOutput->setCheckState(COLUMN_CHECKBOX, Qt::Unchecked);
 
             // address
-            const bool isP2CS = out.tx->vout[out.i].scriptPubKey.IsPayToColdStaking();
             CTxDestination outputAddress;
             CTxDestination outputAddressStaker;
             QString sAddress = "";
-            bool haveDest = false;
-            if (isP2CS) {
-                txnouttype type; std::vector<CTxDestination> addresses; int nRequired;
-                haveDest = (ExtractDestinations(out.tx->vout[out.i].scriptPubKey, type, addresses, nRequired)
-                            && addresses.size() == 2);
-                if (haveDest) {
-                    outputAddressStaker = addresses[0];
-                    outputAddress = addresses[1];
-                }
-            } else {
-                haveDest = ExtractDestination(out.tx->vout[out.i].scriptPubKey, outputAddress);
-            }
+            bool haveDest = ExtractDestination(out.tx->vout[out.i].scriptPubKey, outputAddress);
+
             if (haveDest) {
                 sAddress = QString::fromStdString(EncodeDestination(outputAddress));
 
@@ -902,18 +875,8 @@ void CoinControlDialog::updateView()
             }
 
             // set checkbox
-            if (coinControl->IsSelected(COutPoint(txhash, out.i)))
+            if (coinControl->IsSelected(COutPoint(txhash, out.i))) {
                 itemOutput->setCheckState(COLUMN_CHECKBOX, Qt::Checked);
-
-            // outputs delegated (for cold staking)
-            if (isP2CS) {
-                itemOutput->setData(COLUMN_CHECKBOX, Qt::UserRole, QString("Delegated"));
-                if (!isLockedCoin)
-                    itemOutput->setIcon(COLUMN_CHECKBOX, QIcon("://ic-check-cold-staking-off"));
-                if (haveDest) {
-                    sAddress = QString::fromStdString(EncodeDestination(outputAddressStaker, CChainParams::STAKING_ADDRESS));
-                    itemOutput->setToolTip(COLUMN_CHECKBOX, tr("delegated to %1 for cold staking").arg(sAddress));
-                }
             }
         }
 

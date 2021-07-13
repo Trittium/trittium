@@ -27,7 +27,6 @@ bench_bench_trittium_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1) \
   $(LIBBITCOIN_ZEROCOIN) \
-  $(LIBRUSTZCASH) \
   $(LIBZCASH_LIBS)
 
 if ENABLE_ZMQ

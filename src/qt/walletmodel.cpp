@@ -65,11 +65,6 @@ bool WalletModel::isRegTestNetwork() const
     return Params().IsRegTestNet();
 }
 
-bool WalletModel::isColdStakingNetworkelyEnabled() const
-{
-    return sporkManager.IsSporkActive(SPORK_17_COLDSTAKING_ENFORCEMENT);
-}
-
 bool WalletModel::isStakingStatusActive() const
 {
     return wallet->pStakerStatus->IsActive();
@@ -82,8 +77,7 @@ bool WalletModel::isHDEnabled() const
 
 bool WalletModel::upgradeWallet(std::string& upgradeError)
 {
-    // For now, Sapling features are locked to regtest.
-    WalletFeature features = Params().IsRegTestNet() ? FEATURE_SAPLING : FEATURE_PRE_SPLIT_KEYPOOL;
+    WalletFeature features = FEATURE_PRE_SPLIT_KEYPOOL;
 
     // This action must be performed in a separate thread and not the main one.
     LOCK2(cs_main, wallet->cs_wallet);
@@ -98,12 +92,12 @@ bool WalletModel::upgradeWallet(std::string& upgradeError)
     return wallet->Upgrade(upgradeError, prev_version);
 }
 
-CAmount WalletModel::getBalance(const CCoinControl* coinControl, bool fIncludeDelegated, bool fUnlockedOnly) const
+CAmount WalletModel::getBalance(const CCoinControl* coinControl, bool fUnlockedOnly) const
 {
     if (coinControl) {
         CAmount nBalance = 0;
         std::vector<COutput> vCoins;
-        wallet->AvailableCoins(&vCoins, coinControl, fIncludeDelegated);
+        wallet->AvailableCoins(&vCoins, coinControl);
         for (const COutput& out : vCoins) {
             bool fSkip = fUnlockedOnly && isLockedCoin(out.tx->GetHash(), out.i);
             if (out.fSpendable && !fSkip)
@@ -113,17 +107,12 @@ CAmount WalletModel::getBalance(const CCoinControl* coinControl, bool fIncludeDe
         return nBalance;
     }
 
-    return wallet->GetAvailableBalance(fIncludeDelegated) - (fUnlockedOnly ? wallet->GetLockedCoins() : CAmount(0));
+    return wallet->GetAvailableBalance() - (fUnlockedOnly ? wallet->GetLockedCoins() : CAmount(0));
 }
 
-CAmount WalletModel::getUnlockedBalance(const CCoinControl* coinControl, bool fIncludeDelegated) const
+CAmount WalletModel::getUnlockedBalance(const CCoinControl* coinControl) const
 {
-    return getBalance(coinControl, fIncludeDelegated, true);
-}
-
-CAmount WalletModel::getMinColdStakingAmount() const
-{
-    return MIN_COLDSTAKING_AMOUNT;
+    return getBalance(coinControl, true);
 }
 
 CAmount WalletModel::getLockedBalance() const
@@ -134,17 +123,6 @@ CAmount WalletModel::getLockedBalance() const
 bool WalletModel::haveWatchOnly() const
 {
     return fHaveWatchOnly;
-}
-
-CAmount WalletModel::getDelegatedBalance() const
-{
-    return wallet->GetDelegatedBalance();
-}
-
-bool WalletModel::isColdStaking() const
-{
-    // TODO: Complete me..
-    return false;
 }
 
 void WalletModel::updateStatus()
@@ -283,12 +261,7 @@ void WalletModel::updateWatchOnlyFlag(bool fHaveWatchonly)
 bool WalletModel::validateAddress(const QString& address)
 {
     // Only regular base58 addresses accepted here
-    return IsValidDestinationString(address.toStdString(), false);
-}
-
-bool WalletModel::validateAddress(const QString& address, bool fStaking)
-{
-    return IsValidDestinationString(address.toStdString(), fStaking);
+    return IsValidDestinationString(address.toStdString());
 }
 
 bool WalletModel::updateAddressBookLabels(const CTxDestination& dest, const std::string& strName, const std::string& strPurpose)
@@ -306,7 +279,7 @@ bool WalletModel::updateAddressBookLabels(const CTxDestination& dest, const std:
     return false;
 }
 
-WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl, bool fIncludeDelegations)
+WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl)
 {
     CAmount total = 0;
     QList<SendCoinsRecipient> recipients = transaction.getRecipients();
@@ -341,7 +314,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             }
             total += subtotal;
         } else { // User-entered TRTT address / amount:
-            if (!validateAddress(rcp.address, rcp.isP2CS)) {
+            if (!validateAddress(rcp.address)) {
                 return InvalidAddress;
             }
             if (rcp.amount <= 0) {
@@ -353,27 +326,9 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             CScript scriptPubKey;
             CTxDestination out = DecodeDestination(rcp.address.toStdString());
 
-            if (rcp.isP2CS) {
-                Destination ownerAdd;
-                if (rcp.ownerAddress.isEmpty()) {
-                    // Create new internal owner address
-                    if (!getNewAddress(ownerAdd).result)
-                        return CannotCreateInternalAddress;
-                } else {
-                    ownerAdd = Destination(DecodeDestination(rcp.ownerAddress.toStdString()), false);
-                }
+            // Regular P2PK or P2PKH
+            scriptPubKey = GetScriptForDestination(out);
 
-                const CKeyID* stakerId = boost::get<CKeyID>(&out);
-                const CKeyID* ownerId = boost::get<CKeyID>(&ownerAdd.dest);
-                if (!stakerId || !ownerId) {
-                    return InvalidAddress;
-                }
-
-                scriptPubKey = GetScriptForStakeDelegation(*stakerId, *ownerId);
-            } else {
-                // Regular P2PK or P2PKH
-                scriptPubKey = GetScriptForDestination(out);
-            }
             vecSend.push_back(CRecipient{scriptPubKey, rcp.amount, false});
 
             total += rcp.amount;
@@ -383,7 +338,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         return DuplicateAddress;
     }
 
-    CAmount nSpendableBalance = getUnlockedBalance(coinControl, fIncludeDelegations);
+    CAmount nSpendableBalance = getUnlockedBalance(coinControl);
 
     if (total > nSpendableBalance) {
         return AmountExceedsBalance;
@@ -400,13 +355,6 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         CWalletTx* newTx = transaction.getTransaction();
         CReserveKey* keyChange = transaction.getPossibleKeyChange();
 
-
-        if (recipients[0].useSwiftTX && total > sporkManager.GetSporkValue(SPORK_5_MAX_VALUE) * COIN) {
-            Q_EMIT message(tr("Send Coins"), tr("SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 %2.").arg(sporkManager.GetSporkValue(SPORK_5_MAX_VALUE)).arg(CURRENCY_UNIT.c_str()),
-                CClientUIInterface::MSG_ERROR);
-            return TransactionCreationFailed;
-        }
-
         bool fCreated = wallet->CreateTransaction(vecSend,
                                                   *newTx,
                                                   *keyChange,
@@ -416,16 +364,8 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
                                                   coinControl,
                                                   recipients[0].inputType,
                                                   true,
-                                                  recipients[0].useSwiftTX,
-                                                  0,
-                                                  fIncludeDelegations);
+                                                  0);
         transaction.setTransactionFee(nFeeRequired);
-
-        if (recipients[0].useSwiftTX && newTx->GetValueOut() > sporkManager.GetSporkValue(SPORK_5_MAX_VALUE) * COIN) {
-            Q_EMIT message(tr("Send Coins"), tr("SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 %2.").arg(sporkManager.GetSporkValue(SPORK_5_MAX_VALUE)).arg(CURRENCY_UNIT.c_str()),
-                CClientUIInterface::MSG_ERROR);
-            return TransactionCreationFailed;
-        }
 
         if (!fCreated) {
             if ((total + nFeeRequired) > nSpendableBalance) {
@@ -456,11 +396,9 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction& tran
         return StakingOnlyUnlocked;
     }
 
-    bool fColdStakingActive = sporkManager.IsSporkActive(SPORK_17_COLDSTAKING_ENFORCEMENT);
-
     // Double check tx before do anything
     CValidationState state;
-    if (!CheckTransaction(*transaction.getTransaction(), true, true, state, true, fColdStakingActive)) {
+    if (!CheckTransaction(*transaction.getTransaction(), true, true, state, true)) {
         return TransactionCheckFailed;
     }
 
@@ -483,7 +421,7 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction& tran
         }
 
         CReserveKey* keyChange = transaction.getPossibleKeyChange();
-        const CWallet::CommitResult& res = wallet->CommitTransaction(*newTx, *keyChange, g_connman.get(), (recipients[0].useSwiftTX) ? NetMsgType::IX : NetMsgType::TX);
+        const CWallet::CommitResult& res = wallet->CommitTransaction(*newTx, *keyChange, g_connman.get());
         if (res.status != CWallet::CommitStatus::OK) {
             return SendCoinsReturn(res);
         }
@@ -499,9 +437,8 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(WalletModelTransaction& tran
     Q_FOREACH (const SendCoinsRecipient& rcp, transaction.getRecipients()) {
         // Don't touch the address book when we have a payment request
         if (!rcp.paymentRequest.IsInitialized()) {
-            bool isStaking = false;
-            CTxDestination address = DecodeDestination(rcp.address.toStdString(), isStaking);
-            std::string purpose = isStaking ? AddressBook::AddressBookPurpose::COLD_STAKING_SEND : AddressBook::AddressBookPurpose::SEND;
+            CTxDestination address = DecodeDestination(rcp.address.toStdString());
+            std::string purpose = AddressBook::AddressBookPurpose::SEND;
             std::string strLabel = rcp.label.toStdString();
             updateAddressBookLabels(address, strLabel, purpose);
         }
@@ -777,34 +714,13 @@ PairResult WalletModel::getNewAddress(Destination& ret, std::string label) const
 {
     CTxDestination dest;
     PairResult res = wallet->getNewAddress(dest, label);
-    if (res.result) ret = Destination(dest, false);
+    if (res.result) ret = Destination(dest);
     return res;
-}
-
-PairResult WalletModel::getNewStakingAddress(Destination& ret,std::string label) const
-{
-    CTxDestination dest;
-    PairResult res = wallet->getNewStakingAddress(dest, label);
-    if (res.result) ret = Destination(dest, true);
-    return res;
-}
-
-bool WalletModel::whitelistAddressFromColdStaking(const QString &addressStr)
-{
-    return updateAddressBookPurpose(addressStr, AddressBook::AddressBookPurpose::DELEGATOR);
-}
-
-bool WalletModel::blacklistAddressFromColdStaking(const QString &addressStr)
-{
-    return updateAddressBookPurpose(addressStr, AddressBook::AddressBookPurpose::DELEGABLE);
 }
 
 bool WalletModel::updateAddressBookPurpose(const QString &addressStr, const std::string& purpose)
 {
-    bool isStaking = false;
-    CTxDestination address = DecodeDestination(addressStr.toStdString(), isStaking);
-    if (isStaking)
-        return error("Invalid TRTT address, cold staking address");
+    CTxDestination address = DecodeDestination(addressStr.toStdString());
     CKeyID keyID;
     if (!getKeyId(address, keyID))
         return false;
@@ -855,7 +771,7 @@ void WalletModel::getOutputs(const std::vector<COutPoint>& vOutpoints, std::vect
 bool WalletModel::getMNCollateralCandidate(COutPoint& outPoint)
 {
     std::vector<COutput> vCoins;
-    wallet->AvailableCoins(&vCoins, nullptr, false, false, ONLY_10000);
+    wallet->AvailableCoins(&vCoins, nullptr, ONLY_10000);
     for (const COutput& out : vCoins) {
         // skip locked collaterals
         if (!isLockedCoin(out.tx->GetHash(), out.i)) {

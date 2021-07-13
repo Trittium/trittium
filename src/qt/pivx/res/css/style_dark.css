@@ -56,6 +56,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     border-radius:2px;
 }
 
+
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       NAVIGATION
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
@@ -433,6 +434,7 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
     font-size: 11px;
     color: #0099f9;
 }
+
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       TOP BAR
@@ -825,6 +827,7 @@ QProgressBar[cssClass="progress-sync"]::chunk:horizontal {
       stop: 2 #0099f9
     );
   }
+
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       LISTS ELEMENTS
@@ -2180,6 +2183,7 @@ QComboBox QAbstractItemView::item {
     border-radius:0px;
     outline: 0px;
 }
+
 QComboBox QAbstractItemView::item:selected {
     background-color: #0099f9;
     padding:10px 20px;
@@ -2203,6 +2207,7 @@ QComboBox QAbstractItemView::item:selected QPushButton:hover{
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       RADIO BUTTON
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
+
 QRadioButton:checked {
     color: #0099f9;
     font-size:20px;
@@ -2235,6 +2240,7 @@ QRadioButton::indicator:unchecked {
     background-repeat:no-repeat;
     background-position:center;
 }
+
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 HH       SCROLL BAR

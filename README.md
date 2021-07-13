@@ -4,9 +4,9 @@ Trittium Standard Wallet
 
 ### Coin Specs
 
-• PoW Algorithm: XEVAN   
+• PoW Algorithm: X11KVS   
 • Premine: 250.000.000 TRTT   
-• PoW Blocks: 1 - 1000    
+• PoW Blocks: 0 - 1000
 • PoS Blocks: Starting from 1001    
 • Block Time: 60 Seconds    
 • Maturity: 100 Confirmations   
